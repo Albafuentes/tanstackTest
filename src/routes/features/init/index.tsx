@@ -27,7 +27,8 @@ function Init() {
           <Link
             to="/quiz"
             activeOptions={{ exact: true }}
-          >get started <IconChevronRight size={18} /></Link>
+            className="button--variant-solid--white"
+          >Get Started <IconChevronRight size={18} /></Link>
         </div>
       </article>
     </section>

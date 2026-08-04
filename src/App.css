@@ -21,8 +21,55 @@
     border-radius: 0.5rem 0 0 0.5rem;
     background-color: var(--purple-50);
 
-    & > svg {
+    &>svg {
       stroke: var(--pink-200);
+    }
+  }
+}
+
+#not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  article {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: 1fr 0.5fr;
+    grid-template-rows: 1fr 0.25fr;
+    justify-items: stretch;
+    gap: 1rem;
+
+    width: fit-content;
+    height: fit-content;
+
+    .not-found__text {
+      p {
+        margin-left: auto;
+        color: var(--pink-200);
+        max-width: 75%;
+
+        &:before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 6px;
+          margin-top: 0.5rem;
+
+          background-color: var(--pink-200);
+          border-radius: 3px;
+        }
+
+      }
+
+      h1 {
+        font-size: 250px;
+        line-height: 250px;
+        margin: 0 2rem 0 0;
+      }
     }
   }
 }

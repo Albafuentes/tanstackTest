@@ -67,7 +67,8 @@
     font-weight: 400;
   }
 
-  button, a {
+  button,
+  a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,20 +79,36 @@
     width: fit-content;
 
     border-radius: 0.5rem;
-    border: none;
+
 
     font-weight: 600;
     font-size: initial;
-    background-color: var(--white);
-    color: var(--purple-500);
-
     text-decoration: none;
-    cursor: pointer;
+    line-height: 1.25rem;
 
+    cursor: pointer;
     transition: all 0.2s ease-in;
 
-    &:hover {
-       outline: 2px inset var(--pink-200);
+    &.button--variant-solid--white {
+      background-color: var(--white);
+      color: var(--purple-500);
+      border: none;
+
+      &:hover {
+        transform: translateX(0.25rem);
+        outline: 1px solid var(--pink-200);
+      }
+    }
+
+    &.button--variant-outline {
+      border: 1px solid var(--purple-500);
+      background-color: var(--purple-50);
+      color: var(--purple-500);
+
+      &:hover {
+        transform: translateX(-0.25rem);
+      }
+
     }
   }
 }

@@ -1,6 +1,6 @@
 import type { Question } from '../types/question.types';
 
-const questions: Question[] = [
+export const questions: Question[] = [
     {
         question: "In Bulgaria, how do people traditionally say 'yes' and 'no' with their heads?",
         options: [

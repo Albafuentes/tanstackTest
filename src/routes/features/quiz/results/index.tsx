@@ -13,6 +13,7 @@ function Results() {
 
     return (
         <section id="center">
+            results
         </section>
     )
 }

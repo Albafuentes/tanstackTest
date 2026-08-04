@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Question } from "../../../types/question.types";
 
-const QuizStatus = {
+export const QuizStatus = {
     NOT_STARTED: "not-started",
     IN_PROGRESS: "in-progress",
     FINISHED: "finished"

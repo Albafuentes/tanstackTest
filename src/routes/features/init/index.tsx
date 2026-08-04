@@ -1,6 +1,6 @@
 
 import { createRoute, Link } from '@tanstack/react-router'
-import { Route as RootRoute } from "./routes/__root";
+import { Route as RootRoute } from "../../__root";
 import { IconChevronRight, IconDiamond } from '@tabler/icons-react';
 
 const dataMock = {

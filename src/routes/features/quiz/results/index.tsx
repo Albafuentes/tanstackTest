@@ -1,6 +1,6 @@
 
 import { createRoute } from '@tanstack/react-router'
-import { Route as QuizRoute } from "./quiz-layout";
+import { Route as QuizRoute } from "../layout";
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,

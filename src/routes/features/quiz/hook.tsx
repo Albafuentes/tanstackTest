@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Question } from "../../../types/question.types";
 
 export type SelectedOption = {
@@ -22,24 +22,34 @@ export const useQuiz = (questions: Question[]): {
     selectedOption: SelectedOption | null;
     isQuizFinished: boolean;
 } => {
-    const [pendingQuestions, setPendingQuestions] = useState(() => [...questions]);
+    const [pendingQuestions, setPendingQuestions] = useState<Question[]>(questions);
     const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
 
     const [selectedOption, setSelectedOption] = useState<SelectedOption | null>(null);
     const [score, setScore] = useState<number>(0);
 
-    const isQuizFinished = pendingQuestions.length === 0;
+    const isQuizFinished = pendingQuestions?.length === 0;
+
+
+    // Added to ensure that the first question is generated only once when the component mounts. This prevents multiple questions from being generated on re-renders.
+    const hasGenerated = useRef(false);
 
     useEffect(() => {
-        generateCurrentQuestion()
-    }, [])
+        if (hasGenerated.current) return;
+
+        hasGenerated.current = true;
+
+        generateCurrentQuestion();
+    }, []);
+
+
 
     const generateCurrentQuestion = () => {
         if (isQuizFinished) {
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * pendingQuestions.length);
+        const randomIndex = Math.floor(Math.random() * pendingQuestions?.length);
         const newQuestion = pendingQuestions[randomIndex];
 
         setPendingQuestions(prevQuestions => prevQuestions.filter((_, index) => index !== randomIndex));
@@ -56,7 +66,7 @@ export const useQuiz = (questions: Question[]): {
         if (!currentQuestion) return;
 
         const isCorrect = currentQuestion.answer === selectedOption?.answer;
-        setSelectedOption({ answer: selectedOption?.answer?? DEFAULT_ANSWER_SELECTED , resolved: true, correct: isCorrect });
+        setSelectedOption({ answer: selectedOption?.answer ?? DEFAULT_ANSWER_SELECTED, resolved: true, correct: isCorrect });
 
         if (isCorrect) {
             setScore(prevScore => prevScore + SCORE_INCREMENT);

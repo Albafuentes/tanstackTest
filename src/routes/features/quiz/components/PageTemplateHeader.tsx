@@ -16,7 +16,7 @@ const PageTemplateHeader = ({ questionCount, timer, handleResolveAnswer }: PageT
             <h3><span>{questionsAnswered ?? "-"}</span> / {questionCount?.totalQuestions ?? "-"}</h3>
         </div>
 
-        <TimerCountdown onFinish={handleResolveAnswer} />
+        <TimerCountdown key={questionCount?.pendingQuestions ?? 0} onFinish={handleResolveAnswer} />
 
         <div className="quiz__template-header__progress-bar">
             <motion.div

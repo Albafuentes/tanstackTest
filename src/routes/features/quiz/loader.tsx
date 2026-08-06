@@ -1,8 +1,11 @@
+import PageTemplateContent from "./components/PageTemplateContent";
+import PageTemplateHeader from "./components/PageTemplateHeader";
+
 const Loader = () => {
     return (
-        <section id="center">
-            <h1>Loading...</h1>
-            <p>The quiz is loading, please wait.</p>
+        <section id="loader">
+            <PageTemplateHeader />
+            <PageTemplateContent />
         </section>
     );
 };

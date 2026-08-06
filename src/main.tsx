@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import './index.css'
+import './assets/css/index.css'
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";
 import { router } from './routes/router';

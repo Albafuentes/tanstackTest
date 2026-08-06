@@ -1,10 +1,12 @@
 
 import { createRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { Route as QuizRoute } from "./layout";
-import { QuizStatus, useQuiz } from './hook';
 import NotFound from './not-found';
 import Loader from './loader';
 import { api } from '../../../service/api.service';
+import PageTemplateHeader from './components/PageTemplateHeader';
+import PageTemplateContent from './components/PageTemplateContent';
+import { useQuiz } from './hook';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -26,8 +28,11 @@ export const Route = createRoute({
         return questions;
     },
 
-    // staleTime fixed the revalidation of the data, so the loader function is not executed again on the client, and the data is not fetched again.
+    // staleTime fixed the revalidation of the data. The loader function is not executed again on the client, and the data is not fetched again if it does not become stale.
     // staleTime: 1000 * 60 * 5, // 5 minutes
+
+    // gcTime fixed the garbage collection of the data. The loader function is not executed again on the client, and the data is not fetched again if the user does not navigate away from the page.
+    // gcTime: 1000 * 60 * 10, // 10 minutes
 
     // page error 404, the page is not found, the component is rendered, and the user can navigate to another page.
     notFoundComponent: () => <NotFound />,
@@ -42,25 +47,31 @@ export const Route = createRoute({
 
 
 function Quiz() {
-
-    const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
-    const { getRandomQuestion, currentQuestion, quizStatus, totalQuestions, pendingQuestions } = useQuiz(data);
     const navigate = useNavigate()
+    const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
+    // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
+    const { resolveAnswer, selectOption, nextQuestion, currentQuestion, totalQuestions, pendingQuestions, selectedOption, isQuizFinished, score } = useQuiz(data);
 
-    const handleNextQuestion = async() => {
+    const handleNextQuestion = () => {
+        nextQuestion();
 
-        await getRandomQuestion();
-
-        if (quizStatus === QuizStatus.FINISHED) {
+        if (isQuizFinished) {
             navigate({ to: "results" });
+            console.log("Quiz finished. Final score:", score);
         }
     }
 
+
     return (
-        <section id="center">
-            <p>Question {pendingQuestions}/{totalQuestions}</p>
-            {currentQuestion ? <p>{currentQuestion.question}</p> : <p>No question available</p>}
-            <button type='button' onClick={handleNextQuestion}>Next Question</button>
+        <section id="quiz">
+
+            <PageTemplateHeader questionCount={{
+                totalQuestions: totalQuestions,
+                pendingQuestions: pendingQuestions
+            }} handleResolveAnswer={resolveAnswer} />
+
+            <PageTemplateContent
+                selectedOption={selectedOption} handleNextQuestion={handleNextQuestion} currentQuestion={currentQuestion} handleResolveAnswer={resolveAnswer} handleSelectOption={selectOption} />
         </section>
     )
 }

@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.46.0",
     "@tanstack/react-router": "^1.170.18",
+    "motion": "^12.43.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },

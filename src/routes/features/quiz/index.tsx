@@ -7,6 +7,7 @@ import { api } from '../../../service/api.service';
 import PageTemplateHeader from './components/PageTemplateHeader';
 import PageTemplateContent from './components/PageTemplateContent';
 import { useQuiz } from './hook';
+import { motion } from 'motion/react';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -65,16 +66,23 @@ function Quiz() {
 
 
     return (
-        <section id="quiz">
-
-            <PageTemplateHeader questionCount={{
-                totalQuestions: totalQuestions,
-                pendingQuestions: pendingQuestions
-            }} handleResolveAnswer={resolveAnswer} />
+        <>
+            <PageTemplateHeader
+                questionCount={{
+                    totalQuestions: totalQuestions,
+                    pendingQuestions: pendingQuestions
+                }}
+                handleResolveAnswer={resolveAnswer}
+            />
 
             <PageTemplateContent
-                selectedOption={selectedOption} handleNextQuestion={handleNextQuestion} currentQuestion={currentQuestion} handleResolveAnswer={resolveAnswer} handleSelectOption={selectOption} />
-        </section>
+                selectedOption={selectedOption}
+                handleNextQuestion={handleNextQuestion}
+                currentQuestion={currentQuestion}
+                handleResolveAnswer={resolveAnswer}
+                handleSelectOption={selectOption}
+            />
+        </>
     )
 }
 

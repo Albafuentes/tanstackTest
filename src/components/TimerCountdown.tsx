@@ -9,11 +9,13 @@ const SECONDS = 60;
 interface TimerCountdownProps {
     seconds?: number;
     onFinish?: () => void;
+    showTimer?: boolean;
 }
 
-const TimerCountdown = ({ seconds = SECONDS, onFinish }: TimerCountdownProps) => {
-    const timer = useMotionValue(seconds);
-    const [currentSeconds, setCurrentSeconds] = useState(seconds);
+const TimerCountdown = ({ seconds = SECONDS, onFinish, showTimer = true }: TimerCountdownProps) => {
+    const secondsToDisplay = showTimer ? seconds : 0;
+    const [currentSeconds, setCurrentSeconds] = useState(secondsToDisplay);
+    const timer = useMotionValue(secondsToDisplay);
 
     const strokeDasharray = currentSeconds === 0 ? CIRCUMFERENCE : CIRCUMFERENCE + 2;
 
@@ -23,18 +25,24 @@ const TimerCountdown = ({ seconds = SECONDS, onFinish }: TimerCountdownProps) =>
 
     const dashOffset = useTransform(
         timer,
-        [seconds, 0],
+        [secondsToDisplay, 0],
         [0, CIRCUMFERENCE]
     );
 
     useEffect(() => {
+
+        if (!showTimer) {
+            return;
+        }
+
         const controls = animate(timer, 0, {
-            duration: seconds,
+            duration: secondsToDisplay,
             ease: "linear",
         });
 
         return () => controls.stop();
-    }, []);
+
+    }, [showTimer, secondsToDisplay, timer]);
 
     useEffect(() => {
         if (currentSeconds === 0) {

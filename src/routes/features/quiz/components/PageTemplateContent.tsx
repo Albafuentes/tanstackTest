@@ -36,6 +36,7 @@ const PageTemplateContent = ({ selectedOption, currentQuestion, handleNextQuesti
             opacity: 1,
         }
     }
+
     return (
         <motion.article className="quiz__template-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .5 }} exit={{ opacity: 0 }}>
 
@@ -47,7 +48,17 @@ const PageTemplateContent = ({ selectedOption, currentQuestion, handleNextQuesti
             <motion.div
                 initial="hidden"
                 animate="visible"
-                variants={animationVariant}
+                variants={{
+                    hidden: {
+                        opacity: 0
+                    },
+                    visible: {
+                        opacity: 1,
+                        transition: {
+                            ease: "easeOut"
+                        }
+                    }
+                }}
                 className="quiz__template-content__list"
             >
                 {isLabelResolved ?

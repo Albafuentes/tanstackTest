@@ -90,6 +90,11 @@
     cursor: pointer;
     transition: all 0.2s ease-in;
 
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     &.button--variant-solid--white {
       background-color: var(--white);
       color: var(--purple-500);
@@ -116,6 +121,122 @@
       background-color: var(--purple-500);
       color: var(--white);
       border: none;
+    }
+  }
+
+  .info-card {
+    width: stretch;
+    margin: 0 5vw;
+
+    color: var(--white);
+
+    &>div {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--purple-500);
+
+      position: relative;
+
+      border-radius: 1rem;
+      padding: 1.75rem 3.75rem;
+
+      overflow: hidden;
+
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 2;
+
+        background-color: var(--purple-500);
+        filter: brightness(5);
+        opacity: 0.2;
+        border-radius: 100%;
+      }
+
+      &::after {
+        width: 250px;
+        height: 250px;
+        top: 3rem;
+        right: -3rem;
+      }
+
+      &::before {
+        width: 150px;
+        height: 150px;
+        top: -3rem;
+        right: -3rem;
+      }
+    }
+  }
+
+  .quiz-card {
+    width: stretch;
+    min-height: 1.25rem;
+
+    padding: 1rem 2rem;
+    overflow: hidden;
+
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+
+    border-radius: 1rem;
+
+    p {
+      margin: 0;
+    }
+
+    &.quiz-card--pink {
+      background-color: var(--pink-50);
+    }
+
+    &.quiz-card--purple {
+      background-color: var(--white);
+      border: 2px solid var(--purple-500);
+
+      transition: all 0.2s ease-in;
+
+      input[type="radio"] {
+        visibility: hidden;
+      }
+
+      &:has(input[aria-checked="true"]),
+      &.quiz-card--purple--checked {
+        background-color: var(--purple-50);
+        border-color: transparent;
+
+        &>.quiz-card__option {
+          background-color: var(--purple-500);
+          color: var(--white);
+        }
+      }
+
+      &>.quiz-card__option {
+        background-color: var(--purple-50);
+        color: var(--purple-500);
+      }
+    }
+
+    &.quiz-card--70 {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    &>.quiz-card__option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 1.25rem;
+      height: 1.25rem;
+
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 0.8;
+
+      border-radius: 100%;
     }
   }
 }

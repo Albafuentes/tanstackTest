@@ -1,6 +1,11 @@
 import { IconChevronLeft } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 
+/*
+* This component displays the 404 not found page for the quiz section and it is called in the index.tsx file when the loader function does not find any data. It is a mirror of the quiz page, and it must be a mirror of the quiz page.
+* The page redirects the user to the home page when the button is clicked.
+*/
+
 const NotFound = () => {
     const navigate = useNavigate()
     return (

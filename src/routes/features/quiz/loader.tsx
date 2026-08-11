@@ -1,8 +1,23 @@
 import { IconChevronRight } from "@tabler/icons-react";
 import TimerCountdown from "../../../components/TimerCountdown";
-import { motion } from "motion/react";
+import { motion, type TransitionWithValueOverrides } from "motion/react";
+
+/*
+* This component displays the skeleton loader for the quiz page and it is called in the index.tsx file when the loader function is fetching data.
+* The animations are specifically for this loader and are not used anywhere else in the application.
+* It must be a mirror of the quiz page.
+*/
 
 const Loader = () => {
+    const animation = {
+        backgroundPosition: ["200% 0", "-200% 0"],
+    }
+    const transition: TransitionWithValueOverrides<any> = {
+        duration: 1.5,
+        repeat: Infinity,
+        ease: "linear",
+    }
+
     return (
         <>
             <article className="quiz__template-header">
@@ -24,14 +39,8 @@ const Loader = () => {
             <article className="quiz__template-content">
                 <motion.div
                     className="quiz-card quiz-card--pink"
-                    animate={{
-                        backgroundPosition: ["200% 0", "-200% 0"],
-                    }}
-                    transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
+                    animate={animation}
+                    transition={transition}
                 />
                 <div
                     className="quiz__template-content__list"
@@ -41,14 +50,8 @@ const Loader = () => {
                             <motion.label
                                 key={`${index}`}
                                 className="quiz-card quiz-card--purple"
-                                animate={{
-                                    backgroundPosition: ["200% 0", "-200% 0"],
-                                }}
-                                transition={{
-                                    duration: 1.5,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
+                                animate={animation}
+                                transition={transition}
                             />
                         );
                     })}

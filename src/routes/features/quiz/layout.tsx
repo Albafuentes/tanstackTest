@@ -9,12 +9,9 @@ export const Route = createRoute({
 });
 
 function QuizLayout() {
-  const { isFetching } = Route.useMatch()
-
   return (
     <AnimatePresence mode="wait">
-      <motion.section
-        id={isFetching ? "loader" : "quiz"}
+      <motion.main
         key={location.pathname}
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -22,7 +19,7 @@ function QuizLayout() {
         transition={{ duration: 1 }}
       >
         <Outlet />
-      </motion.section>
+      </motion.main>
     </AnimatePresence>)
 }
 

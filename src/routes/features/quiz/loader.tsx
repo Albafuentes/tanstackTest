@@ -19,7 +19,7 @@ const Loader = () => {
     }
 
     return (
-        <>
+        <section id="loader">
             <article className="quiz__template-header">
                 <div>
                     <p>Questions</p>
@@ -66,7 +66,7 @@ const Loader = () => {
                     <IconChevronRight size={18} />
                 </button>
             </article>
-        </>
+        </section>
     );
 };
 

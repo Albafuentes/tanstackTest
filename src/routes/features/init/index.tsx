@@ -2,10 +2,7 @@
 import { createRoute, Link } from '@tanstack/react-router'
 import { Route as RootRoute } from "../../__root";
 import { IconChevronRight, IconDiamond } from '@tabler/icons-react';
-
-const dataMock = {
-  points: 100,
-}
+import useScore from '../../../zunstand/score';
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
@@ -16,9 +13,11 @@ export const Route = createRoute({
 
 function Init() {
 
+  const score = useScore((state) => state.score);
+
   return (
     <section id="init">
-      <div className="score-pill"><IconDiamond />{dataMock.points}</div>
+      <div className="score-pill"><IconDiamond />{score}</div>
       <img src="../../public/cube.svg" alt="logo" width={200} />
       <article className="info-card">
         <div>

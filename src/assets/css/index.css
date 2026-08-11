@@ -130,7 +130,8 @@
 
     color: var(--white);
 
-    &>div {
+    & > div:first-of-type {
+    
       display: flex;
       flex-direction: column;
       background-color: var(--purple-500);

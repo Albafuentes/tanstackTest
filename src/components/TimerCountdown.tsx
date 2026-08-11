@@ -10,9 +10,10 @@ interface TimerCountdownProps {
     seconds?: number;
     onFinish?: () => void;
     showTimer?: boolean;
+    isPaused?: boolean;
 }
 
-const TimerCountdown = ({ seconds = SECONDS, onFinish, showTimer = true }: TimerCountdownProps) => {
+const TimerCountdown = ({ seconds = SECONDS, onFinish, showTimer = true, isPaused = false }: TimerCountdownProps) => {
     const secondsToDisplay = showTimer ? seconds : 0;
     const [currentSeconds, setCurrentSeconds] = useState(secondsToDisplay);
     const timer = useMotionValue(secondsToDisplay);
@@ -35,6 +36,8 @@ const TimerCountdown = ({ seconds = SECONDS, onFinish, showTimer = true }: Timer
             return;
         }
 
+        if (isPaused) return;
+
         const controls = animate(timer, 0, {
             duration: secondsToDisplay,
             ease: "linear",
@@ -42,7 +45,7 @@ const TimerCountdown = ({ seconds = SECONDS, onFinish, showTimer = true }: Timer
 
         return () => controls.stop();
 
-    }, [showTimer, secondsToDisplay, timer]);
+    }, [showTimer, secondsToDisplay, timer, isPaused]);
 
     useEffect(() => {
         if (currentSeconds === 0) {

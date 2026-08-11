@@ -7,7 +7,6 @@ import { api } from '../../../service/api.service';
 import PageTemplateHeader from './components/PageTemplateHeader';
 import PageTemplateContent from './components/PageTemplateContent';
 import { useQuiz } from './hook';
-import { motion } from 'motion/react';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -53,26 +52,23 @@ function Quiz() {
     const navigate = useNavigate()
     const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
     // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
-    const { resolveAnswer, selectOption, nextQuestion, currentQuestion, totalQuestions, pendingQuestions, selectedOption, isQuizFinished, score } = useQuiz(data);
+    const { resolveAnswer, selectOption, nextQuestion, currentQuestion, questionCount, selectedOption, isQuizFinished } = useQuiz(data);
 
     const handleNextQuestion = () => {
         nextQuestion();
 
         if (isQuizFinished) {
             navigate({ to: "results" });
-            console.log("Quiz finished. Final score:", score);
         }
     }
 
 
     return (
-        <>
+        <section id="quiz">
             <PageTemplateHeader
-                questionCount={{
-                    totalQuestions: totalQuestions,
-                    pendingQuestions: pendingQuestions
-                }}
+                questionCount={questionCount}
                 handleResolveAnswer={resolveAnswer}
+                isResolvingAnswer={selectedOption?.resolved ?? false}
             />
 
             <PageTemplateContent
@@ -82,7 +78,7 @@ function Quiz() {
                 handleResolveAnswer={resolveAnswer}
                 handleSelectOption={selectOption}
             />
-        </>
+        </section>
     )
 }
 

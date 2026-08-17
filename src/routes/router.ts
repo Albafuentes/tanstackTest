@@ -3,4 +3,5 @@ import { routeTree } from "./routeTree";
 
 export const router = createRouter({
   routeTree,
+  basepath: "/tanstackTest/",
 });

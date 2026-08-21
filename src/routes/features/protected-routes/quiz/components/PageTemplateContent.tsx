@@ -1,8 +1,8 @@
-import type { Question } from "../../../../types/question.types";
+import type { Question } from "../../../../../types/question.types";
 import { DEFAULT_ANSWER_SELECTED, type SelectedOption } from "../hook";
 import { motion, type TransitionWithValueOverrides } from "motion/react";
-import resolveGood from "../../../../../public/resolve-good.svg";
-import resolveError from "../../../../../public/resolve-error.svg";
+import resolveGood from "../../../../../../public/resolve-good.svg";
+import resolveError from "../../../../../../public/resolve-error.svg";
 import { IconChevronRight } from "@tabler/icons-react";
 
 interface PageTemplateContentProps {

@@ -1,9 +1,9 @@
 import { createRoute, Outlet } from '@tanstack/react-router'
-import { Route as RootRoute } from "../../__root";
+import { Route as ProtectedRoutesLayoutRoute } from "../layout";
 import { AnimatePresence, motion } from 'motion/react';
 
 export const Route = createRoute({
-  getParentRoute: () => RootRoute,
+  getParentRoute: () => ProtectedRoutesLayoutRoute,
   path: "quiz",
   component: QuizLayout,
 });

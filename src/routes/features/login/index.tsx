@@ -1,4 +1,4 @@
-import { createRoute } from "@tanstack/react-router";
+import { createRoute, useNavigate } from "@tanstack/react-router";
 import { Route as RootRoute } from "../../__root";
 
 export const Route = createRoute({
@@ -8,5 +8,13 @@ export const Route = createRoute({
 });
 
 function Login() {
-    return <div>Login Page</div>;
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        const token = 'mi-token-obtenido'; // desde API
+        sessionStorage.setItem('token', token);
+        navigate({ to: '/protected' });
+    }
+
+    return <button onClick={handleLogin}>Login</button>;
 }

@@ -3,7 +3,7 @@ import { createRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { Route as QuizRoute } from "./layout";
 import NotFound from './not-found';
 import Loader from './loader';
-import { api } from '../../../service/api.service';
+import { api } from '../../../../service/api.service';
 import PageTemplateHeader from './components/PageTemplateHeader';
 import PageTemplateContent from './components/PageTemplateContent';
 import { useQuiz } from './hook';

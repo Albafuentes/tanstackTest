@@ -1,8 +1,8 @@
 
 import { createRoute, Link } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
-import useScore from '../../../../zunstand/score';
-import useSQuizStatus from '../../../../zunstand/quiz-status';
+import useScore from '../../../../../zunstand/score';
+import useSQuizStatus from '../../../../../zunstand/quiz-status';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,

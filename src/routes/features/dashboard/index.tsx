@@ -7,16 +7,16 @@ import useScore from '../../../zunstand/score';
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
   path: "/",
-  component: Init,
+  component: Dashboard,
 });
 
 
-function Init() {
+function Dashboard() {
 
   const score = useScore((state) => state.score);
 
   return (
-    <section id="init">
+    <section id="dashboard">
       <div className="score-pill"><IconDiamond />{score}</div>
       <img src="../../public/cube.svg" alt="logo" width={200} />
       <article className="info-card">
@@ -34,4 +34,4 @@ function Init() {
   )
 }
 
-export default Init
+export default Dashboard

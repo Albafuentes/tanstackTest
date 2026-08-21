@@ -3,6 +3,7 @@ import { createRoute, Link } from '@tanstack/react-router'
 import { Route as ProtectedRoutesLayoutRoute } from "../layout";
 import { IconChevronRight, IconDiamond } from '@tabler/icons-react';
 import useScore from '../../../../zunstand/score';
+import cube from "../../../../assets/svg/cube-variant-01.svg";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -18,7 +19,7 @@ function Dashboard() {
   return (
     <section id="dashboard">
       <div className="score-pill"><IconDiamond />{score}</div>
-      <img src="../../../public/cube.svg" alt="logo" width={200} />
+      <img src={cube} alt="logo" width={200} />
       <article className="info-card">
         <div>
           <h2>Play</h2>

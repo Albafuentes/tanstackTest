@@ -3,6 +3,7 @@ import { createRoute, Link } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
 import useScore from '../../../../../zunstand/score';
 import useSQuizStatus from '../../../../../zunstand/quiz-status';
+import cube from "../../../../../assets/svg/cube-variant-01.svg";
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -19,7 +20,7 @@ function Results() {
         <section id="results">
 
             <article className="info-card">
-                <img src="../../public/cube-variant-01.svg" alt="logo" width={300} />
+                <img src={cube} alt="logo" width={300} />
                 <div className="results__text">
                     <h2>{score === 0 ? "Better luck next time!" : "Congratulations!"}</h2>
                     <p>Your score: <span>{score}</span></p>

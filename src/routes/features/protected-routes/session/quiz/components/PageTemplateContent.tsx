@@ -1,9 +1,10 @@
-import type { Question } from "../../../../../types/question.types";
+
 import { DEFAULT_ANSWER_SELECTED, type SelectedOption } from "../hook";
 import { motion, type TransitionWithValueOverrides } from "motion/react";
-import resolveGood from "../../../../../../public/resolve-good.svg";
-import resolveError from "../../../../../../public/resolve-error.svg";
+import resolveGood from "../../../../../../assets/svg/resolve-good.svg";
+import resolveError from "../../../../../../assets/svg/resolve-error.svg";
 import { IconChevronRight } from "@tabler/icons-react";
+import type { Question } from "../../../../../../types/question.types";
 
 interface PageTemplateContentProps {
     selectedOption?: SelectedOption | null;

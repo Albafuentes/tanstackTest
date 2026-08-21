@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import TimerCountdown from "../../../../../components/TimerCountdown";
+import TimerCountdown from "../../../../../../components/TimerCountdown";
 
 interface PageTemplateHeaderProps {
     handleResolveAnswer?: () => void;

@@ -1,5 +1,6 @@
 import { IconChevronLeft } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
+import cube from "../../../../../assets/svg/cube-variant-02.svg";
 
 /*
 * This component displays the 404 not found page for the quiz section and it is called in the index.tsx file when the loader function does not find any data. It is a mirror of the quiz page, and it must be a mirror of the quiz page.
@@ -16,7 +17,7 @@ const NotFound = () => {
 
                     <p>The quiz you are looking for does not exist.</p>
                 </div>
-                <img src="../../../public/cube-variant-02.svg" alt="logo" width={300} />
+                <img src={cube} alt="logo" width={300} />
                 <button onClick={() => navigate({ to: "/" })} className="button--variant-outline"><IconChevronLeft size={18} /> Back to Home</button>
             </article>
         </section>

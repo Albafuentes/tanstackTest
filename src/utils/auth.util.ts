@@ -1,37 +1,64 @@
-import jwt from "jsonwebtoken";
+import { SignJWT, jwtVerify, decodeJwt, type JWTPayload } from "jose";
 import type { AuthModel } from "../types/auth.types";
 
-const SECRET_KEY = crypto.randomUUID();
+/**
+ * Mock JWT secret.
+ *
+ * This key intentionally lives in the client because authentication
+ * is simulated and the token is not used for server authorization.
+ */
+const SECRET_KEY = crypto.getRandomValues(
+    new Uint8Array(32),
+);
 
-export function isAuthenticated(): boolean {
+export function getToken(): string | null {
+    return sessionStorage.getItem("token");
+}
+
+export async function generateToken(
+    payload: AuthModel.User,
+): Promise<string> {
+    const SignPayload: JWTPayload = {
+        ...payload,
+    };
+    return new SignJWT(SignPayload)
+        .setProtectedHeader({
+            alg: "HS256",
+            typ: "JWT",
+        })
+        .setIssuedAt()
+        .setExpirationTime("24h")
+        .sign(SECRET_KEY);
+}
+
+export async function isAuthenticated(): Promise<boolean> {
     const token = getToken();
 
     if (!token) {
         return false;
     }
 
-    jwt.verify(token, SECRET_KEY, (err) => {
-        if (err) {
-            sessionStorage.removeItem('token');
-            return false;
-        }
-    });
+    try {
+        await jwtVerify(token, SECRET_KEY);
 
-    return true;
-}
+        return true;
+    } catch {
+        sessionStorage.removeItem("token");
 
-export function getToken(): string | null {
-    return sessionStorage.getItem('token');
-}
-
-export function generateToken(payload: AuthModel.User): string {
-    return jwt.sign(payload, SECRET_KEY, { expiresIn: (60 * 60 * 1.000) * 24 }); // 24h
-}
-
-export function decodeToken(token: string): AuthModel.User | null {
-    if (isAuthenticated()) {
-        const decoded = jwt.decode(token) as AuthModel.User;
-        return decoded;
+        return false;
     }
-    return null;
+}
+
+export function decodeToken(): AuthModel.User | null {
+    const token = getToken();
+
+    if (!token) {
+        return null;
+    }
+
+    try {
+        return decodeJwt<AuthModel.User>(token);
+    } catch {
+        return null;
+    }
 }

@@ -13,7 +13,7 @@ function Login() {
 
     const handleLogin = async () => {
 
-        sessionStorage.setItem('token', generateToken({ id: "1", name: "John Doe", email: "john.doe@example.com" }));
+        sessionStorage.setItem('token', await generateToken({ id: "1", name: "John Doe", email: "john.doe@example.com" }));
         navigate({ to: '/protected' });
     }
 

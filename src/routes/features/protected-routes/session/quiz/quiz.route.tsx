@@ -1,16 +1,16 @@
 
 import { createRoute, notFound, useNavigate } from '@tanstack/react-router'
-import { Route as QuizRoute } from "./layout";
+import { Route as QuizRoute } from "../layout";
 import NotFound from './not-found';
 import Loader from './loader';
-import { api } from '../../../../service/api.service';
+import { api } from '../../../../../service/api.service';
 import PageTemplateHeader from './components/PageTemplateHeader';
 import PageTemplateContent from './components/PageTemplateContent';
 import { useQuiz } from './hook';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
-    path: "/",
+    path: "quiz",
     component: Quiz,
 
     // First on the server and then on the client, it usually doesn't mean it's doing the same job twice for no reason, but is part of the hydration cycle.

@@ -2,9 +2,11 @@ import { createRoute, Outlet } from '@tanstack/react-router'
 import { Route as ProtectedRoutesLayoutRoute } from "../layout";
 import { AnimatePresence, motion } from 'motion/react';
 
+//TODO: Change session to quiz name
+
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
-  path: "quiz",
+  path: "session",
   component: QuizLayout,
 });
 

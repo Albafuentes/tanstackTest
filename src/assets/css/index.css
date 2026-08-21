@@ -1,5 +1,4 @@
 @import "./routes.css";
-@import "./components.css";
 
 :root {
   --white: #fff;
@@ -12,14 +11,45 @@
   --pink-100: #FED6FF;
   --pink-200: #F0A2EF;
 
+  /* New Colors */
+  --black: #1a1a19;
+  --black-90: #18181b;
+  /* text */
+  --black-80: #2f2f37;
+  --black-70: #474752;
+  --black-60: #5e5e6e;
+  --black-50: #767689;
+  --black-40: #9191a1;
+  --black-30: #adadb8;
+  --black-20: #c8c8d0;
+  --black-10: #e4e4e7;
+  --black-5: #f1f1f3;
+  /* background */
+
+  --red-60: #e11e35;
+  --red-55: #e43549;
+  /* aux */
+  --red-50: #e74b5d;
+  --red-45: #ea6271;
+  /* aux */
+  --red-40: #ed7886;
+
+  --green-60: #39604a;
+  --green-55: #437056;
+  /* aux */
+  --green-50: #4c8062;
+  --green-45: #56906e;
+  /* aux */
+  --green-40: #5fa07b;
+
+
   --sans: "Rubik", sans-serif;
   --heading: "Rubik", sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
+  font: 1rem/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--purple-500);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -49,80 +79,65 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  color: var(--black-90);
+
+  h1 {
+    font-size: 5.61em;
+    line-height: 1;
+    margin: 0;
+  }
 
   h2 {
-    font-size: 3.052rem;
-    font-weight: 500;
+    font-size: 4.209em;
     line-height: 1;
     margin: 0;
   }
 
   h3 {
-    font-size: 2.441rem;
-    font-weight: 500;
+    font-size: 3.158em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  h4 {
+    font-size: 2.369em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  h5 {
+    font-size: 1.777em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  h6 {
+    font-size: 1.333em;
     line-height: 1;
     margin: 0;
   }
 
   p {
+    font-size: 1em;
+    line-height: 1;
+    margin: 0;
+  }
+
+  small {
+    font-size: 0.75em;
     font-weight: 400;
+    line-height: 1;
+    margin: 0;
   }
 
-  button,
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-
-    padding: 0.45rem 1rem;
-    margin-top: 1rem;
-    width: fit-content;
-
-    border-radius: 0.5rem;
-
-
-    font-weight: 600;
-    font-size: initial;
-    text-decoration: none;
-    line-height: 1.25rem;
-
-    cursor: pointer;
-    transition: all 0.2s ease-in;
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    &.button--variant-solid--white {
-      background-color: var(--white);
-      color: var(--purple-500);
-      border: none;
-
-      &:hover {
-        transform: translateX(0.25rem);
-        outline: 1px solid var(--pink-200);
-      }
-    }
-
-    &.button--variant-outline {
-      border: 1px solid var(--purple-500);
-      background-color: var(--purple-50);
-      color: var(--purple-500);
-
-      &:hover {
-        transform: translateX(-0.25rem);
-      }
-
-    }
-
-    &.button--variant-solid--purple {
-      background-color: var(--purple-500);
-      color: var(--white);
-      border: none;
-    }
+  main {
+    padding: 2.625rem 1.5rem 1.5rem;
+    height: calc(100dvh - 5.125rem);
+    width: stretch;
+    overflow: hidden;
   }
+
+  /* delete*/
 
   .info-card {
     width: stretch;
@@ -130,8 +145,8 @@
 
     color: var(--white);
 
-    & > div:first-of-type {
-    
+    &>div:first-of-type {
+
       display: flex;
       flex-direction: column;
       background-color: var(--purple-500);
@@ -238,6 +253,17 @@
       line-height: 0.8;
 
       border-radius: 100%;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  #root {
+    main {
+      padding: 2.5rem 5rem;
+      height: calc(100vh - 6rem);
+      width: stretch;
+      overflow: hidden;
     }
   }
 }

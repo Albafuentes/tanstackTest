@@ -1,0 +1,46 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+
+    &[aria-orientation="vertical"] {
+        flex-direction: column;
+    }
+
+    &[aria-orientation="horizontal"] {
+        flex-direction: row;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    input {
+        width: stretch;
+        min-width: 22rem;
+        padding: 14px 24px;
+
+        border-radius: 14px;
+        border-color: transparent;
+        background-color: var(--black-5);
+
+        &:focus {
+            background-color: var(--black-10);
+            outline-color: transparent;
+        }
+
+        &::placeholder {
+            color: var(--black-20);
+        }
+
+        &[aria-invalid="true"], &:invalid {
+            border: 2px solid var(--red-50);
+        }
+    }
+
+    small {
+        color: var(--red-50);
+        padding: 0rem 0.15rem;
+    }
+}

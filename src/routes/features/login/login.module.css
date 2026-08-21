@@ -1,0 +1,23 @@
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.625rem;
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.625rem 1rem;
+        align-items: stretch;
+        justify-content: stretch;
+
+
+        button {
+            grid-column: 2 / -1;
+            justify-self: end;
+        }
+    }
+
+
+}

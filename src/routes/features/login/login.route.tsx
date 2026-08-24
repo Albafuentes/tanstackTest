@@ -9,6 +9,7 @@ import type { AuthModel } from "@/types/auth.types";
 import { mailVerification, stringVerification } from "./utils/validators";
 import { useFormStatus } from "react-dom";
 import type { LoginState } from "./types/state.types";
+import { api } from "@/service/api.service";
 
 export const Route = createRoute({
     getParentRoute: () => RootRoute,
@@ -41,13 +42,18 @@ function Login() {
             return { errors };
         }
 
-        const user: AuthModel.User = {
-            id: crypto.randomUUID(),
-            name: (email as string).split("@")[0],
-            email: email as string,
-        };
+        const response = await api.auth.login(email as string, password as string);
 
-        sessionStorage.setItem("token", await generateToken(user));
+        if (!response || !response.token) {
+            return {
+                errors: {
+                    email: ["Invalid username or password"],
+                    password: ["Invalid username or password"],
+                },
+            };
+        }
+        
+        sessionStorage.setItem("token", response.token);
 
         navigate({ to: "/protected" });
 

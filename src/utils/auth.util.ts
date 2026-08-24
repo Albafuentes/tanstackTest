@@ -31,6 +31,15 @@ export async function generateToken(
         .sign(SECRET_KEY);
 }
 
+export async function verifyToken(token: string): Promise<boolean> {
+    try {
+        await jwtVerify(token, SECRET_KEY);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 export async function isAuthenticated(): Promise<boolean> {
     const token = getToken();
 
@@ -39,8 +48,7 @@ export async function isAuthenticated(): Promise<boolean> {
     }
 
     try {
-        await jwtVerify(token, SECRET_KEY);
-
+        await verifyToken(token);
         return true;
     } catch {
         sessionStorage.removeItem("token");

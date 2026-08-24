@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const SCORE_QUESTION_INCREMENT = 10;
+export const SCORE_QUESTION_INCREMENT = 10;
 
 type ScoreState = {
   score: number;

@@ -4,12 +4,12 @@
   --white: #fff;
   --bg: var(--white);
 
-  --purple-50: #ECE4FF;
-  --purple-500: #2200A6;
+  --purple-50: #ece4ff;
+  --purple-500: #2200a6;
 
-  --pink-50: #FDE2FF;
-  --pink-100: #FED6FF;
-  --pink-200: #F0A2EF;
+  --pink-50: #fde2ff;
+  --pink-100: #fed6ff;
+  --pink-200: #f0a2ef;
 
   /* New Colors */
   --black: #1a1a19;
@@ -42,7 +42,6 @@
   /* aux */
   --green-40: #5fa07b;
 
-
   --sans: "Rubik", sans-serif;
   --heading: "Rubik", sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -64,7 +63,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --white: #fff;
-    --bg: #16171D;
+    --bg: #16171d;
 
     --purple-50: #201b2b;
     --purple-500: #637af6;
@@ -130,11 +129,22 @@
     margin: 0;
   }
 
+  header,
   main {
-    padding: 2.625rem 1.5rem 1.5rem;
-    height: calc(100dvh - 5.125rem);
+    padding: 1.5rem 1.5rem;
     width: stretch;
     overflow: hidden;
+  }
+
+  header {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  main {
+    height: calc(100dvh - (2.5rem + 1.5rem + 1.5rem));
   }
 
   /* delete*/
@@ -145,8 +155,7 @@
 
     color: var(--white);
 
-    &>div:first-of-type {
-
+    & > div:first-of-type {
       display: flex;
       flex-direction: column;
       background-color: var(--purple-500);
@@ -223,13 +232,13 @@
         background-color: var(--purple-50);
         border-color: transparent;
 
-        &>.quiz-card__option {
+        & > .quiz-card__option {
           background-color: var(--purple-500);
           color: var(--white);
         }
       }
 
-      &>.quiz-card__option {
+      & > .quiz-card__option {
         background-color: var(--purple-50);
         color: var(--purple-500);
       }
@@ -240,7 +249,7 @@
       margin: 0 auto;
     }
 
-    &>.quiz-card__option {
+    & > .quiz-card__option {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -259,11 +268,17 @@
 
 @media (min-width: 1024px) {
   #root {
+    header,
     main {
-      padding: 2.5rem 5rem;
-      height: calc(100vh - 6rem);
-      width: stretch;
-      overflow: hidden;
+      padding: 1.25rem 5rem;
+    }
+
+    header {
+      height: 3rem;
+    }
+
+    main {
+      height: calc(100vh - (3rem + 1.25rem + 1.25rem));
     }
   }
 }

@@ -1,0 +1,1 @@
+export const ABBREVIATION_PT = "XP";

@@ -1,4 +1,5 @@
-import { createRoute, Outlet, redirect } from '@tanstack/react-router'
+import { createRoute, Outlet, redirect } from "@tanstack/react-router";
+import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
 import { isAuthenticated } from "../../../utils/auth.util";
 
@@ -10,15 +11,18 @@ export const Route = createRoute({
     const hasToken = await isAuthenticated();
 
     if (!hasToken) {
-      throw redirect({ to: '/', search: { redirect: location.href } });
+      throw redirect({ to: "/", search: { redirect: location.href } });
     }
-  }
-})
+  },
+});
 
 function ProtectedRoutesLayout() {
   return (
-    <Outlet />
-  )
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 }
 
-export default ProtectedRoutesLayout
+export default ProtectedRoutesLayout;

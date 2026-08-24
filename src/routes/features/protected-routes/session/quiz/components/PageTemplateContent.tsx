@@ -4,11 +4,11 @@ import { motion, type TransitionWithValueOverrides } from "motion/react";
 import resolveGood from "../../../../../../assets/svg/resolve-good.svg";
 import resolveError from "../../../../../../assets/svg/resolve-error.svg";
 import { IconChevronRight } from "@tabler/icons-react";
-import type { Question } from "../../../../../../types/question.types";
+import type { QuizModel } from "../../../../../../types/quiz.types";
 
 interface PageTemplateContentProps {
     selectedOption?: SelectedOption | null;
-    currentQuestion?: Question | null;
+    currentQuestion?: QuizModel.Question | null;
     handleResolveAnswer?: () => void;
     handleSelectOption?: (optionIndex: number) => void;
     handleNextQuestion?: () => void;

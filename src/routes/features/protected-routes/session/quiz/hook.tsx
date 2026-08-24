@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { Question } from "../../../../../types/question.types";
+import type { Question } from "../../../../../types/quiz.types";
 import useScore from "../../../../../zunstand/score";
 import useSQuizStatus, { QUIZ_STATUS } from "../../../../../zunstand/quiz-status";
 

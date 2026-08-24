@@ -1,8 +1,8 @@
 
 import { createRoute, Link } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
-import useScore from '../../../../../zunstand/score';
 import useSQuizStatus from '../../../../../zunstand/quiz-status';
+import useSession from '../../../../../zunstand/session';
 import cube from "../../../../../assets/svg/cube-variant-01.svg";
 
 export const Route = createRoute({
@@ -13,7 +13,7 @@ export const Route = createRoute({
 
 
 function Results() {
-    const score = useScore((state) => state.score);
+    const score = useSession((state) => state.score.points);
     const resetStatus = useSQuizStatus((state) => state.resetStatus);
 
     return (

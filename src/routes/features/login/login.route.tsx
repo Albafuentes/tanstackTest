@@ -10,6 +10,7 @@ import { mailVerification, stringVerification } from "./utils/validators";
 import { useFormStatus } from "react-dom";
 import type { LoginState } from "./types/state.types";
 import { api } from "@/service/api.service";
+import useSession from "@/zunstand/session";
 
 export const Route = createRoute({
     getParentRoute: () => RootRoute,
@@ -28,6 +29,7 @@ const SubmitButton = () => {
 
 function Login() {
     const navigate = useNavigate();
+    const session = useSession.getState();
 
     const loginAction = async (_previousState: LoginState, formData: FormData): Promise<LoginState> => {
         const email = formData.get("email");
@@ -52,8 +54,9 @@ function Login() {
                 },
             };
         }
-        
+
         sessionStorage.setItem("token", response.token);
+        session.setUser(email as string);
 
         navigate({ to: "/protected" });
 

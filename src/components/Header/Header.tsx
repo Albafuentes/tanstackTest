@@ -1,5 +1,5 @@
 import { useRouterState } from "@tanstack/react-router";
-import useScore from "../../zunstand/score";
+import useSession from "../../zunstand/session";
 import { ABBREVIATION_PT } from "../../config/constants";
 import chGreen from "../../assets/svg/ch-green.svg";
 import chRed from "../../assets/svg/ch-red.svg";
@@ -11,7 +11,7 @@ export const Header = () => {
 
   const urlImage = Math.random() < 0.5 ? chGreen : chRed;
 
-  const score = useScore((state) => state.score);
+  const score = useSession((state) => state.score.points);
 
   return (
     <header>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { Question } from "../../../../../types/quiz.types";
-import useScore from "../../../../../zunstand/score";
 import useSQuizStatus, { QUIZ_STATUS } from "../../../../../zunstand/quiz-status";
+import useSession from "../../../../../zunstand/session";
+import type { QuizModel } from "@/types/quiz.types";
 
 export type SelectedOption = {
     answer: number;
@@ -17,18 +17,18 @@ export type QuestionCount = {
 
 export const DEFAULT_ANSWER_SELECTED = 0
 
-export const useQuiz = (questions: Question[]): {
+export const useQuiz = (questions: QuizModel.Question[]): {
     getRandomQuestion: () => void;
     resolveAnswer: () => void;
     selectOption: (optionIndex: number) => void;
     nextQuestion: () => void;
-    currentQuestion: Question | null;
+    currentQuestion: QuizModel.Question | null;
     questionCount: QuestionCount;
     selectedOption: SelectedOption | null;
     isQuizFinished: boolean;
 } => {
-    const [pendingQuestions, setPendingQuestions] = useState<Question[]>(questions);
-    const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+    const [pendingQuestions, setPendingQuestions] = useState<QuizModel.Question[]>(questions);
+    const [currentQuestion, setCurrentQuestion] = useState<QuizModel.Question | null>(null);
 
     const [selectedOption, setSelectedOption] = useState<SelectedOption | null>(null);
 
@@ -36,7 +36,7 @@ export const useQuiz = (questions: Question[]): {
 
     // Added to ensure that the first question is generated only once when the component mounts. This prevents multiple questions from being generated on re-renders.
     const hasGenerated = useRef(false);
-    const increase = useScore((state) => state.increase);
+    const increase = useSession((state) => state.increaseScore);
 
     useEffect(() => {
         if (hasGenerated.current || quizStatus.status !== QUIZ_STATUS.NOT_STARTED) return;

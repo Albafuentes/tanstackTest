@@ -1,12 +1,14 @@
+import style from "./login.module.css";
 import { createRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Button } from "@/components/Button/Button";
+import { useActionState } from "react";
+import { Button, Field } from "@/components";
 import { Route as RootRoute } from "../../__root";
 import { generateToken } from "../../../utils/auth.util";
 import hero from "@/assets/svg/hero.svg";
-import { Field } from "@/components/Field/Field";
-import style from "./login.module.css";
 import type { AuthModel } from "@/types/auth.types";
+import { mailVerification, stringVerification } from "./utils/validators";
+import { useFormStatus } from "react-dom";
+import type { LoginState } from "./types/state.types";
 
 export const Route = createRoute({
     getParentRoute: () => RootRoute,
@@ -14,80 +16,69 @@ export const Route = createRoute({
     component: Login,
 });
 
+const SubmitButton = () => {
+    const { pending } = useFormStatus();
+    return (
+        <Button type="submit" disabled={pending}>
+            Login
+        </Button>
+    );
+};
+
 function Login() {
     const navigate = useNavigate();
 
-    const [errors, setErrors] = useState<{ [key: string]: string[] } | null>(null);
-    const [loading, setLoading] = useState(false);
-
-    const stringVerification = (value: unknown): string[] | null => {
-        const errors: string[] = [];
-        if (!value) {
-            errors.push("This field is required");
-        }
-
-        if (typeof value !== "string") {
-            errors.push("The field must be a string");
-        }
-
-        return errors.length > 0 ? errors : null;
-    };
-
-    const mailVerification = (value: unknown): string[] | null => {
-        if (typeof value === "string" && !value.includes("@")) {
-            return ["Email must be a valid email address"];
-        }
-        return null;
-    };
-
-    const handleLogin = async (e: React.SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-
-        const email = e.currentTarget.email.value;
-        const password = e.currentTarget.password.value;
+    const loginAction = async (_previousState: LoginState, formData: FormData): Promise<LoginState> => {
+        const email = formData.get("email");
+        const password = formData.get("password");
 
         const errors = {
-            email: [...(stringVerification(email) || []), ...(mailVerification(email) || [])],
-            password: [...(stringVerification(password) || [])],
+            email: [...stringVerification(email), ...mailVerification(email)],
+            password: stringVerification(password),
         };
 
         if (errors.email.length > 0 || errors.password.length > 0) {
-            setErrors(errors);
-            setLoading(false);
-            return;
+            return { errors };
         }
 
         const user: AuthModel.User = {
             id: crypto.randomUUID(),
-            name: email.split("@")[0],
-            email: email
-        }
+            name: (email as string).split("@")[0],
+            email: email as string,
+        };
 
-        sessionStorage.setItem('token', await generateToken(user));
-        navigate({ to: '/protected' });
-        setLoading(false);
-    }
+        sessionStorage.setItem("token", await generateToken(user));
+
+        navigate({ to: "/protected" });
+
+        return {
+            errors: {},
+        };
+    };
+
+    const [state, formAction] = useActionState<LoginState, FormData>(loginAction, {
+        errors: {},
+    });
 
     return (
         <main id={style.login}>
             <img src={hero} alt="Hero" />
-            <form onSubmit={(e) => handleLogin(e)}>
+            <form action={formAction}>
                 <Field
                     type="text"
                     label="Email"
                     name={"email"}
                     placeholder="email..."
-                    errors={errors?.email}
+                    errors={state.errors?.email}
                 />
                 <Field
                     type="password"
                     label="Password"
                     name={"password"}
                     placeholder="password..."
-                    errors={errors?.password}
+                    errors={state.errors?.password}
                 />
-                <Button type="submit" disabled={loading}>Login</Button>
+                <SubmitButton />
             </form>
         </main>
     );

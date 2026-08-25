@@ -5,10 +5,11 @@ import useSession from "../../../zunstand/session";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
 import { decodeToken, isAuthenticated } from "../../../utils/auth.util";
+import { AnimatedRoute } from "@/components/AnimationRoute/AnimatedRoute";
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
-  path: "/protected",
+  path: "/dashboard",
   component: ProtectedRoutesLayout,
   beforeLoad: async ({ location }) => {
     const hasToken = await isAuthenticated();
@@ -31,7 +32,9 @@ function ProtectedRoutesLayout() {
   return (
     <SidebarProvider>
       <Header />
-      <Outlet />
+      <AnimatedRoute variant="fade">
+        <Outlet />
+      </AnimatedRoute>
     </SidebarProvider>
   );
 }

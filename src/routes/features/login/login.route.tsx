@@ -3,9 +3,7 @@ import { createRoute, useNavigate } from "@tanstack/react-router";
 import { useActionState } from "react";
 import { Button, Field } from "@/components";
 import { Route as RootRoute } from "../../__root";
-import { generateToken } from "../../../utils/auth.util";
 import hero from "@/assets/svg/hero.svg";
-import type { AuthModel } from "@/types/auth.types";
 import { mailVerification, stringVerification } from "./utils/validators";
 import { useFormStatus } from "react-dom";
 import type { LoginState } from "./types/state.types";
@@ -58,7 +56,7 @@ function Login() {
         sessionStorage.setItem("token", response.token);
         session.setUser(email as string);
 
-        navigate({ to: "/protected" });
+        navigate({ to: "/dashboard" });
 
         return {
             errors: {},

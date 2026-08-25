@@ -16,7 +16,7 @@ const Logo = () => {
 };
 
 export const Header = () => {
-  const isDashboardRoute = useRouterState().location.pathname === "/protected";
+  const isDashboardRoute = useRouterState().location.pathname === "/dashboard";
   const session = useSession();
 
   return (
@@ -35,7 +35,7 @@ export const Header = () => {
             </div>
           </Sidebar.Item>
           <Sidebar.Item withSeparator>
-            <Link to="/protected/settings"><IconSettings size={20} />Settings</Link>
+            <Link to="/dashboard/settings"><IconSettings size={20} />Settings</Link>
           </Sidebar.Item>
 
           <Sidebar.Footer>

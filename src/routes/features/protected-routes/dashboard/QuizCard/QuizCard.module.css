@@ -11,7 +11,7 @@
     border-radius: 0.875rem;
     border: 2px solid var(--black-30);
 
-    height: fit-content;
+    height: stretch;
     max-width: 20rem;
 
     .quiz-card__badge {

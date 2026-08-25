@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, useContext, type JSX } from "react";
+import { Children, cloneElement, isValidElement, useContext} from "react";
 import type { FooterProps } from "./components/Footer";
 import { Footer } from "./components/Footer";
 import { SidebarContext } from "./SidebarProvider";

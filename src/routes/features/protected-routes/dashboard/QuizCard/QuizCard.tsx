@@ -18,7 +18,10 @@ export const QuizCard = ({ quiz }: { quiz: QuizModel.Quiz }) => {
             </div>
 
             <Link
-                to="/protected/session/quiz"
+                to="/dashboard/$quizId/quiz"
+                params={{
+                    quizId: quiz.id,
+                }}
                 activeOptions={{ exact: true }}
                 className={`${buttonStyles["button"]} ${buttonStyles["button--red"]}`}
             >

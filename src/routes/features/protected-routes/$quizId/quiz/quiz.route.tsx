@@ -7,6 +7,8 @@ import { api } from '../../../../../service/api.service';
 import PageTemplateHeader from './components/PageTemplateHeader';
 import PageTemplateContent from './components/PageTemplateContent';
 import { useQuiz } from './hook';
+import { AnimatedRoute as AnimationRoute } from "@/components/AnimationRoute/AnimatedRoute";
+import { motion } from 'motion/react';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -19,13 +21,13 @@ export const Route = createRoute({
     // with Vite SPA config the loader function is not executed on the server, but only on the client, so the data is fetched only once.
     // Added try catch if we need to manage te error for example in Sentry o redirect to another page.
     loader: async () => {
-        const questions = await api.quiz.getQuiz();
+        // const questions = await api.quiz.getQuiz();
 
-        if (questions.length === 0 || !questions) {
-            throw notFound(); // if the data is not found, the notFound() function is executed, and the user is redirected to the 404 page.
-        }
+        // if (questions.length === 0 || !questions) {
+        //     throw notFound(); // if the data is not found, the notFound() function is executed, and the user is redirected to the 404 page.
+        // }
 
-        return questions;
+        // return questions;
     },
 
     // staleTime fixed the revalidation of the data. The loader function is not executed again on the client, and the data is not fetched again if it does not become stale.
@@ -49,23 +51,24 @@ export const Route = createRoute({
 
 
 function Quiz() {
-    const navigate = useNavigate()
-    const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
-    // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
-    const { resolveAnswer, selectOption, nextQuestion, currentQuestion, questionCount, selectedOption, isQuizFinished } = useQuiz(data);
+    // const navigate = useNavigate()
+    // const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
+    // // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
+    // const { resolveAnswer, selectOption, nextQuestion, currentQuestion, questionCount, selectedOption, isQuizFinished } = useQuiz(data);
 
-    const handleNextQuestion = () => {
-        nextQuestion();
+    // const handleNextQuestion = () => {
+    //     nextQuestion();
 
-        if (isQuizFinished) {
-            navigate({ to: "results" });
-        }
-    }
+    //     if (isQuizFinished) {
+    //         navigate({ to: "results" });
+    //     }
+    // }
 
 
     return (
-        <section id="quiz">
-            <PageTemplateHeader
+        <motion.section>
+            heyyy
+            {/* <PageTemplateHeader
                 questionCount={questionCount}
                 handleResolveAnswer={resolveAnswer}
                 isResolvingAnswer={selectedOption?.resolved ?? false}
@@ -77,8 +80,9 @@ function Quiz() {
                 currentQuestion={currentQuestion}
                 handleResolveAnswer={resolveAnswer}
                 handleSelectOption={selectOption}
-            />
-        </section>
+            /> */}
+
+        </motion.section>
     )
 }
 

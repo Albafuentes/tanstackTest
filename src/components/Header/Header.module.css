@@ -1,17 +1,23 @@
 #header {
-  .sidebar-item__trigger {
-    padding-inline: 0;
-  }
+
 
   .score-pill {
     display: flex;
     align-items: center;
+    justify-content: end;
     gap: 1rem;
+
+    width:100%;
+
     color: var(--red-50);
 
     svg {
       fill: var(--red-50);
     }
+  }
+
+  .sidebar-item__trigger {
+    padding-inline: 0;
   }
 
   .sidebar-item__header {

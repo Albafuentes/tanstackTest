@@ -1,6 +1,7 @@
 import * as quizsQuestions from "@/assets/quizs/quiz-questions"
 import type { QuizModel } from "@/types/quiz.types";
-import { SCORE_QUESTION_INCREMENT } from "@/zunstand/score";
+import { SCORE_QUESTION_INCREMENT } from "@/zunstand/session";
+
 
 export const quizs: QuizModel.Quiz[] = Object.entries(quizsQuestions).map(([key, value], index) => {
     const numberOfQuestions = value.questions.length;

@@ -75,6 +75,7 @@
         background-color: transparent;
         color: var(--black-90);
         border: none;
+        font-weight: 500;
 
         &:hover {
             text-decoration: underline;

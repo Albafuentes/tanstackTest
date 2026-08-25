@@ -6,6 +6,7 @@ import type { QuizModel } from "@/types/quiz.types";
 import { api } from "@/service/api.service";
 import { QuizCard } from "./QuizCard/QuizCard";
 import styles from "./dashboard.module.css";
+import { ABBREVIATION_PT } from "@/config/constants";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -39,7 +40,7 @@ export const Route = createRoute({
 });
 
 function Dashboard() {
-
+  const session = useSession();
   const { quizsData } = Route.useLoaderData() as { quizsData: QuizModel.Quiz[] };
 
   return (
@@ -55,9 +56,14 @@ function Dashboard() {
         <article className={styles["dashboard-scores"]}>
           <p>Lastest Scores</p>
           <ul>
-            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
-            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
-            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
+            {session?.history.length ? session?.history.map((historyItem, index) => (
+              <li key={index}>
+                <Badge variant="tag">
+                  <span>{historyItem.quizName}</span>
+                  <span>{historyItem.points} {ABBREVIATION_PT}</span>
+                </Badge>
+              </li>
+            )) : <li className={styles["dashboard-scores__item-empty"]}>No scores yet...</li>}
           </ul>
         </article>
       </section>

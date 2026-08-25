@@ -39,6 +39,10 @@
                 li >* {
                     width: stretch;
                 }
+
+                li.dashboard-scores__item-empty {
+                    color: var(--black-50);
+                }
             }
         }
     }

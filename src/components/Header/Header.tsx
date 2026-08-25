@@ -28,7 +28,9 @@ export const Header = () => {
           <Sidebar.Item readonly>
             <div className={styles["sidebar-item__header"]}>
               <Logo />
-              {session?.identity.user}
+              <span>{session?.identity.user}</span>
+              <small>session: {session?.identity.createdAt?.toLocaleDateString()}</small>
+
             </div>
           </Sidebar.Item>
           <Sidebar.Item withSeparator>

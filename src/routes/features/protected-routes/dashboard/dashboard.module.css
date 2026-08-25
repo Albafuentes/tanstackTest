@@ -21,6 +21,25 @@
             grid-template-rows: auto
         }
 
-        &>.dashboard-scores {}
+        &>.dashboard-scores {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            p {
+                font-weight: 500;
+            }
+
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                li >* {
+                    width: stretch;
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { createRoute, Link } from "@tanstack/react-router";
+import { Badge } from "@/components/Badge/Badge";
 import useSession from "@/zunstand/session";
 import { Route as ProtectedRoutesLayoutRoute } from "../layout";
 import type { QuizModel } from "@/types/quiz.types";
@@ -54,9 +55,9 @@ function Dashboard() {
         <article className={styles["dashboard-scores"]}>
           <p>Lastest Scores</p>
           <ul>
-            <li>Score 1</li>
-            <li>Score 2</li>
-            <li>Score 3</li>
+            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
+            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
+            <li><Badge variant="tag"><span>score</span><span>0 XP</span></Badge></li>
           </ul>
         </article>
       </section>

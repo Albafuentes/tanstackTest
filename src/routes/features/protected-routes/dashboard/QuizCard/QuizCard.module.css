@@ -14,6 +14,14 @@
     height: fit-content;
     max-width: 20rem;
 
+    .quiz-card__badge {
+        align-self: flex-end;
+
+        svg {
+            fill: var(--white);
+        }
+    }
+
     .quiz-card__text {
         display: flex;
         flex-direction: column;

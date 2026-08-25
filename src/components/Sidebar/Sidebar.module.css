@@ -34,12 +34,8 @@
         flex-direction: column;
         gap: 3rem;
 
-        margin: 0;
-        padding: 0;
-
 
         &>.sidebar-item {
-            list-style: none;
 
             &.item--separator {
                 padding-top: 2rem;

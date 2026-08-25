@@ -1,0 +1,21 @@
+import React from "react";
+import styles from "./Badge.module.css";
+interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode | React.ReactNode[];
+    variant?: "solid" | "tag";
+    color?: "black" | "red" | "green";
+    className?: string;
+}
+
+export const Badge = ({ children, variant = "solid", color = "black", className, ...props }: BadgeProps) => {
+    const classNameCompounded = `${styles.badge} ${variant ? styles[`badge--${variant}`] : ""} ${color ? styles[`badge--${color}`] : ""} ${className ?? ""}`;
+    return (
+        <div className={classNameCompounded} {...props}>
+            {Array.isArray(children)
+                ? children.map((child, index) => (
+                    <React.Fragment key={index}>{child}</React.Fragment>
+                ))
+                : children}
+        </div>
+    );
+};

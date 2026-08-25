@@ -70,4 +70,22 @@
             color: var(--black-80);
         }
     }
+
+    &.button--link {
+        background-color: transparent;
+        color: var(--black-90);
+        border: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &:disabled {
+            color: var(--black-80);
+        }
+    }
 }

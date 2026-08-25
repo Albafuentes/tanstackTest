@@ -1,8 +1,8 @@
 import style from "./Button.module.css";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
-    variant?: "black" | "red" | "outline-black" ;
+    variant?: "black" | "red" | "outline-black" | "link";
 }
 
 export const Button = ({ children, variant = "black", ...props }: ButtonProps) => {

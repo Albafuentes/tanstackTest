@@ -4,6 +4,7 @@ import buttonStyles from "@/components/Button/Button.module.css";
 import styles from "./QuizCard.module.css";
 import { Badge } from "@/components/Badge/Badge";
 import { IconStar } from "@tabler/icons-react";
+import { formatSentenceString } from "@/utils/formats";
 
 
 export const QuizCard = ({ quiz }: { quiz: QuizModel.Quiz }) => {
@@ -12,7 +13,7 @@ export const QuizCard = ({ quiz }: { quiz: QuizModel.Quiz }) => {
             <Badge color="green" className={styles["quiz-card__badge"]}><IconStar size={14} />{quiz.extraPoints}</Badge>
 
             <div className={styles["quiz-card__text"]}>
-                <h6>{quiz.name}</h6>
+                <h6>{formatSentenceString(quiz.name)}</h6>
                 <p>Questions: {quiz.questions}</p>
             </div>
 

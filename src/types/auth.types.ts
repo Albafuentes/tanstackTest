@@ -3,5 +3,6 @@ export namespace AuthModel {
         id: string;
         name: string;
         email: string;
+        createdAt: string;
     }
 }

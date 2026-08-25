@@ -8,6 +8,7 @@ import chGreen from "../../assets/svg/ch-green.svg";
 import chRed from "../../assets/svg/ch-red.svg";
 import { IconStar } from "@tabler/icons-react";
 import styles from "./Header.module.css";
+import { formatDate } from "@/utils/formats";
 
 const Logo = () => {
   const urlImage = Math.random() < 0.5 ? chGreen : chRed;
@@ -29,7 +30,7 @@ export const Header = () => {
             <div className={styles["sidebar-item__header"]}>
               <Logo />
               <span>{session?.identity.user}</span>
-              <small>session: {session?.identity.createdAt?.toLocaleDateString()}</small>
+              <small>session: {formatDate(session?.identity.createdAt)}</small>
 
             </div>
           </Sidebar.Item>

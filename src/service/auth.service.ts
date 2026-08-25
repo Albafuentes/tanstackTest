@@ -10,6 +10,7 @@ export const authService = {
                     id: crypto.randomUUID(),
                     name: (email as string).split("@")[0],
                     email: email as string,
+                    createdAt: new Date().toISOString(),
                 };
 
                 generateToken(user).then((token) => {

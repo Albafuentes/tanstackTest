@@ -1,4 +1,4 @@
-import { createRoute, Link } from "@tanstack/react-router";
+import { createRoute } from "@tanstack/react-router";
 import { Badge } from "@/components/Badge/Badge";
 import useSession from "@/zunstand/session";
 import { Route as ProtectedRoutesLayoutRoute } from "../layout";
@@ -7,6 +7,7 @@ import { api } from "@/service/api.service";
 import { QuizCard } from "./QuizCard/QuizCard";
 import styles from "./dashboard.module.css";
 import { ABBREVIATION_PT } from "@/config/constants";
+import { formatSentenceString } from "@/utils/formats";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -59,7 +60,7 @@ function Dashboard() {
             {session?.history.length ? session?.history.map((historyItem, index) => (
               <li key={index}>
                 <Badge variant="tag">
-                  <span>{historyItem.quizName}</span>
+                  <span>{formatSentenceString(historyItem.quizName)}</span>
                   <span>{historyItem.points} {ABBREVIATION_PT}</span>
                 </Badge>
               </li>

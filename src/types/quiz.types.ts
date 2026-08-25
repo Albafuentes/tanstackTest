@@ -4,6 +4,7 @@ export namespace QuizModel {
         options: string[];
         answer: number;
         explanation: string;
+        level: 1 | 2 | 3;
     }
 
     export type Quiz = {

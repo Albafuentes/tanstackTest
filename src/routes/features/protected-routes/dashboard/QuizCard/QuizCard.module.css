@@ -1,0 +1,28 @@
+.quiz-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+
+    padding: 0.875rem 1.5rem;
+
+    background-color: var(--white);
+    border-radius: 0.875rem;
+    border: 2px solid var(--black-30);
+
+    .quiz-card__text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        h6 {
+            font-weight: 400;
+        }
+    }
+
+    a {
+        width: stretch;
+        text-decoration: none;
+    }
+}

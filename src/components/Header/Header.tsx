@@ -22,7 +22,7 @@ export const Header = () => {
     <header id={styles["header"]}>
       {isDashboardRoute && (
         <Sidebar>
-          <Sidebar.Trigger>
+          <Sidebar.Trigger className={styles["sidebar-item__trigger"]}>
             <Logo />
           </Sidebar.Trigger>
           <Sidebar.Item readonly>

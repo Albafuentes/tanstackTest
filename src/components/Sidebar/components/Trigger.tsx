@@ -7,7 +7,7 @@ export interface TriggerProps extends ButtonProps {
 }
 
 export const Trigger = ({ children, ...props }: TriggerProps) => {
-
+    
     return (
         <Button {...props} variant="link">
             {children}

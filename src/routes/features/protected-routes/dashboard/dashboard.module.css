@@ -1,0 +1,26 @@
+.dashboard {
+    section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: 2.625rem;
+
+        width: inherit;
+        height: inherit;
+
+        h3 {
+            grid-column: 1 / -1;
+        }
+
+        &>.dashboard-quizs {
+            grid-column: 1 / -2;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto
+        }
+
+        &>.dashboard-scores {}
+    }
+}

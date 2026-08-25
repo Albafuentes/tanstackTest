@@ -1,4 +1,8 @@
 #header {
+  .sidebar-item__trigger {
+    padding-inline: 0;
+  }
+
   .score-pill {
     display: flex;
     align-items: center;

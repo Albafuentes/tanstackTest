@@ -4,7 +4,7 @@ import { SCORE_QUESTION_INCREMENT } from "@/zunstand/session";
 
 
 export const quizs: QuizModel.Quiz[] = Object.entries(quizsQuestions).map(([key, value], index) => {
-    const numberOfQuestions = value.questions.length;
+    const numberOfQuestions = value.questions.filter((question) => question.level === 1).length;
     return {
         id: `${key}-${index}${numberOfQuestions}`,
         name: key,

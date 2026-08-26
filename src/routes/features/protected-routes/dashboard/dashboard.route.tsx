@@ -8,6 +8,7 @@ import { QuizCard } from "./QuizCard/QuizCard";
 import styles from "./dashboard.module.css";
 import { ABBREVIATION_PT } from "@/config/constants";
 import { formatSentenceString } from "@/utils/formats";
+import { AnimatedRoute } from "@/components";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -45,28 +46,30 @@ function Dashboard() {
   const { quizsData } = Route.useLoaderData() as { quizsData: QuizModel.Quiz[] };
 
   return (
-    <section className={styles["dashboard"]}>
-      <h3>Let's play a quiz!</h3>
+    <AnimatedRoute variant="scale">
+      <section className={styles["dashboard"]}>
+        <h3>Let's play a quiz!</h3>
 
-      <article className={styles["dashboard-quizs"]}>
-        {quizsData.map((quiz) => (
-          <QuizCard key={quiz.id} quiz={quiz} />
-        ))}
-      </article>
-      <article className={styles["dashboard-scores"]}>
-        <p>Lastest Scores</p>
-        <ul>
-          {session?.history.length ? session?.history.map((historyItem, index) => (
-            <li key={index}>
-              <Badge variant="tag">
-                <span>{formatSentenceString(historyItem.quizName)}</span>
-                <span>{historyItem.points} {ABBREVIATION_PT}</span>
-              </Badge>
-            </li>
-          )) : <li className={styles["dashboard-scores__item-empty"]}>No scores yet...</li>}
-        </ul>
-      </article>
-    </section>
+        <article className={styles["dashboard-quizs"]}>
+          {quizsData.map((quiz) => (
+            <QuizCard key={quiz.id} quiz={quiz} />
+          ))}
+        </article>
+        <article className={styles["dashboard-scores"]}>
+          <p>Lastest Scores</p>
+          <ul>
+            {session?.history.length ? session?.history.map((historyItem, index) => (
+              <li key={index}>
+                <Badge variant="tag">
+                  <span>{formatSentenceString(historyItem.quizName)}</span>
+                  <span>{historyItem.points} {ABBREVIATION_PT}</span>
+                </Badge>
+              </li>
+            )) : <li className={styles["dashboard-scores__item-empty"]}>No scores yet...</li>}
+          </ul>
+        </article>
+      </section>
+    </AnimatedRoute>
   );
 }
 

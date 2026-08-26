@@ -5,7 +5,6 @@ import useSession from "../../../zunstand/session";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
 import { decodeToken, isAuthenticated } from "../../../utils/auth.util";
-import { AnimatedRoute } from "@/components/AnimationRoute/AnimatedRoute";
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,

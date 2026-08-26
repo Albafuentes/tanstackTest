@@ -23,6 +23,14 @@
                 top: auto;
 
                 background: var(--red-50);
+
+                &.progress__thumb__value--red {
+                    background: var(--red-50);
+                }
+
+                &.progress__thumb__value--black {
+                    background: var(--black-90);
+                }
             }
 
             progress {

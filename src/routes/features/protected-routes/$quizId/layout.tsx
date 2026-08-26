@@ -11,10 +11,7 @@ export const Route = createRoute({
 function QuizLayout() {
 
   return (
-
-      <AnimatedRoute variant="slideUp">
-        <Outlet />
-      </AnimatedRoute>
+    <Outlet />
   );
 }
 

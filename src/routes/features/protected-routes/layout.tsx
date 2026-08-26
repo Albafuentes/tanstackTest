@@ -32,9 +32,7 @@ function ProtectedRoutesLayout() {
   return (
     <SidebarProvider>
       <Header />
-      <AnimatedRoute variant="fade">
-        <Outlet />
-      </AnimatedRoute>
+      <Outlet />
     </SidebarProvider>
   );
 }

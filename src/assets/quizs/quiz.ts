@@ -10,6 +10,6 @@ export const quizs: QuizModel.Quiz[] = Object.entries(quizsQuestions).map(([key,
         name: key,
         extraPoints: numberOfQuestions * SCORE_QUESTION_INCREMENT,
         questions: numberOfQuestions,
-
+        quizQuestions: value.questions
     }
 })

@@ -12,6 +12,7 @@ export namespace QuizModel {
         extraPoints: number;
         questions: number;
         name: string;
+        quizQuestions: Question[];
     }
 }
 

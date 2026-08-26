@@ -1,5 +1,5 @@
 import { IconChevronRight } from "@tabler/icons-react";
-import TimerCountdown from "../../../../../components/TimerCountdown/TimerCountdown";
+import TimerCountdown from "./components/TimerCountdown/TimerCountdown";
 import { motion, type TransitionWithValueOverrides } from "motion/react";
 
 /*

@@ -1,7 +1,8 @@
 .badge {
     display: inline-flex;
-
     gap: 0.25rem;
+
+    width: fit-content;
 
     color: var(--white);
 
@@ -27,11 +28,40 @@
         background-color: var(--black-90);
     }
 
+    &.badge--gray {
+        background-color: var(--black-5);
+        color: var(--black-90);
+    }
+
     &.badge--red {
         background-color: var(--red-50);
     }
 
     &.badge--green {
         background-color: var(--green-50);
+    }
+
+    &.badge--outline-black {
+        background-color: var(--white);
+        border: 2px solid var(--black-90);
+        color: var(--black-90);
+    }
+
+    &.badge--outline-gray {
+        background-color: var(--white);
+        border: 2px solid var(--black-5);
+        color: var(--black-90);
+    }
+
+    &.badge--outline-red {
+        background-color: var(--white);
+        border: 2px solid var(--red-50);
+        color: var(--red-50);
+    }
+
+    &.badge--outline-green {
+        background-color: var(--white);
+        border: 2px solid var(--green-50);
+        color: var(--green-50);
     }
 }

@@ -1,0 +1,43 @@
+    .progress {
+        width: 100%;
+
+
+        .progress__help-text {
+            text-align: right;
+            margin-bottom: 1rem !important;
+        }
+
+        .progress__thumb {
+            position: relative;
+            line-height: 0;
+
+            .progress__thumb__value,
+            progress {
+                height: 0.563rem;
+                border-radius: 0.25rem;
+            }
+
+            .progress__thumb__value {
+                position: absolute;
+                bottom: 0;
+                top: auto;
+
+                background: var(--red-50);
+            }
+
+            progress {
+                width: 100%;
+
+                &::-webkit-progress-bar {
+                    background-color: var(--black-5);
+                    border-radius: 0.25rem;
+                }
+
+                &::-webkit-progress-value {
+                    background-color: transparent;
+                }
+            }
+        }
+
+
+    }

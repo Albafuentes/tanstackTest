@@ -1,0 +1,60 @@
+.tag-answer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    align-items: center;
+    gap: 2rem;
+
+    background-color: var(--black-5);
+
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.875rem;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: var(--black-10);
+    }
+
+    &:has(input[aria-checked="true"]) {
+        outline: 2px solid var(--black-80);
+        background-color: var(--black-20);
+
+        &.tag-answer--green {
+            outline: 2px solid var(--green-60);
+            background-color: var(--green-50);
+            color: var(--white);
+        }
+
+        &.tag-answer--red {
+            outline: 2px solid var(--red-60);
+            background-color: var(--red-50);
+            color: var(--white);
+        }
+
+        &.tag-answer--green,
+        &.tag-answer--red {
+
+            &>.tag-answer__badge {
+                justify-self: flex-end;
+                padding: 0.375rem 1.25rem;
+                line-height: 1.25rem;
+            }
+        }
+    }
+
+    &.tag-answer--disabled {
+        opacity: 0.5;
+        color: var(--black-80);
+    }
+
+    &>input[type="radio"] {
+        display: none;
+    }
+
+    &>p {
+        grid-column: 1 / 4;
+    }
+}

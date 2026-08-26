@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import useSQuizStatus, { QUIZ_STATUS } from "../../../../../zunstand/quiz-status";
 import useSession from "../../../../../zunstand/session";
 import type { QuizModel } from "@/types/quiz.types";
 
@@ -15,13 +14,27 @@ export type QuestionCount = {
     questionsAnswered: number;
 }
 
+interface UseQuizProps {
+    id: string;
+    name: string;
+}
+
 export const DEFAULT_ANSWER_SELECTED = 0
 
-export const useQuiz = (questions: QuizModel.Question[]): {
+export const QUIZ_STATUS = {
+    NOT_STARTED: "not-started",
+    IN_PROGRESS: "in-progress",
+    FINISHED: "finished",
+} as const;
+type QUIZ_STATUS = typeof QUIZ_STATUS[keyof typeof QUIZ_STATUS];
+
+export const useQuiz = (questions: QuizModel.Question[], quizInfo: UseQuizProps): {
     getRandomQuestion: () => void;
     resolveAnswer: () => void;
+    skipAnswer: () => void;
     selectOption: (optionIndex: number) => void;
     nextQuestion: () => void;
+    finishedQuiz: () => void;
     currentQuestion: QuizModel.Question | null;
     questionCount: QuestionCount;
     selectedOption: SelectedOption | null;
@@ -32,17 +45,18 @@ export const useQuiz = (questions: QuizModel.Question[]): {
 
     const [selectedOption, setSelectedOption] = useState<SelectedOption | null>(null);
 
-    const quizStatus = useSQuizStatus();
+    const [quizStatus, setQuizStatus] = useState<{ status: QUIZ_STATUS, totalScore: number, skippedAnswers: number }>({ status: QUIZ_STATUS.NOT_STARTED, totalScore: 0, skippedAnswers: 0 });
+
 
     // Added to ensure that the first question is generated only once when the component mounts. This prevents multiple questions from being generated on re-renders.
     const hasGenerated = useRef(false);
-    const increase = useSession((state) => state.increaseScore);
+    const session = useSession();
 
     useEffect(() => {
         if (hasGenerated.current || quizStatus.status !== QUIZ_STATUS.NOT_STARTED) return;
 
         hasGenerated.current = true;
-        quizStatus.setStatus(QUIZ_STATUS.IN_PROGRESS);
+        setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.IN_PROGRESS });
         generateCurrentQuestion();
     }, []);
 
@@ -68,24 +82,36 @@ export const useQuiz = (questions: QuizModel.Question[]): {
         setSelectedOption({ answer: selectedOption?.answer ?? DEFAULT_ANSWER_SELECTED, resolved: true, correct: isCorrect });
 
         if (isCorrect) {
-            increase();
+            setQuizStatus({ ...quizStatus, totalScore: quizStatus.totalScore + 1 });
         }
     }
 
-    const nextQuestion = () => {
-        const isQuizFinished = pendingQuestions.length === 1;
+    const skipAnswer = (): void => {
+        if (!currentQuestion) return;
 
+        setSelectedOption({ answer: selectedOption?.answer ?? DEFAULT_ANSWER_SELECTED, resolved: true, correct: false });
+        setQuizStatus({ ...quizStatus, skippedAnswers: quizStatus.skippedAnswers + 1 });
+        nextQuestion();
+    }
+
+    const nextQuestion = () => {
         setPendingQuestions((prevQuestions) =>
             prevQuestions.filter((question) => question !== currentQuestion)
         );
 
-        if (isQuizFinished) {
-            quizStatus.setStatus(QUIZ_STATUS.FINISHED);
-            return;
-        }
-
         generateCurrentQuestion();
         setSelectedOption(null);
+    }
+
+    const finishedQuiz = () => {
+        setPendingQuestions((prevQuestions) =>
+            prevQuestions.filter((question) => question !== currentQuestion)
+        );
+        setSelectedOption(null);
+        setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.FINISHED });
+        
+        session.increaseScore(quizStatus.totalScore);
+        session.updateHistory(quizInfo.id, quizInfo.name, quizStatus.totalScore, quizStatus.skippedAnswers, true);
     }
 
     const questionCount: QuestionCount = {
@@ -94,5 +120,5 @@ export const useQuiz = (questions: QuizModel.Question[]): {
         questionsAnswered: questions.length - pendingQuestions.length,
     };
 
-    return { getRandomQuestion: generateCurrentQuestion, resolveAnswer, selectOption, nextQuestion, currentQuestion, questionCount, selectedOption, isQuizFinished: quizStatus.status === QUIZ_STATUS.FINISHED };
+    return { getRandomQuestion: generateCurrentQuestion, resolveAnswer, skipAnswer, selectOption, nextQuestion, finishedQuiz, currentQuestion, questionCount, selectedOption, isQuizFinished: pendingQuestions.length === 1 };
 }

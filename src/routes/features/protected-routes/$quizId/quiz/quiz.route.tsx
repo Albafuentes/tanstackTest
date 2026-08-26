@@ -1,14 +1,19 @@
-
-import { createRoute, notFound, useNavigate } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
-import NotFound from './not-found';
-import Loader from './loader';
-import { api } from '../../../../../service/api.service';
-import PageTemplateHeader from './components/PageTemplateHeader';
-import PageTemplateContent from './components/PageTemplateContent';
-import { useQuiz } from './hook';
-import { AnimatedRoute as AnimationRoute } from "@/components/AnimationRoute/AnimatedRoute";
-import { motion } from 'motion/react';
+import NotFound from "./not-found";
+import Loader from "./loader";
+import { api } from "../../../../../service/api.service";
+
+import { motion } from "motion/react";
+import { createRoute, useNavigate } from "@tanstack/react-router";
+import { useQuiz } from "./hook";
+import type { QuizModel } from "@/types/quiz.types";
+import { formatSentenceString } from "@/utils/formats";
+import styles from "./quiz.module.css";
+import { Progress } from "./components/Progress/Progress";
+import TimerCountdown from "./components/TimerCountdown/TimerCountdown";
+import useSession from "@/zunstand/session";
+import { TagAnswer } from "./components/TagAnswer/TagAnswer";
+import { Button } from "@/components";
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -20,14 +25,17 @@ export const Route = createRoute({
     // The customer needs to know that the data is still valid.
     // with Vite SPA config the loader function is not executed on the server, but only on the client, so the data is fetched only once.
     // Added try catch if we need to manage te error for example in Sentry o redirect to another page.
-    loader: async () => {
-        // const questions = await api.quiz.getQuiz();
 
-        // if (questions.length === 0 || !questions) {
-        //     throw notFound(); // if the data is not found, the notFound() function is executed, and the user is redirected to the 404 page.
-        // }
-
-        // return questions;
+    loader: async ({ params }) => {
+        try {
+            const response: QuizModel.Quiz = await api.quiz.getQuizById(
+                params.quizId,
+            );
+            return response;
+        } catch (error) {
+            console.error(`Error fetching quiz ${params.quizId}:`, error);
+            return { quizsData: [] };
+        }
     },
 
     // staleTime fixed the revalidation of the data. The loader function is not executed again on the client, and the data is not fetched again if it does not become stale.
@@ -46,44 +54,81 @@ export const Route = createRoute({
     pendingMs: 1000, // 1 second
 
     // the component is rendered while the route is loading, and the user can see a loading state.
-    // loaderComponent: () => <div>Loading...</div>, 
+    // loaderComponent: () => <div>Loading...</div>,
 });
 
-
 function Quiz() {
-    // const navigate = useNavigate()
-    // const data = Route.useLoaderData() // can be used here to access the data returned from the loader function
-    // // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
-    // const { resolveAnswer, selectOption, nextQuestion, currentQuestion, questionCount, selectedOption, isQuizFinished } = useQuiz(data);
+    const navigate = useNavigate();
 
-    // const handleNextQuestion = () => {
-    //     nextQuestion();
+    const session = useSession();
 
-    //     if (isQuizFinished) {
-    //         navigate({ to: "results" });
-    //     }
-    // }
+    const data: QuizModel.Quiz = Route.useLoaderData(); // can be used here to access the data returned from the loader function
+    const dataWithLevel = data.quizQuestions.filter(
+        (quiz) => quiz.level === session?.settings.level,
+    );
+    const {
+        resolveAnswer,
+        skipAnswer,
+        selectOption,
+        nextQuestion,
+        finishedQuiz,
+        currentQuestion,
+        questionCount,
+        selectedOption,
+        isQuizFinished,
+    } = useQuiz(dataWithLevel, { id: data.id, name: data.name });
 
+    // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
+
+    const handleNextQuestion = () => {
+        nextQuestion();
+    };
+
+    const handleFinishQuiz = () => {
+        finishedQuiz();
+        navigate({ to: "results" });
+    }
 
     return (
-        <motion.section>
-            heyyy
-            {/* <PageTemplateHeader
-                questionCount={questionCount}
-                handleResolveAnswer={resolveAnswer}
-                isResolvingAnswer={selectedOption?.resolved ?? false}
-            />
+        <motion.section className={styles["quiz"]}>
+            <div className={styles["quiz__header"]}>
+                <h4>{formatSentenceString(data.name)}</h4>
+                <div className={styles["quiz__header-timer"]}>
+                    <Progress questionCount={questionCount} />
+                    <TimerCountdown seconds={session.settings.timer} />
+                </div>
+            </div>
 
-            <PageTemplateContent
-                selectedOption={selectedOption}
-                handleNextQuestion={handleNextQuestion}
-                currentQuestion={currentQuestion}
-                handleResolveAnswer={resolveAnswer}
-                handleSelectOption={selectOption}
-            /> */}
-
+            <div className={styles["quiz__body"]}>
+                <h6>{currentQuestion?.question}</h6>
+                <div className={styles["quiz__body__list-answers"]}>
+                    {currentQuestion?.options.map((answer, index) => (
+                        <TagAnswer
+                            key={`${data.name}-answer-${index}`}
+                            selectedOption={selectedOption}
+                            data={{
+                                index: index,
+                                answer: answer,
+                                explanation: currentQuestion.explanation,
+                            }}
+                            handleSelectOption={selectOption}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className={styles["quiz__footer"]}>
+                <Button variant="outline-black" onClick={skipAnswer}>Skip</Button>
+                {selectedOption?.resolved ? (
+                    <Button onClick={handleNextQuestion} >Next Question</Button>
+                ) : (
+                    isQuizFinished ? (
+                        <Button onClick={handleFinishQuiz}>Finish Quiz</Button>
+                    ) : (
+                        <Button variant="red" onClick={resolveAnswer} disabled={!selectedOption}>Resolve</Button>)
+                )}
+            </div>
         </motion.section>
-    )
+    );
 }
 
-export default Quiz
+export default Quiz;

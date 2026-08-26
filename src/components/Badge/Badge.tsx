@@ -3,7 +3,7 @@ import styles from "./Badge.module.css";
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode | React.ReactNode[];
     variant?: "solid" | "tag";
-    color?: "black" | "red" | "green";
+    color?: "black" | "outline-black" | "red" | "outline-red" | "green" | "outline-green" | "gray" | "outline-gray";
     className?: string;
 }
 

@@ -28,6 +28,7 @@ export const Route = createRoute({
   // staleTime: 1000 * 60 * 5, // 5 minutes
   staleTime: 0,
 
+
   // gcTime fixed the garbage collection of the data. The loader function is not executed again on the client, and the data is not fetched again if the user does not navigate away from the page.
   // gcTime: 1000 * 60 * 10, // 10 minutes
   gcTime: 0,
@@ -56,7 +57,7 @@ function Dashboard() {
           ))}
         </article>
         <article className={styles["dashboard-scores"]}>
-          <p>Lastest Scores</p>
+          <strong>Lastest Scores</strong>
           <ul>
             {session?.history.length ? session?.history.map((historyItem, index) => (
               <li key={index}>

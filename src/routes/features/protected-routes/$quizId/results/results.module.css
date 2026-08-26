@@ -1,0 +1,55 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    .results__summary,
+    .results__score,
+    .results__empty {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .results__score {
+        align-items: center;
+
+        &>h4 {
+            align-self: flex-start;
+        }
+    }
+
+    .results__summary {
+        .results__summary__group-badges {
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            gap: 0.5rem;
+
+            &>div {
+                width: stretch;
+                flex-direction: column;
+
+                &>span:first-child {
+                    font-size: 0.75rem;
+                }
+            }
+
+        }
+    }
+
+    .results__empty {
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:not(.results__empty > a) {
+            align-self: flex-end;
+        }
+
+    }
+
+
+}

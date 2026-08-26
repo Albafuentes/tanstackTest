@@ -29,6 +29,9 @@ type sessionState = {
     skippedAnswers: number;
     createdAt: Date | null;
     isCompleted: boolean;
+    totalQuestions: number;
+    correctQuestions: number;
+    wrongQuestions: number;
   }[];
   resetSession: () => void;
   setUser: (user: string | null) => void;
@@ -37,7 +40,7 @@ type sessionState = {
   decreaseTimer: () => void;
   increaseLevel: () => void;
   decreaseLevel: () => void;
-  updateHistory: (quizId: string, quizName: string, points: number, skippedAnswers: number, isCompleted: boolean) => void;
+  updateHistory: (quizId: string, quizName: string, points: number, skippedAnswers: number, isCompleted: boolean, totalQuestions: number, correctQuestions: number, wrongQuestions: number) => void;
 };
 
 const initialState: Omit<
@@ -111,11 +114,11 @@ const useSession = create<sessionState>((set) => ({
         level: Math.max(state.settings.level - 1, MIN_LEVEL),
       },
     })),
-  updateHistory: (quizId, quizName, points, skippedAnswers, isCompleted) =>
+  updateHistory: (quizId, quizName, points, skippedAnswers, isCompleted, totalQuestions, correctQuestions, wrongQuestions) =>
     set((state) => ({
       history: [
         ...state.history,
-        { quizId, quizName, points, skippedAnswers, createdAt: new Date(), isCompleted },
+        { quizId, quizName, points, skippedAnswers, createdAt: new Date(), isCompleted, totalQuestions, correctQuestions, wrongQuestions },
       ],
     })),
 }));

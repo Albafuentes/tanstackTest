@@ -45,7 +45,7 @@ export const useQuiz = (questions: QuizModel.Question[], quizInfo: UseQuizProps)
 
     const [selectedOption, setSelectedOption] = useState<SelectedOption | null>(null);
 
-    const [quizStatus, setQuizStatus] = useState<{ status: QUIZ_STATUS, totalScore: number, skippedAnswers: number }>({ status: QUIZ_STATUS.NOT_STARTED, totalScore: 0, skippedAnswers: 0 });
+    const [quizStatus, setQuizStatus] = useState<{ status: QUIZ_STATUS, totalScore: number, skippedAnswers: number, correctQuestions: number, wrongQuestions: number }>({ status: QUIZ_STATUS.NOT_STARTED, totalScore: 0, skippedAnswers: 0, correctQuestions: 0, wrongQuestions: 0 });
 
 
     // Added to ensure that the first question is generated only once when the component mounts. This prevents multiple questions from being generated on re-renders.
@@ -82,7 +82,9 @@ export const useQuiz = (questions: QuizModel.Question[], quizInfo: UseQuizProps)
         setSelectedOption({ answer: selectedOption?.answer ?? DEFAULT_ANSWER_SELECTED, resolved: true, correct: isCorrect });
 
         if (isCorrect) {
-            setQuizStatus({ ...quizStatus, totalScore: quizStatus.totalScore + 1 });
+            setQuizStatus({ ...quizStatus, totalScore: quizStatus.totalScore + 1, correctQuestions: quizStatus.correctQuestions + 1 });
+        } else {
+            setQuizStatus({ ...quizStatus, wrongQuestions: quizStatus.wrongQuestions + 1 });
         }
     }
 
@@ -109,9 +111,9 @@ export const useQuiz = (questions: QuizModel.Question[], quizInfo: UseQuizProps)
         );
         setSelectedOption(null);
         setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.FINISHED });
-        
+
         session.increaseScore(quizStatus.totalScore);
-        session.updateHistory(quizInfo.id, quizInfo.name, quizStatus.totalScore, quizStatus.skippedAnswers, true);
+        session.updateHistory(quizInfo.id, quizInfo.name, quizStatus.totalScore, quizStatus.skippedAnswers, true, questions.length, quizStatus.correctQuestions, quizStatus.wrongQuestions);
     }
 
     const questionCount: QuestionCount = {

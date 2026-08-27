@@ -1,5 +1,6 @@
 
 import { createRoute, Link, } from '@tanstack/react-router'
+import { maxScore } from '@/utils/score.utils';
 import { Badge, Progress } from '@/components';
 import { isGoodScore } from '@/utils/score.utils';
 import { Route as QuizRoute } from "../layout";
@@ -8,11 +9,10 @@ import { Score } from '@/assets/svg/score';
 import { ABBREVIATION_PT } from '@/config/constants';
 import buttonStyles from '@/components/Button/Button.module.css';
 import styles from './results.module.css';
-import { averagePercentageScore, maxScorePercentage } from '@/utils/score.utils';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
-    path: "quiz/results",
+    path: "/results",
     component: Results,
 
     // staleTime: 5 * 60 * 1000,
@@ -37,8 +37,8 @@ function Results() {
                         <Score score={`${results.points}`} isGoodScore={isGoodScore(results.points ?? 0, results.totalQuestions ?? 0)} />
                         <Progress
                             helpText={`${results.points} ${ABBREVIATION_PT}`}
-                            widthValue={averagePercentageScore(results.points ?? 0, results.totalQuestions ?? 0)}
-                            maxValue={maxScorePercentage(results.totalQuestions ?? 0)}
+                            widthValue={results.points ?? 0}
+                            maxValue={maxScore(results.totalQuestions ?? 0)}
                         />
                     </div>
                     <div className={styles["results__summary"]}>

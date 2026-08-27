@@ -29,11 +29,18 @@ export const QUIZ_STATUS = {
 } as const;
 type QUIZ_STATUS = (typeof QUIZ_STATUS)[keyof typeof QUIZ_STATUS];
 
+type QuizStatus = {
+    status: QUIZ_STATUS;
+    totalScore: number;
+    skippedAnswers: number;
+    correctQuestions: number;
+    wrongQuestions: number;
+}
+
 export const useQuiz = (
     questions: QuizModel.Question[],
     quizInfo: UseQuizProps,
 ): {
-    getRandomQuestion: () => void;
     resolveAnswer: () => void;
     skipAnswer: () => void;
     selectOption: (optionIndex: number) => void;
@@ -53,13 +60,7 @@ export const useQuiz = (
         null,
     );
 
-    const [quizStatus, setQuizStatus] = useState<{
-        status: QUIZ_STATUS;
-        totalScore: number;
-        skippedAnswers: number;
-        correctQuestions: number;
-        wrongQuestions: number;
-    }>({
+    const [quizStatus, setQuizStatus] = useState<QuizStatus>({
         status: QUIZ_STATUS.NOT_STARTED,
         totalScore: DEFAULT_SCORE,
         skippedAnswers: 0,
@@ -71,7 +72,7 @@ export const useQuiz = (
     const hasGenerated = useRef(false);
     const session = useSession();
 
-    const generateCurrentQuestion = useCallback(() => {
+    const generateCurrentQuestion = useCallback((pendingQuestions: QuizModel.Question[]) => {
         const randomIndex = Math.floor(Math.random() * pendingQuestions?.length);
         const newQuestion = pendingQuestions[randomIndex];
 
@@ -79,13 +80,13 @@ export const useQuiz = (
     }, [pendingQuestions]);
 
     useEffect(() => {
-        console.log("entra")
+
         if (hasGenerated.current || quizStatus.status !== QUIZ_STATUS.NOT_STARTED)
             return;
-        console.log("entra2 y genera pregunta")
+
         hasGenerated.current = true;
-        setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.IN_PROGRESS });
-        generateCurrentQuestion();
+        setQuizStatus((prev) => ({ ...prev, status: QUIZ_STATUS.IN_PROGRESS }));
+        generateCurrentQuestion(pendingQuestions);
     }, [quizStatus, setQuizStatus, generateCurrentQuestion]);
 
     const selectOption = (optionIndex: number): void => {
@@ -105,17 +106,18 @@ export const useQuiz = (
         });
 
         if (isCorrect) {
-            setQuizStatus({
-                ...quizStatus,
-                totalScore: increaseScore(quizStatus.totalScore),
-                correctQuestions: quizStatus.correctQuestions + 1,
-            });
+            setQuizStatus((prev) => ({
+                ...prev,
+                totalScore: increaseScore(prev.totalScore),
+                correctQuestions: prev.correctQuestions + 1,
+            }));
         } else {
-            setQuizStatus({
-                ...quizStatus,
-                wrongQuestions: quizStatus.wrongQuestions + 1,
-            });
+            setQuizStatus((prev) => ({
+                ...prev,
+                wrongQuestions: prev.wrongQuestions + 1,
+            }));
         }
+
     };
 
     const skipAnswer = (): void => {
@@ -126,29 +128,24 @@ export const useQuiz = (
             resolved: true,
             correct: false,
         });
-        setQuizStatus({
-            ...quizStatus,
-            skippedAnswers: quizStatus.skippedAnswers + 1,
-        });
+        setQuizStatus((prev) => ({
+            ...prev,
+            skippedAnswers: prev.skippedAnswers + 1,
+        }));
         nextQuestion();
     };
 
     const nextQuestion = () => {
-        setPendingQuestions((prevQuestions) =>
-            prevQuestions.filter((question) => question !== currentQuestion),
+        const nextQuestions = pendingQuestions.filter(
+            (question) => question !== currentQuestion,
         );
 
-        generateCurrentQuestion();
+        setPendingQuestions(nextQuestions);
+        generateCurrentQuestion(nextQuestions);
         setSelectedOption(null);
     };
 
     const finishedQuiz = () => {
-        setPendingQuestions((prevQuestions) =>
-            prevQuestions.filter((question) => question !== currentQuestion),
-        );
-        setSelectedOption(null);
-        setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.FINISHED });
-
         session.updateHistory(
             quizInfo.id,
             quizInfo.name,
@@ -159,6 +156,13 @@ export const useQuiz = (
             quizStatus.correctQuestions,
             quizStatus.wrongQuestions,
         );
+
+        setQuizStatus((prev) => ({ ...prev, status: QUIZ_STATUS.FINISHED }));
+
+        // reset the quiz state for the next time the user takes the quiz
+        setPendingQuestions([]);
+        setSelectedOption(null);
+        setCurrentQuestion(null);
     };
 
     const questionCount: QuestionCount = {
@@ -168,7 +172,6 @@ export const useQuiz = (
     };
 
     return {
-        getRandomQuestion: generateCurrentQuestion,
         resolveAnswer,
         skipAnswer,
         selectOption,

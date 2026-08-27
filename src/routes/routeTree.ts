@@ -10,6 +10,10 @@ export const routeTree = RootRoute.addChildren([
     LoginRoute,
     ProtectedRoutesLayoutRoute.addChildren([
         DashboardRoute,
-        QuizLayoutRoute.addChildren([QuizRoute, ResultsRoute]),
+
+        QuizLayoutRoute.addChildren([
+            QuizRoute,
+            ResultsRoute,
+        ]),
     ]),
 ]);

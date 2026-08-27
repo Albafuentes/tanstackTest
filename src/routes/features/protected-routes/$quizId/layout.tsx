@@ -3,7 +3,7 @@ import { Route as ProtectedRoutesLayoutRoute } from "../layout";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,
-  path: "$quizId",
+  path: "/$quizId",
   component: QuizLayout,
 });
 

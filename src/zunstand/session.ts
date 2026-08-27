@@ -10,16 +10,16 @@ export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 3;
 
 export type HistoryState = {
-    quizId: string;
-    quizName: string;
-    points: number;
-    skippedAnswers: number;
-    createdAt: string | null;
-    isCompleted: boolean;
-    totalQuestions: number;
-    correctQuestions: number;
-    wrongQuestions: number;
-  }
+  quizId: string;
+  quizName: string;
+  points: number;
+  skippedAnswers: number;
+  createdAt: string | null;
+  isCompleted: boolean;
+  totalQuestions: number;
+  correctQuestions: number;
+  wrongQuestions: number;
+}
 
 type SessionState = {
   settings: {

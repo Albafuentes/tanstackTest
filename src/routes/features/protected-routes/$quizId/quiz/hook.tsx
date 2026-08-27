@@ -29,7 +29,15 @@ export const QUIZ_STATUS = {
 } as const;
 type QUIZ_STATUS = (typeof QUIZ_STATUS)[keyof typeof QUIZ_STATUS];
 
+export const TIMER_STATUS = {
+    STARTED: 'started',
+    PAUSED: 'paused',
+    FINISHED: 'finished',
+} as const;
+type TIMER_STATUS = (typeof TIMER_STATUS)[keyof typeof TIMER_STATUS];
+
 type QuizStatus = {
+    timerStatus: TIMER_STATUS;
     status: QUIZ_STATUS;
     totalScore: number;
     skippedAnswers: number;
@@ -46,6 +54,7 @@ export const useQuiz = (
     selectOption: (optionIndex: number) => void;
     nextQuestion: () => void;
     finishedQuiz: () => void;
+    timerStatus: TIMER_STATUS;
     currentQuestion: QuizModel.Question | null;
     questionCount: QuestionCount;
     selectedOption: SelectedOption | null;
@@ -61,6 +70,7 @@ export const useQuiz = (
     );
 
     const [quizStatus, setQuizStatus] = useState<QuizStatus>({
+        timerStatus: TIMER_STATUS.STARTED,
         status: QUIZ_STATUS.NOT_STARTED,
         totalScore: DEFAULT_SCORE,
         skippedAnswers: 0,
@@ -108,6 +118,7 @@ export const useQuiz = (
         if (isCorrect) {
             setQuizStatus((prev) => ({
                 ...prev,
+                timerStatus: TIMER_STATUS.PAUSED,
                 totalScore: increaseScore(prev.totalScore),
                 correctQuestions: prev.correctQuestions + 1,
             }));
@@ -143,6 +154,7 @@ export const useQuiz = (
         setPendingQuestions(nextQuestions);
         generateCurrentQuestion(nextQuestions);
         setSelectedOption(null);
+        setQuizStatus((prev) => ({ ...prev, timerStatus: TIMER_STATUS.STARTED }));
     };
 
     const finishedQuiz = () => {
@@ -157,7 +169,7 @@ export const useQuiz = (
             quizStatus.wrongQuestions,
         );
 
-        setQuizStatus((prev) => ({ ...prev, status: QUIZ_STATUS.FINISHED }));
+        setQuizStatus((prev) => ({ ...prev, status: QUIZ_STATUS.FINISHED, timerStatus: TIMER_STATUS.FINISHED }));
 
         // reset the quiz state for the next time the user takes the quiz
         setPendingQuestions([]);
@@ -177,6 +189,7 @@ export const useQuiz = (
         selectOption,
         nextQuestion,
         finishedQuiz,
+        timerStatus: quizStatus.timerStatus,
         currentQuestion,
         questionCount,
         selectedOption,

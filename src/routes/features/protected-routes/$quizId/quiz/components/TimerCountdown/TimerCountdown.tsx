@@ -9,10 +9,9 @@ interface TimerCountdownProps {
     onFinish?: () => void;
     showTimer?: boolean;
     isPaused?: boolean;
-    resetTimer?: boolean;
 }
 
-const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true, isPaused = false, resetTimer = false }: TimerCountdownProps) => {
+const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true, isPaused = false,  }: TimerCountdownProps) => {
 
     const secondsToDisplay = showTimer ? seconds : 0;
     const [currentSeconds, setCurrentSeconds] = useState(secondsToDisplay);
@@ -25,10 +24,6 @@ const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true,
     useEffect(() => {
         if (!showTimer || isPaused) {
             return;
-        }
-        
-        if (resetTimer) {
-            timer.set(secondsToDisplay);
         }
 
         let controls: ReturnType<typeof animate>;
@@ -51,7 +46,7 @@ const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true,
         return () => {
             controls?.stop();
         };
-    }, [showTimer, secondsToDisplay, isPaused, onFinish, resetTimer]);
+    }, [showTimer, secondsToDisplay, isPaused, onFinish]);
 
     return (
         <Badge color="gray" className={styles["timer-countdown"]}>

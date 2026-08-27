@@ -67,6 +67,7 @@ function Quiz() {
     selectOption,
     nextQuestion,
     finishedQuiz,
+    timerStatus,
     currentQuestion,
     questionCount,
     selectedOption,
@@ -122,19 +123,17 @@ function Quiz() {
           <Progress
             helpText={`${questionCount?.questionsAnswered ?? '-'} of ${questionCount?.totalQuestions ?? '-'}`}
             widthValue={
-              ((questionCount?.questionsAnswered ?? 0) /
-                (questionCount?.totalQuestions ?? 0)) *
-              100
+              questionCount?.questionsAnswered ?? 0
             }
             maxValue={questionCount?.totalQuestions ?? 0}
             color="red"
           />
           <TimerCountdown
             seconds={session.settings.timer}
-            isPaused={isResolved}
+            isPaused={timerStatus === 'paused'}
             onFinish={skipAnswer}
             showTimer={!isQuizFinished}
-            resetTimer={!isResolved && !isQuizFinished}
+
           />
         </div>
       </div>

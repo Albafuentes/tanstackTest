@@ -73,6 +73,8 @@ function Quiz() {
     isQuizFinished,
   } = useQuiz(dataWithLevel, { id: data.id, name: data.name });
 
+  const isResolved = selectedOption?.resolved ?? false;
+
   // const {isFetching} = Route.useMatch()  can be used here to access the data returned from the loader function
 
   const handleNextQuestion = () => {
@@ -84,7 +86,7 @@ function Quiz() {
   };
 
   const buttonSwitch = () => {
-    if (selectedOption?.resolved) {
+    if (isResolved) {
       if (isQuizFinished) {
         return (
           <Link
@@ -127,7 +129,13 @@ function Quiz() {
             maxValue={questionCount?.totalQuestions ?? 0}
             color="red"
           />
-          <TimerCountdown seconds={session.settings.timer} />
+          <TimerCountdown
+            seconds={session.settings.timer}
+            isPaused={isResolved}
+            onFinish={skipAnswer}
+            showTimer={!isQuizFinished}
+            resetTimer={!isResolved && !isQuizFinished}
+          />
         </div>
       </div>
 

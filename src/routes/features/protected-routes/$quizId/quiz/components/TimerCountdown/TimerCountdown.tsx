@@ -9,9 +9,10 @@ interface TimerCountdownProps {
     onFinish?: () => void;
     showTimer?: boolean;
     isPaused?: boolean;
+    resetTimer?: boolean;
 }
 
-const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true, isPaused = false }: TimerCountdownProps) => {
+const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true, isPaused = false, resetTimer = false }: TimerCountdownProps) => {
 
     const secondsToDisplay = showTimer ? seconds : 0;
     const [currentSeconds, setCurrentSeconds] = useState(secondsToDisplay);
@@ -22,27 +23,35 @@ const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true,
     });
 
     useEffect(() => {
-
-        if (!showTimer) {
+        if (!showTimer || isPaused) {
             return;
         }
-
-        if (isPaused) return;
-
-        const controls = animate(timer, 0, {
-            duration: secondsToDisplay,
-            ease: "linear",
-        });
-
-        return () => controls.stop();
-
-    }, [showTimer, secondsToDisplay, timer, isPaused]);
-
-    useEffect(() => {
-        if (currentSeconds === 0) {
-            onFinish?.();
+        
+        if (resetTimer) {
+            timer.set(secondsToDisplay);
         }
-    }, [currentSeconds, onFinish]);
+
+        let controls: ReturnType<typeof animate>;
+
+        const run = () => {
+            timer.set(secondsToDisplay);
+
+            controls = animate(timer, 0, {
+                duration: secondsToDisplay,
+                ease: "linear",
+                onComplete: () => {
+                    onFinish?.();
+                    run();
+                },
+            });
+        };
+
+        run();
+
+        return () => {
+            controls?.stop();
+        };
+    }, [showTimer, secondsToDisplay, isPaused, onFinish, resetTimer]);
 
     return (
         <Badge color="gray" className={styles["timer-countdown"]}>

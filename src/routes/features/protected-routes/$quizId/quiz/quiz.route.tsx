@@ -1,6 +1,4 @@
 import { Route as QuizRoute } from "../layout";
-import NotFound from "./not-found";
-import Loader from "./loader";
 import { api } from "../../../../../service/api.service";
 
 import { createRoute, useNavigate } from "@tanstack/react-router";
@@ -46,11 +44,11 @@ export const Route = createRoute({
     gcTime: 0,
 
     // page error 404, the page is not found, the component is rendered, and the user can navigate to another page.
-    notFoundComponent: () => <NotFound />,
+    notFoundComponent: () => <>not found...</>,
 
     // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-    pendingComponent: () => <Loader />,
-    pendingMs: 1000, // 1 second
+    pendingComponent: () => <>Loading...</>,
+    //pendingMs: 1000, // 1 second
 
     // the component is rendered while the route is loading, and the user can see a loading state.
     // loaderComponent: () => <div>Loading...</div>,

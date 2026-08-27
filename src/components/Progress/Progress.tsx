@@ -13,13 +13,14 @@ export const Progress = ({
     maxValue,
     color = "black"
 }: ProgressProps) => {
+    const percentage = (widthValue / maxValue) * 100;
     return (
         <div className={styles["progress"]}>
             <p className={styles["progress__help-text"]}>{helpText}</p>
             <div className={styles["progress__thumb"]}>
                 <motion.div
                     animate={{
-                        width: `${widthValue}%`,
+                        width: `${percentage}%`,
                     }}
                     transition={{
                         duration: 0.6,
@@ -27,13 +28,13 @@ export const Progress = ({
                     }}
                     style={{
                         visibility:
-                            widthValue === 0 ? "hidden" : "visible",
+                            percentage === 0 ? "hidden" : "visible",
                     }}
                     className={`${styles["progress__thumb__value"]} ${color === "red" ? styles["progress__thumb__value--red"] : styles["progress__thumb__value--black"]}`}
                 />
                 <progress
-                    value={widthValue ?? 0}
-                    max={maxValue ?? 0}
+                    value={percentage ?? 0}
+                    max={100}
                 />
             </div>
         </div >

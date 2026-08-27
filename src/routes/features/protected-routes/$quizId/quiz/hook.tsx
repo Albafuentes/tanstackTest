@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useSession from "../../../../../zunstand/session";
 import type { QuizModel } from "@/types/quiz.types";
 
@@ -52,22 +52,20 @@ export const useQuiz = (questions: QuizModel.Question[], quizInfo: UseQuizProps)
     const hasGenerated = useRef(false);
     const session = useSession();
 
+    const generateCurrentQuestion = useCallback(() => {
+        const randomIndex = Math.floor(Math.random() * pendingQuestions?.length);
+        const newQuestion = pendingQuestions[randomIndex];
+
+        setCurrentQuestion(newQuestion);
+    }, [pendingQuestions]);
+
     useEffect(() => {
         if (hasGenerated.current || quizStatus.status !== QUIZ_STATUS.NOT_STARTED) return;
 
         hasGenerated.current = true;
         setQuizStatus({ ...quizStatus, status: QUIZ_STATUS.IN_PROGRESS });
         generateCurrentQuestion();
-    }, []);
-
-
-
-    const generateCurrentQuestion = () => {
-        const randomIndex = Math.floor(Math.random() * pendingQuestions?.length);
-        const newQuestion = pendingQuestions[randomIndex];
-
-        setCurrentQuestion(newQuestion);
-    }
+    }, [quizStatus, setQuizStatus, generateCurrentQuestion,]);
 
     const selectOption = (optionIndex: number): void => {
         if (!currentQuestion) return;

@@ -15,6 +15,8 @@ export const Route = createRoute({
     component: Login,
 });
 
+// SubmitButton component that uses the useFormStatus hook to determine if the form is pending submission. It disables the button when the form is pending.
+// It requires a separate component because the useFormStatus hook can only be used inside a component that is a child of a form element.
 const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (

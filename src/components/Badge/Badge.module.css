@@ -16,7 +16,8 @@
     }
 
     &.badge--tag {
-        align-items: space-between;
+        align-items: center;
+        justify-content: space-between;
 
         padding: 0.875rem 1.5rem;
 

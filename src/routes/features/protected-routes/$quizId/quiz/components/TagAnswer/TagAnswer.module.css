@@ -36,6 +36,7 @@
 
         &.tag-answer--green,
         &.tag-answer--red {
+            justify-content: flex-start;
 
             &>.tag-answer__badge {
                 justify-self: flex-end;
@@ -46,6 +47,7 @@
     }
 
     &.tag-answer--disabled {
+        justify-content: flex-start;
         opacity: 0.5;
         color: var(--black-80);
     }

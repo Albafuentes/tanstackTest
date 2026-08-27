@@ -7,7 +7,7 @@ import { IconStar } from "@tabler/icons-react";
 import { formatSentenceString } from "@/utils/formats";
 
 
-export const QuizCard = ({ quiz }: { quiz: QuizModel.Quiz }) => {
+export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: boolean }) => {
     return (
         <div className={styles["quiz-card"]}>
             <Badge color="green" className={styles["quiz-card__badge"]}><IconStar size={14} />{quiz.extraPoints}</Badge>
@@ -22,6 +22,7 @@ export const QuizCard = ({ quiz }: { quiz: QuizModel.Quiz }) => {
                 params={{ quizId: quiz.id }}
                 activeOptions={{ exact: true }}
                 className={`${buttonStyles["button"]} ${buttonStyles["button--red"]}`}
+                disabled={disabled}
             >
                 Let's go!
             </Link>

@@ -4,5 +4,6 @@ export namespace AuthModel {
         name: string;
         email: string;
         createdAt: string;
+        avatarURL: string;
     }
 }

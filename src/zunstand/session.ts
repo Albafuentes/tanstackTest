@@ -10,11 +10,6 @@ export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 3;
 
 type sessionState = {
-  identity: {
-    id: string | null;
-    user: string | null;
-    createdAt?: Date | null;
-  };
   score: {
     points: number;
   };
@@ -34,7 +29,7 @@ type sessionState = {
     wrongQuestions: number;
   }[];
   resetSession: () => void;
-  setUser: (user: string | null) => void;
+  // setUser: (user: string | null) => void;
   increaseScore: (amount: number) => void;
   increaseTimer: () => void;
   decreaseTimer: () => void;
@@ -54,11 +49,6 @@ const initialState: Omit<
   | "increaseLevel"
   | "decreaseLevel"
 > = {
-  identity: {
-    id: null,
-    user: null,
-    createdAt: null,
-  },
   score: {
     points: 0,
   },
@@ -75,10 +65,6 @@ const useSession = create<sessionState>((set) => ({
     set({
       ...initialState,
     }),
-  setUser: (user) =>
-    set(() => ({
-      identity: { id: `session-${new Date().toISOString()}`, user, createdAt: new Date() },
-    })),
   increaseScore: (amount) =>
     set((state) => ({
       score: {

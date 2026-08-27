@@ -1,5 +1,7 @@
 import type { AuthModel } from "@/types/auth.types";
 import { generateToken } from "@/utils/auth.util";
+import chGreen from "@/assets/svg/ch-green.svg";
+import chRed from "@/assets/svg/ch-red.svg";
 
 export const authService = {
     async login(email: string, password: string): Promise<{ token: string }> {
@@ -11,6 +13,7 @@ export const authService = {
                     name: (email as string).split("@")[0],
                     email: email as string,
                     createdAt: new Date().toISOString(),
+                    avatarURL: Math.random() < 0.5 ? chGreen : chRed
                 };
 
                 generateToken(user).then((token) => {

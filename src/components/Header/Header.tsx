@@ -5,18 +5,22 @@ import { Sidebar } from "../Sidebar";
 import useSession from "../../zunstand/session";
 import { ABBREVIATION_PT } from "../../config/constants";
 import chGreen from "../../assets/svg/ch-green.svg";
-import chRed from "../../assets/svg/ch-red.svg";
 import { IconStar } from "@tabler/icons-react";
 import styles from "./Header.module.css";
 import { formatDate } from "@/utils/formats";
+import { decodeToken } from "@/utils/auth.util";
 
-const Logo = () => {
-  const urlImage = Math.random() < 0.5 ? chGreen : chRed;
-  return <img src={urlImage} alt="User" width={48} height={48} />;
+const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
+
+
+  return <img src={avatarUrl} alt="User" width={48} height={48} />;
 };
 
 export const Header = () => {
   const isDashboardRoute = useRouterState().location.pathname === "/dashboard";
+  
+  const user = decodeToken();
+
   const session = useSession();
 
   return (
@@ -24,13 +28,13 @@ export const Header = () => {
       {isDashboardRoute && (
         <Sidebar>
           <Sidebar.Trigger className={styles["sidebar-item__trigger"]}>
-            <Logo />
+            <Logo avatarUrl={user?.avatarURL || chGreen} />
           </Sidebar.Trigger>
           <Sidebar.Item readonly>
             <div className={styles["sidebar-item__header"]}>
-              <Logo />
-              <span>{session?.identity.user}</span>
-              <small>session: {formatDate(session?.identity.createdAt)}</small>
+              <Logo avatarUrl={user?.avatarURL || chGreen} />
+              <span>{user?.email}</span>
+              <small>session: {formatDate(user?.createdAt)}</small>
 
             </div>
           </Sidebar.Item>

@@ -5,7 +5,7 @@ import { UnauthorizedError } from "../../../utils/errors.utils";
 import useSession from "../../../zunstand/session";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
-import { decodeToken, isAuthenticated } from "../../../utils/auth.util";
+import { isAuthenticated } from "../../../utils/auth.util";
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
@@ -19,11 +19,6 @@ export const Route = createRoute({
       console.error(new UnauthorizedError("Unauthorized access. Please provide a valid token."));
       session.resetSession();
       throw redirect({ to: "/", search: { redirect: location.href } });
-    }
-
-    if (!session.identity.user) {
-      const user = decodeToken();
-      session.setUser(user?.email || "Unknown User");
     }
   },
 });

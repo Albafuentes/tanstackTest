@@ -47,7 +47,6 @@ function Dashboard() {
   const { quizsData } = Route.useLoaderData() as { quizsData: QuizModel.Quiz[] };
 
   return (
-    <AnimatedRoute variant="scale">
       <section className={styles["dashboard"]}>
         <h3>Let's play a quiz!</h3>
 
@@ -70,7 +69,6 @@ function Dashboard() {
           </ul>
         </article>
       </section>
-    </AnimatedRoute>
   );
 }
 

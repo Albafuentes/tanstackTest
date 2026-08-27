@@ -27,7 +27,7 @@ function Results() {
     const results = session.history.find((item) => item.quizId === params.quizId);
 
     return (
-        <AnimatedRoute variant="slideUp">
+        <>
             {results ? (
                 <section className={styles["results"]}>
                     <div className={styles["results__score"]}>
@@ -71,7 +71,7 @@ function Results() {
                     </div>
                 </section>
             )}
-        </AnimatedRoute>
+        </>
     )
 }
 

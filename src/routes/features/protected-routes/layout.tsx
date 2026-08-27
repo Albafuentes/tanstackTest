@@ -1,4 +1,5 @@
 import { createRoute, Outlet, redirect } from "@tanstack/react-router";
+import { AnimatedRoute } from "../../../components";
 import { SidebarProvider } from "../../../components/Sidebar/SidebarProvider";
 import { UnauthorizedError } from "../../../utils/errors.utils";
 import useSession from "../../../zunstand/session";
@@ -31,7 +32,9 @@ function ProtectedRoutesLayout() {
   return (
     <SidebarProvider>
       <Header />
-      <Outlet />
+      <AnimatedRoute variant="slideUp">
+        <Outlet />
+      </AnimatedRoute>
     </SidebarProvider>
   );
 }

@@ -1,15 +1,15 @@
 
 import { AnimatePresence, motion, type MotionProps, type Variants } from 'motion/react'
-import { useLocation, useRouterState } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 
-
+type RouteVariant = 'fade' | 'slide' | 'scale' | 'slideUp'
 interface AnimatedRouteProps extends MotionProps {
     children: ReactNode
-    variant?: 'fade' | 'slide' | 'scale' | 'slideUp'
+    variant?: RouteVariant
 }
 
-const routeVariants: Record<string, Variants> = {
+const routeVariants: Record<RouteVariant, Variants> = {
     fade: {
         initial: { opacity: 0 },
         in: { opacity: 1 },
@@ -47,19 +47,28 @@ export function AnimatedRoute({
         select: (state) => state.location.pathname,
     });
 
+
+    const navigationStatus = useRouterState({
+        select: (state) => state.status,
+    })
+
+    const isNavigating = navigationStatus === 'pending'
+
     return (
         <AnimatePresence mode="wait">
-            <motion.main
-                key={pathname}
-                initial="initial"
-                animate="in"
-                exit="out"
-                variants={routeVariants[variant]}
-                transition={pageTransition}
-                {...motionProps}
-            >
-                {children}
-            </motion.main>
+            {!isNavigating && (
+                <motion.main
+                    key={pathname}
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={routeVariants[variant]}
+                    transition={pageTransition}
+                    {...motionProps}
+                >
+                    {children}
+                </motion.main>
+            )}
         </AnimatePresence>
     );
 }

@@ -87,60 +87,58 @@ function Quiz() {
     };
 
     return (
-        <AnimatedRoute variant="slideUp">
-            <section className={styles["quiz"]}>
-                <div className={styles["quiz__header"]}>
-                    <h4>{formatSentenceString(data.name)}</h4>
-                    <div className={styles["quiz__header-timer"]}>
-                        <Progress
-                            helpText={`${questionCount?.questionsAnswered ?? "-"} of ${questionCount?.totalQuestions ?? "-"}`}
-                            widthValue={((questionCount?.questionsAnswered ?? 0) / (questionCount?.totalQuestions ?? 0)) * 100}
-                            maxValue={questionCount?.totalQuestions ?? 0}
-                            color="red"
-                        />
-                        <TimerCountdown seconds={session.settings.timer} />
-                    </div>
+        <section className={styles["quiz"]}>
+            <div className={styles["quiz__header"]}>
+                <h4>{formatSentenceString(data.name)}</h4>
+                <div className={styles["quiz__header-timer"]}>
+                    <Progress
+                        helpText={`${questionCount?.questionsAnswered ?? "-"} of ${questionCount?.totalQuestions ?? "-"}`}
+                        widthValue={((questionCount?.questionsAnswered ?? 0) / (questionCount?.totalQuestions ?? 0)) * 100}
+                        maxValue={questionCount?.totalQuestions ?? 0}
+                        color="red"
+                    />
+                    <TimerCountdown seconds={session.settings.timer} />
                 </div>
+            </div>
 
-                <div className={styles["quiz__body"]}>
-                    <h6>{currentQuestion?.question}</h6>
-                    <div className={styles["quiz__body__list-answers"]}>
-                        {currentQuestion?.options.map((answer, index) => (
-                            <TagAnswer
-                                key={`${data.name}-answer-${index}`}
-                                selectedOption={selectedOption}
-                                data={{
-                                    index: index,
-                                    answer: answer,
-                                    explanation: currentQuestion.explanation,
-                                }}
-                                handleSelectOption={selectOption}
-                            />
-                        ))}
-                    </div>
+            <div className={styles["quiz__body"]}>
+                <h6>{currentQuestion?.question}</h6>
+                <div className={styles["quiz__body__list-answers"]}>
+                    {currentQuestion?.options.map((answer, index) => (
+                        <TagAnswer
+                            key={`${data.name}-answer-${index}`}
+                            selectedOption={selectedOption}
+                            data={{
+                                index: index,
+                                answer: answer,
+                                explanation: currentQuestion.explanation,
+                            }}
+                            handleSelectOption={selectOption}
+                        />
+                    ))}
                 </div>
-                <div className={styles["quiz__footer"]}>
-                    <Button variant="outline-black" onClick={skipAnswer}>
-                        Skip
+            </div>
+            <div className={styles["quiz__footer"]}>
+                <Button variant="outline-black" onClick={skipAnswer}>
+                    Skip
+                </Button>
+                {selectedOption?.resolved ? (
+                    <Button onClick={handleNextQuestion}>Next Question</Button>
+                ) : isQuizFinished ? (
+                    <Button onClick={handleFinishQuiz} disabled={!selectedOption}>
+                        Finish Quiz
                     </Button>
-                    {selectedOption?.resolved ? (
-                        <Button onClick={handleNextQuestion}>Next Question</Button>
-                    ) : isQuizFinished ? (
-                        <Button onClick={handleFinishQuiz} disabled={!selectedOption}>
-                            Finish Quiz
-                        </Button>
-                    ) : (
-                        <Button
-                            variant="red"
-                            onClick={resolveAnswer}
-                            disabled={!selectedOption}
-                        >
-                            Resolve
-                        </Button>
-                    )}
-                </div>
-            </section>
-        </AnimatedRoute>
+                ) : (
+                    <Button
+                        variant="red"
+                        onClick={resolveAnswer}
+                        disabled={!selectedOption}
+                    >
+                        Resolve
+                    </Button>
+                )}
+            </div>
+        </section>
     );
 }
 

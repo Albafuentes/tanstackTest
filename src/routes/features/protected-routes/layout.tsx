@@ -27,7 +27,7 @@ function ProtectedRoutesLayout() {
   return (
     <SidebarProvider>
       <Header />
-      <AnimatedRoute variant="slideUp">
+      <AnimatedRoute variant="fade">
         <Outlet />
       </AnimatedRoute>
     </SidebarProvider>

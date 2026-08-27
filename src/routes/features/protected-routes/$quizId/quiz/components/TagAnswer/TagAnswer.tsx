@@ -1,6 +1,5 @@
 import { Badge } from "@/components";
 import type { SelectedOption } from "../../hook";
-import type { QuizModel } from "@/types/quiz.types";
 import styles from "./TagAnswer.module.css";
 
 interface TagAnswerProps {

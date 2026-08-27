@@ -1,4 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { totalScore } from "@/utils/score.utils";
 import { Button } from "@/components/Button/Button";
 import { IconSettings } from "@tabler/icons-react";
 import { Sidebar } from "../Sidebar";
@@ -50,7 +51,7 @@ export const Header = () => {
       )}
       <div className={styles["score-pill"]}>
         <IconStar size={18} />
-        {session?.score?.points} {ABBREVIATION_PT}
+        {totalScore(session?.history || [])} {ABBREVIATION_PT}
       </div>
     </header>
   );

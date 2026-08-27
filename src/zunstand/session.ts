@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-export const SCORE_QUESTION_INCREMENT = 10;
 export const TIMER_INCREMENT = 60;
 
 export const MIN_TIMER = TIMER_INCREMENT;
@@ -10,15 +9,7 @@ export const MAX_TIMER = TIMER_INCREMENT * 3;
 export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 3;
 
-type SessionState = {
-  score: {
-    points: number;
-  };
-  settings: {
-    timer: number;
-    level: number;
-  };
-  history: {
+export type HistoryState = {
     quizId: string;
     quizName: string;
     points: number;
@@ -28,10 +19,15 @@ type SessionState = {
     totalQuestions: number;
     correctQuestions: number;
     wrongQuestions: number;
-  }[];
+  }
+
+type SessionState = {
+  settings: {
+    timer: number;
+    level: number;
+  };
+  history: HistoryState[];
   resetSession: () => void;
-  // setUser: (user: string | null) => void;
-  increaseScore: (amount: number) => void;
   increaseTimer: () => void;
   decreaseTimer: () => void;
   increaseLevel: () => void;
@@ -50,9 +46,6 @@ const initialState: Omit<
   | "increaseLevel"
   | "decreaseLevel"
 > = {
-  score: {
-    points: 0,
-  },
   settings: {
     timer: TIMER_INCREMENT,
     level: 1,
@@ -69,13 +62,6 @@ const useSession = create<SessionState>()(
         set({
           ...initialState,
         }),
-      increaseScore: (amount) =>
-        set((state) => ({
-          score: {
-            ...state.score,
-            points: state.score.points + amount,
-          },
-        })),
       increaseTimer: () =>
         set((state) => ({
           settings: {

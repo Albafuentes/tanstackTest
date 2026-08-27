@@ -1,12 +1,14 @@
 
 import { createRoute, Link, } from '@tanstack/react-router'
 import { Badge, Progress } from '@/components';
+import { isGoodScore } from '@/utils/score.utils';
 import { Route as QuizRoute } from "../layout";
-import useSession, { SCORE_QUESTION_INCREMENT } from '../../../../../zunstand/session';
+import useSession from '../../../../../zunstand/session';
 import { Score } from '@/assets/svg/score';
 import { ABBREVIATION_PT } from '@/config/constants';
 import buttonStyles from '@/components/Button/Button.module.css';
 import styles from './results.module.css';
+import { averagePercentageScore, maxScorePercentage } from '@/utils/score.utils';
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,
@@ -32,11 +34,11 @@ function Results() {
                 <>
                     <div className={styles["results__score"]}>
                         <h4>New score</h4>
-                        <Score score={`${results?.points}`} isGoodScore={(results?.points ?? 0) >= ((results?.totalQuestions ?? 0) / 2)} />
+                        <Score score={`${results.points}`} isGoodScore={isGoodScore(results.points ?? 0, results.totalQuestions ?? 0)} />
                         <Progress
-                            helpText={`${results?.points} ${ABBREVIATION_PT}`}
-                            widthValue={results?.points ?? 0}
-                            maxValue={(results?.totalQuestions ?? 0) * SCORE_QUESTION_INCREMENT}
+                            helpText={`${results.points} ${ABBREVIATION_PT}`}
+                            widthValue={averagePercentageScore(results.points ?? 0, results.totalQuestions ?? 0)}
+                            maxValue={maxScorePercentage(results.totalQuestions ?? 0)}
                         />
                     </div>
                     <div className={styles["results__summary"]}>

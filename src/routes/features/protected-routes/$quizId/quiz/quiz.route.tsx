@@ -1,6 +1,5 @@
 import { Route as QuizRoute } from "../layout";
 import { api } from "../../../../../service/api.service";
-
 import { createRoute, useNavigate } from "@tanstack/react-router";
 import { useQuiz } from "./hook";
 import type { QuizModel } from "@/types/quiz.types";
@@ -10,7 +9,7 @@ import { Progress } from "@/components/index";
 import TimerCountdown from "./components/TimerCountdown/TimerCountdown";
 import useSession from "@/zunstand/session";
 import { TagAnswer } from "./components/TagAnswer/TagAnswer";
-import { AnimatedRoute, Button } from "@/components";
+import { Button } from "@/components";
 
 export const Route = createRoute({
     getParentRoute: () => QuizRoute,

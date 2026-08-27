@@ -1,6 +1,6 @@
 
 import { createRoute, Link, } from '@tanstack/react-router'
-import { AnimatedRoute, Badge, Progress } from '@/components';
+import { Badge, Progress } from '@/components';
 import { Route as QuizRoute } from "../layout";
 import useSession, { SCORE_QUESTION_INCREMENT } from '../../../../../zunstand/session';
 import { Score } from '@/assets/svg/score';
@@ -27,9 +27,9 @@ function Results() {
     const results = session.history.find((item) => item.quizId === params.quizId);
 
     return (
-        <>
+        <section className={styles["results"]}>
             {results ? (
-                <section className={styles["results"]}>
+                <>
                     <div className={styles["results__score"]}>
                         <h4>New score</h4>
                         <Score score={`${results?.points}`} isGoodScore={(results?.points ?? 0) >= ((results?.totalQuestions ?? 0) / 2)} />
@@ -59,19 +59,16 @@ function Results() {
                             Go to Dashboard
                         </Link>
                     </div>
-
-                </section>
+                </>
             ) : (
-                <section className={styles["results"]}>
-                    <div className={styles["results__empty"]}>
-                        <strong>Ups! We have an error, and we can't recover the results. </strong>
-                        <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
-                            Go to Dashboard
-                        </Link>
-                    </div>
-                </section>
+                <div className={styles["results__empty"]}>
+                    <strong>Ups! We have an error, and we can't recover the results. </strong>
+                    <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
+                        Go to Dashboard
+                    </Link>
+                </div>
             )}
-        </>
+        </section>
     )
 }
 

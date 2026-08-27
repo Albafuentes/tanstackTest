@@ -8,7 +8,6 @@ import { QuizCard } from "./QuizCard/QuizCard";
 import styles from "./dashboard.module.css";
 import { ABBREVIATION_PT } from "@/config/constants";
 import { formatSentenceString } from "@/utils/formats";
-import { AnimatedRoute } from "@/components";
 
 export const Route = createRoute({
   getParentRoute: () => ProtectedRoutesLayoutRoute,

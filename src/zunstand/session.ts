@@ -91,12 +91,17 @@ const useSession = create<SessionState>()(
           },
         })),
       updateHistory: (quizId, quizName, points, skippedAnswers, isCompleted, totalQuestions, correctQuestions, wrongQuestions) =>
-        set((state) => ({
-          history: [
-            ...state.history,
-            { quizId, quizName, points, skippedAnswers, createdAt: new Date().toISOString(), isCompleted, totalQuestions, correctQuestions, wrongQuestions },
-          ],
-        })),
+        set((state) => {
+          const previousHistory = state.history.filter((item) => item.quizId !== quizId);
+          return {
+            ...state,
+            history: [
+              ...previousHistory,
+              { quizId, quizName, points, skippedAnswers, createdAt: new Date().toISOString(), isCompleted, totalQuestions, correctQuestions, wrongQuestions },
+            ],
+          };
+        }),
+
     }),
     {
       name: "quiz-session",

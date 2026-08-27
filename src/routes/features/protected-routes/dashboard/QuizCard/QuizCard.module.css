@@ -14,11 +14,6 @@
     height: stretch;
     max-width: 20rem;
 
-    &:has( a[aria-disabled="true"]) {
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
     .quiz-card__badge {
         align-self: flex-end;
 

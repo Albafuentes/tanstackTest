@@ -49,15 +49,12 @@ function Dashboard() {
       <h3>Let's play a quiz!</h3>
 
       <article className={styles['dashboard-quizs']}>
-        {quizsData.map((quiz) => {
-          const isDisabled = session.history.some(
-            (item) => item.quizId === quiz.id,
-          );
-          return <QuizCard key={quiz.id} quiz={quiz} disabled={isDisabled} />;
-        })}
+        {quizsData.map((quiz) => (
+          <QuizCard key={quiz.id} quiz={quiz} />
+        ))}
       </article>
       <article className={styles['dashboard-scores']}>
-        <strong>Lastest Scores</strong>
+        <strong>All Scores</strong>
         <ul>
           {session?.history.length ? (
             session?.history.map((historyItem, index) => (

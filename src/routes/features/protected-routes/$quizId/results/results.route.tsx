@@ -15,6 +15,9 @@ export const Route = createRoute({
 
     // staleTime: 5 * 60 * 1000,
     // gcTime: 10 * 60 * 1000,
+
+    notFoundComponent: () => <>not found...</>,
+    pendingComponent: () => <>Loading...</>,
 });
 
 

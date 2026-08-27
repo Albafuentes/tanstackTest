@@ -37,7 +37,7 @@ export const Route = createRoute({
   notFoundComponent: () => <>not found...</>,
 
   // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-  // pendingComponent: () => <>Loading...</>,
+  pendingComponent: () => <>Loading...</>,
   // pendingMs: 1000, // 1 second
 
 });

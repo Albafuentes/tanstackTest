@@ -1,0 +1,30 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 2.625rem;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.375rem;
+
+
+        fieldset {
+            justify-content: space-between;
+
+
+            legend {
+                font-weight: 500;
+            }
+        }
+
+        .settings__button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+
+            padding-top: 2.625rem;
+        }
+    }
+
+}

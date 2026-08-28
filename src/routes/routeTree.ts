@@ -5,12 +5,13 @@ import { Route as QuizLayoutRoute } from "./features/protected-routes/$quizId/la
 import { Route as ResultsRoute } from "./features/protected-routes/$quizId/results/results.route";
 import { Route as LoginRoute } from "./features/login/login.route";
 import { Route as ProtectedRoutesLayoutRoute } from "./features/protected-routes/layout";
+import { Route as SettingsRoute } from "./features/protected-routes/settings/settings.route";
 
 export const routeTree = RootRoute.addChildren([
     LoginRoute,
     ProtectedRoutesLayoutRoute.addChildren([
         DashboardRoute,
-
+        SettingsRoute,
         QuizLayoutRoute.addChildren([
             QuizRoute,
             ResultsRoute,

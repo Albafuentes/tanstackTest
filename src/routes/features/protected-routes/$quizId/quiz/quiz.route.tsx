@@ -129,7 +129,7 @@ function Quiz() {
             color="red"
           />
           <TimerCountdown
-            seconds={session.settings.timer}
+            time={session.settings.timer}
             isPaused={timerStatus === 'paused'}
             onFinish={skipAnswer}
             showTimer={!isQuizFinished}

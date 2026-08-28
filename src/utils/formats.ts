@@ -76,3 +76,16 @@ export const formatDate = (
         return "-";
     }
 };
+
+export const minutesToTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(remainingMinutes).padStart(2, "0")}`;
+};
+
+export const timeToSeconds = (time: string) => {
+  const [hours, minutes] = time.split(":").map(Number);
+
+  return hours * 3600 + minutes * 60;
+};

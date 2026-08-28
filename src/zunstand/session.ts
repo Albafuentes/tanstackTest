@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { minutesToTime } from "@/utils/formats";
 
-export const TIMER_INCREMENT = 60;
+export const TIMER_INCREMENT = 30;
 
 export const MIN_TIMER = TIMER_INCREMENT;
-export const MAX_TIMER = TIMER_INCREMENT * 3;
+export const MAX_TIMER = TIMER_INCREMENT * 6;
 
 export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 3;
@@ -23,31 +24,23 @@ export type HistoryState = {
 
 type SessionState = {
   settings: {
-    timer: number;
+    timer: string;
     level: number;
   };
   history: HistoryState[];
   resetSession: () => void;
-  increaseTimer: () => void;
-  decreaseTimer: () => void;
-  increaseLevel: () => void;
-  decreaseLevel: () => void;
+  updateSettings: (timer: string, level: number) => void;
   updateHistory: (quizId: string, quizName: string, points: number, skippedAnswers: number, isCompleted: boolean, totalQuestions: number, correctQuestions: number, wrongQuestions: number) => void;
 };
 
 const initialState: Omit<
   SessionState,
   | "resetSession"
-  | "setUser"
-  | "increaseScore"
   | "updateHistory"
-  | "increaseTimer"
-  | "decreaseTimer"
-  | "increaseLevel"
-  | "decreaseLevel"
+  | "updateSettings"
 > = {
   settings: {
-    timer: TIMER_INCREMENT,
+    timer: minutesToTime(TIMER_INCREMENT),
     level: 1,
   },
   history: [],
@@ -62,34 +55,16 @@ const useSession = create<SessionState>()(
         set({
           ...initialState,
         }),
-      increaseTimer: () =>
+
+      updateSettings: (timer, level) =>
         set((state) => ({
           settings: {
             ...state.settings,
-            timer: Math.min(state.settings.timer + TIMER_INCREMENT, MAX_TIMER),
+            timer: timer,
+            level: level,
           },
         })),
-      decreaseTimer: () =>
-        set((state) => ({
-          settings: {
-            ...state.settings,
-            timer: Math.max(state.settings.timer - TIMER_INCREMENT, MIN_TIMER),
-          },
-        })),
-      increaseLevel: () =>
-        set((state) => ({
-          settings: {
-            ...state.settings,
-            level: Math.min(state.settings.level + 1, MAX_LEVEL),
-          },
-        })),
-      decreaseLevel: () =>
-        set((state) => ({
-          settings: {
-            ...state.settings,
-            level: Math.max(state.settings.level - 1, MIN_LEVEL),
-          },
-        })),
+
       updateHistory: (quizId, quizName, points, skippedAnswers, isCompleted, totalQuestions, correctQuestions, wrongQuestions) =>
         set((state) => {
           const previousHistory = state.history.filter((item) => item.quizId !== quizId);

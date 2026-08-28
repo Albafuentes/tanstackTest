@@ -19,6 +19,7 @@ const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 
 export const Header = () => {
   const isDashboardRoute = useRouterState().location.pathname === "/dashboard";
+  const isSettingsRoute = useRouterState().location.pathname === "/dashboard/settings";
   
   const user = decodeToken();
 
@@ -26,7 +27,7 @@ export const Header = () => {
 
   return (
     <header id={styles["header"]}>
-      {isDashboardRoute && (
+      {(isDashboardRoute || isSettingsRoute) && (
         <Sidebar>
           <Sidebar.Trigger className={styles["sidebar-item__trigger"]}>
             <Logo avatarUrl={user?.avatarURL || chGreen} />

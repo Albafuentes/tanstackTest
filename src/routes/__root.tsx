@@ -7,12 +7,5 @@ export const Route = createRootRoute({
 function RootLayout() {
   return (
     <Outlet />
-    // <>
-    //   <header>Header</header>
-
-    //   <Outlet />
-
-    //   <footer>Footer</footer>
-    // </>
   );
 }

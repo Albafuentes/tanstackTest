@@ -3,7 +3,7 @@ import style from "./Button.module.css";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode | React.ReactNode[];
-    variant?: "black" | "red" | "outline-black" | "link";
+    variant?: "black" | "red" | "green" | "outline-black" | "link";
     className?: string;
 }
 

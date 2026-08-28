@@ -53,6 +53,24 @@
         }
     }
 
+        &.button--green {
+        background-color: var(--green-50);
+        border: 2px solid var(--green-50);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--green-45);
+        }
+
+        &:focus {
+            background-color: var(--green-40);
+        }
+
+        &:disabled {
+            color: var(--black-5);
+        }
+    }
+
     &.button--outline-black {
         background-color: var(--white);
         color: var(--black-90);

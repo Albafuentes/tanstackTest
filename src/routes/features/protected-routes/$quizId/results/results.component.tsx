@@ -11,9 +11,9 @@ import styles from './results.module.css';
 import { Route } from './results.route';
 
 function Results() {
-    const session = useSession();
+    const history = useSession((state) => state.history);
     const params = Route.useParams();
-    const results = session.history.find((item) => item.quizId === params.quizId);
+    const results = history.find((item) => item.quizId === params.quizId);
 
     return (
         <section className={styles["results"]}>

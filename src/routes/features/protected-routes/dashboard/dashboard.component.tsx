@@ -9,7 +9,7 @@ import { formatSentenceString } from '@/utils/formats';
 import { Route } from './dashboard.route';
 
 function Dashboard() {
-    const session = useSession();
+    const history = useSession((state) => state.history);
     const { quizsData } = Route.useLoaderData() as {
         quizsData: QuizModel.Quiz[];
     };
@@ -26,8 +26,8 @@ function Dashboard() {
             <article className={styles['dashboard-scores']}>
                 <strong>All Scores</strong>
                 <ul>
-                    {session?.history.length ? (
-                        session?.history.map((historyItem, index) => (
+                    {history.length ? (
+                        history.map((historyItem, index) => (
                             <li key={index}>
                                 <Badge variant="tag">
                                     <span>{formatSentenceString(historyItem.quizName)}</span>

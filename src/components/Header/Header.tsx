@@ -21,10 +21,11 @@ export const Header = () => {
   const location = useRouterState().location.pathname;
   const isDashboardRoute = location === "/dashboard";
   const isSettingsRoute = location === "/dashboard/settings";
-  
+
   const user = decodeToken();
 
-  const session = useSession();
+
+  const history = useSession((state) => state.history);
 
   return (
     <header id={styles["header"]}>
@@ -53,7 +54,7 @@ export const Header = () => {
       )}
       <div className={styles["score-pill"]}>
         <IconStar size={18} />
-        {totalScore(session?.history || [])} {ABBREVIATION_PT}
+        {totalScore(history || [])} {ABBREVIATION_PT}
       </div>
     </header>
   );

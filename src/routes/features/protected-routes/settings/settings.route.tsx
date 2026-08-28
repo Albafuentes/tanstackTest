@@ -7,6 +7,7 @@ import buttonStyles from '@/components/Button/Button.module.css';
 import { useActionState } from 'react';
 import type { SettingsState } from './types/state.types';
 import { useFormStatus } from 'react-dom';
+import { useShallow } from 'zustand/shallow';
 
 export const Route = createRoute({
     getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -41,14 +42,20 @@ const SubmitButton = () => {
 };
 
 function Settings() {
-    const session = useSession();
+
+    const { updateSettings, settings } = useSession(
+        useShallow((state) => ({
+            updateSettings: state.updateSettings,
+            settings: state.settings,
+        })),
+    );
     const navigate = useNavigate();
 
     const settingsAction = (_previousState: SettingsState, formData: FormData) => {
         const timer = formData.get('timer') as string;
         const level = formData.get('level') as string;
 
-        session?.updateSettings ? session.updateSettings(timer, Number(level)) : null;
+        updateSettings ? updateSettings(timer, Number(level)) : null;
 
         navigate({ to: "/dashboard" });
 
@@ -72,7 +79,7 @@ function Settings() {
                     name="timer"
                     description="Select the timer that will be used for every question."
                     errors={state.errors?.timer}
-                    defaultValue={session?.settings.timer || ''}
+                    defaultValue={settings?.timer || ''}
                     orientation="horizontal"
                 />
                 <Field
@@ -81,7 +88,7 @@ function Settings() {
                     name="level"
                     description="Select the level questions. A higher level indicates that the questions are more difficult."
                     errors={state.errors?.level}
-                    defaultValue={session?.settings.level.toString() || ''}
+                    defaultValue={settings.level.toString() || ''}
                     orientation="horizontal"
 
                 />

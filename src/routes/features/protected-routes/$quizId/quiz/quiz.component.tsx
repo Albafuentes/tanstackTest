@@ -13,11 +13,12 @@ import buttonStyles from '@/components/Button/Button.module.css';
 import { Route } from './quiz.route';
 
 function Quiz() {
-    const session = useSession();
+
+    const settings = useSession((state) => state.settings);
 
     const data: QuizModel.Quiz = Route.useLoaderData(); // can be used here to access the data returned from the loader function
     const dataWithLevel = data.quizQuestions.filter(
-        (quiz) => quiz.level === session?.settings.level,
+        (quiz) => quiz.level === settings.level,
     );
     const {
         resolveAnswer,
@@ -87,7 +88,7 @@ function Quiz() {
                         color="red"
                     />
                     <TimerCountdown
-                        time={session.settings.timer}
+                        time={settings.timer}
                         isPaused={timerStatus === 'paused'}
                         onFinish={skipAnswer}
                         showTimer={!isQuizFinished}

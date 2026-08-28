@@ -80,7 +80,9 @@ export const useQuiz = (
 
     // Added to ensure that the first question is generated only once when the component mounts. This prevents multiple questions from being generated on re-renders.
     const hasGenerated = useRef(false);
-    const session = useSession();
+
+
+    const updateHistory = useSession((state) => state.updateHistory);
 
     const generateCurrentQuestion = useCallback((pendingQuestions: QuizModel.Question[]) => {
         const randomIndex = Math.floor(Math.random() * pendingQuestions?.length);
@@ -158,7 +160,7 @@ export const useQuiz = (
     };
 
     const finishedQuiz = () => {
-        session.updateHistory(
+        updateHistory(
             quizInfo.id,
             quizInfo.name,
             quizStatus.totalScore,

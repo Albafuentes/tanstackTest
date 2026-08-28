@@ -42,14 +42,12 @@
         align-items: center;
     }
 
-    a {
-        text-decoration: none;
 
-        &:not(.results__empty > a) {
-            align-self: flex-end;
-        }
-
+    a:not(.results__empty > a) {
+        align-self: flex-end;
     }
+
+
 
 
 }

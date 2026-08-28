@@ -48,7 +48,7 @@ export const Score = ({ score, isGoodScore }: ScoreProps) => {
                 fill="#748CBF"
             />
             <text
-                fontSize="37.9px"
+                fontSize="2.369em"
                 fontFamily="rubik"
                 fill="white"
                 x="17.87"

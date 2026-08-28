@@ -15,11 +15,12 @@ export const InputCustomBar = (
             const event = new Event('input', { bubbles: true });
             inputRef.current.dispatchEvent(event);
 
+
             const button = e.currentTarget;
             const siblings = button.parentElement?.querySelectorAll("button");
-            siblings?.forEach((button) => {
 
-                if(button.textContent <= level.toString()) {
+            siblings?.forEach((button) => {
+                if(button.value <= level.toString()) {
                     button.dataset.active = "true";
                 } else {
                     button.dataset.active = "false";
@@ -46,6 +47,7 @@ export const InputCustomBar = (
                         onClick={(e) => handleButtonClick(level, e)}
                         title={`change value level to ${index + 1}`}
                         aria-label={`change value level to ${index + 1}`}
+                        value={level}
                         data-active={props.defaultValue && Number(props.defaultValue) >= level ? "true" : "false"}
                     />
                 )

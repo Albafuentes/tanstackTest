@@ -20,7 +20,7 @@ function Dashboard() {
 
             <article className={styles['dashboard-quizs']}>
                 {quizsData.map((quiz) => (
-                    <QuizCard key={quiz.id} quiz={quiz} />
+                    <QuizCard key={`quiz-card-${quiz.id}`} quiz={quiz} />
                 ))}
             </article>
             <article className={styles['dashboard-scores']}>
@@ -28,7 +28,7 @@ function Dashboard() {
                 <ul>
                     {history.length ? (
                         history.map((historyItem, index) => (
-                            <li key={index}>
+                            <li key={`history-item-${index}`}>
                                 <Badge variant="tag">
                                     <span>{formatSentenceString(historyItem.quizName)}</span>
                                     <span>

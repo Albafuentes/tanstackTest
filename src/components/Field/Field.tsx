@@ -71,7 +71,7 @@ export const Field = (props: FieldProps) => {
 
                 {hasErrors &&
                     errors.map((error, index) => (
-                        <small key={index} id={`${name}-error`}>
+                        <small key={`input-error-${name}-${index}`} id={`${name}-error`}>
                             {error}
                         </small>
                     ))}

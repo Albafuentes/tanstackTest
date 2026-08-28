@@ -42,7 +42,7 @@ export const InputCustomBar = (
                 const level = index + 1;
                 return (
                     <button
-                        key={index}
+                        key={`${props.name}-level-${level}`}
                         className={`${style[`field__custom-bar__${level}`]}`}
                         onClick={(e) => handleButtonClick(level, e)}
                         title={`change value level to ${index + 1}`}

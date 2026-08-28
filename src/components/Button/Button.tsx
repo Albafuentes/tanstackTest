@@ -16,12 +16,7 @@ export const Button = ({
     const combinedClassName = `${style.button} ${style[`button--${variant}`]} ${className ?? ""}`;
     return (
         <button className={combinedClassName} {...props}>
-            {" "}
-            {Array.isArray(children)
-                ? children.map((child, index) => (
-                    <React.Fragment key={index}>{child}</React.Fragment>
-                ))
-                : children}
+            {children}
         </button>
     );
 };

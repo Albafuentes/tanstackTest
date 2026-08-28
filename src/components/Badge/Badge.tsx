@@ -11,11 +11,7 @@ export const Badge = ({ children, variant = "solid", color = "black", className,
     const classNameCompounded = `${styles.badge} ${variant ? styles[`badge--${variant}`] : ""} ${color ? styles[`badge--${color}`] : ""} ${className ?? ""}`;
     return (
         <div className={classNameCompounded} {...props}>
-            {Array.isArray(children)
-                ? children.map((child, index) => (
-                    <React.Fragment key={index}>{child}</React.Fragment>
-                ))
-                : children}
+            {children}
         </div>
     );
 };

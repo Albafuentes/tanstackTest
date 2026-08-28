@@ -1,0 +1,125 @@
+#root {
+    font: 1rem/145% var(--sans);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-synthesis: none;
+    letter-spacing: 0.18px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color: var(--black-90);
+
+    color-scheme: light dark;
+    background: var(--bg);
+
+    h1 {
+        font-size: 5.61em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 4.209em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    h3 {
+        font-size: 3.158em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    h4 {
+        font-size: 2.369em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    h5 {
+        font-size: 1.777em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    h6 {
+        font-size: 1.333em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    p,
+    strong {
+        font-size: 1em;
+        line-height: 1;
+        margin: 0;
+    }
+
+    small {
+        font-size: 0.75em;
+        font-weight: 400;
+        line-height: 1;
+        margin: 0;
+    }
+
+    strong {
+        font-weight: 600;
+    }
+
+    header,
+    main {
+        padding: 1.5rem 1.5rem;
+        width: stretch;
+        overflow: hidden;
+    }
+
+    header {
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    main {
+        height: calc(100dvh - (2.5rem + 1.5rem + 1.5rem));
+    }
+
+    button,
+    a {
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    #root {
+
+        header,
+        main {
+            padding: 1.25rem 5rem;
+        }
+
+        header {
+            height: 3rem;
+        }
+
+        main {
+            height: calc(100vh - (3rem + 1.25rem + 1.25rem));
+        }
+    }
+}

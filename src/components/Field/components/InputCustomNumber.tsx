@@ -3,7 +3,7 @@ import React from "react";
 import style from '../Field.module.css';
 import { Button } from "@/components";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-import { minutesToTime } from "@/utils/formats";
+import { secondsToTime } from "@/utils/formats";
 
 export const InputCustomNumber = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
 
@@ -29,9 +29,9 @@ export const InputCustomNumber = (props: React.InputHTMLAttributes<HTMLInputElem
         </Button>
         <input
             type="time"
-            min={minutesToTime(MIN_TIMER)}
-            max={minutesToTime(MAX_TIMER)}
-            step={TIMER_INCREMENT * 60}
+            min={secondsToTime(MIN_TIMER)}
+            max={secondsToTime(MAX_TIMER)}
+            step={TIMER_INCREMENT}
             ref={inputRef}
             lang="en-US"
             {...props}

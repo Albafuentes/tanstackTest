@@ -77,15 +77,16 @@ export const formatDate = (
     }
 };
 
-export const minutesToTime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
+export const secondsToTime = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
 
-    return `${String(hours).padStart(2, "0")}:${String(remainingMinutes).padStart(2, "0")}`;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 };
 
 export const timeToSeconds = (time: string) => {
-  const [hours, minutes] = time.split(":").map(Number);
+  const [hours, minutes, seconds = 0] = time.split(":").map(Number);
 
-  return hours * 3600 + minutes * 60;
+  return hours * 3600 + minutes * 60 + seconds;
 };

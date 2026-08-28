@@ -18,8 +18,9 @@ const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 };
 
 export const Header = () => {
-  const isDashboardRoute = useRouterState().location.pathname === "/dashboard";
-  const isSettingsRoute = useRouterState().location.pathname === "/dashboard/settings";
+  const location = useRouterState().location.pathname;
+  const isDashboardRoute = location === "/dashboard";
+  const isSettingsRoute = location === "/dashboard/settings";
   
   const user = decodeToken();
 

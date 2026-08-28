@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { minutesToTime } from "@/utils/formats";
+import { secondsToTime } from "@/utils/formats";
 
 export const TIMER_INCREMENT = 30;
 
@@ -40,7 +40,7 @@ const initialState: Omit<
   | "updateSettings"
 > = {
   settings: {
-    timer: minutesToTime(TIMER_INCREMENT),
+    timer: secondsToTime(TIMER_INCREMENT),
     level: 1,
   },
   history: [],

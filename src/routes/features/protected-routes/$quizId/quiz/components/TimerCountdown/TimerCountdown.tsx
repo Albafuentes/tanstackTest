@@ -3,17 +3,20 @@ import { TIMER_INCREMENT } from "@/zunstand/session";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 import { useEffect, useState } from "react";
 import styles from "./TimerCountdown.module.css";
+import { secondsToTime, timeToSeconds } from "@/utils/formats";
 
 interface TimerCountdownProps {
-    seconds?: number;
+    time?: string;
     onFinish?: () => void;
     showTimer?: boolean;
     isPaused?: boolean;
 }
 
-const TimerCountdown = ({ seconds = TIMER_INCREMENT, onFinish, showTimer = true, isPaused = false,  }: TimerCountdownProps) => {
+const TimerCountdown = ({ time = secondsToTime(TIMER_INCREMENT), onFinish, showTimer = true, isPaused = false, }: TimerCountdownProps) => {
 
-    const secondsToDisplay = showTimer ? seconds : 0;
+    const secondsToDisplay = showTimer
+        ? timeToSeconds(time)
+        : 0;
     const [currentSeconds, setCurrentSeconds] = useState(secondsToDisplay);
     const timer = useMotionValue(secondsToDisplay);
 

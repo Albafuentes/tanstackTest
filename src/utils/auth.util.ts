@@ -85,3 +85,7 @@ export function decodeToken(): AuthModel.User | null {
         return null;
     }
 }
+
+export function clearToken(): void {
+    sessionStorage.removeItem("token");
+}

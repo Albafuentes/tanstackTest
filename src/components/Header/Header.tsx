@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { totalScore } from "@/utils/score.utils";
 import { Button } from "@/components";
 import { IconSettings } from "@tabler/icons-react";
@@ -9,7 +9,7 @@ import chGreen from "../../assets/svg/ch-green.svg";
 import { IconStar } from "@tabler/icons-react";
 import styles from "./Header.module.css";
 import { formatDate } from "@/utils/formats";
-import { decodeToken } from "@/utils/auth.util";
+import { clearToken, decodeToken } from "@/utils/auth.util";
 
 const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 
@@ -18,6 +18,7 @@ const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 };
 
 export const Header = () => {
+  const navigate = useNavigate();
   const location = useRouterState().location.pathname;
   const isDashboardRoute = location === "/dashboard";
   const isSettingsRoute = location === "/dashboard/settings";
@@ -25,6 +26,11 @@ export const Header = () => {
   const user = decodeToken();
 
   const history = useSession((state) => state.history);
+
+  const handleLogout = () => {
+    clearToken();
+    navigate({ to: "/" });
+  }
 
   return (
     <header id={styles["header"]}>
@@ -46,8 +52,7 @@ export const Header = () => {
           </Sidebar.Item>
 
           <Sidebar.Footer>
-            <Button onClick={() => console.log("Log out")} variant="link">Log out</Button>
-
+            <Button onClick={handleLogout} variant="link">Log out</Button>
           </Sidebar.Footer>
         </Sidebar>
       )}

@@ -8,12 +8,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Who painted the Mona Lisa?",
         options: [
-            "Leonardo da Vinci",
             "Michelangelo",
             "Raphael",
+            "Leonardo da Vinci",
             "Caravaggio",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "The Mona Lisa was painted by Leonardo da Vinci and is displayed at the Louvre Museum in Paris.",
         level: 1,
@@ -21,12 +21,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Who painted The Starry Night?",
         options: [
-            "Vincent van Gogh",
             "Claude Monet",
+            "Vincent van Gogh",
             "Pablo Picasso",
             "Edvard Munch",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "The Starry Night was painted by Vincent van Gogh in 1889.",
         level: 1,
@@ -47,12 +47,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which famous painting shows a woman holding a mysterious smile?",
         options: [
-            "Mona Lisa",
             "The Scream",
             "Girl with a Pearl Earring",
             "The Birth of Venus",
+            "Mona Lisa",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "The Mona Lisa is famous for the mysterious expression of the woman portrayed in the painting.",
         level: 1,
@@ -60,12 +60,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Who painted The Scream?",
         options: [
-            "Edvard Munch",
             "Pablo Picasso",
+            "Edvard Munch",
             "Salvador Dalí",
             "Henri Matisse",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "The Scream is one of Edvard Munch's most famous works.",
         level: 1,
@@ -73,12 +73,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which art movement is strongly associated with Pablo Picasso?",
         options: [
-            "Cubism",
             "Impressionism",
             "Baroque",
+            "Cubism",
             "Surrealism",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Pablo Picasso was one of the founders and most important figures of Cubism.",
         level: 1,
@@ -99,12 +99,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist is famous for painting water lilies?",
         options: [
-            "Claude Monet",
             "Vincent van Gogh",
             "Paul Cézanne",
+            "Claude Monet",
             "Édouard Manet",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Claude Monet created a famous series of paintings depicting water lilies in his garden at Giverny.",
         level: 1,
@@ -117,12 +117,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist painted The Birth of Venus?",
         options: [
-            "Sandro Botticelli",
             "Raphael",
             "Titian",
             "Caravaggio",
+            "Sandro Botticelli",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "The Birth of Venus was painted by Sandro Botticelli during the Italian Renaissance.",
         level: 2,
@@ -130,12 +130,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist is famous for using dramatic contrasts between light and darkness?",
         options: [
-            "Caravaggio",
             "Claude Monet",
+            "Caravaggio",
             "Henri Matisse",
             "Piet Mondrian",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Caravaggio became famous for his dramatic use of light and shadow, often referred to as chiaroscuro.",
         level: 2,
@@ -143,12 +143,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which art movement is associated with artists such as Claude Monet and Pierre-Auguste Renoir?",
         options: [
-            "Impressionism",
             "Cubism",
             "Surrealism",
+            "Impressionism",
             "Neoclassicism",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Monet and Renoir were major figures of the Impressionist movement.",
         level: 2,
@@ -156,12 +156,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which Spanish artist painted Las Meninas?",
         options: [
-            "Diego Velázquez",
             "Francisco Goya",
+            "Diego Velázquez",
             "El Greco",
             "Joan Miró",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Las Meninas was painted by Diego Velázquez in 1656.",
         level: 2,
@@ -182,12 +182,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which art movement came before Impressionism?",
         options: [
-            "Realism",
             "Surrealism",
             "Cubism",
             "Abstract Expressionism",
+            "Realism",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Realism developed before Impressionism and focused more directly on depicting contemporary life.",
         level: 2,
@@ -195,12 +195,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist painted Guernica?",
         options: [
-            "Pablo Picasso",
             "Joan Miró",
+            "Pablo Picasso",
             "Salvador Dalí",
             "Francisco Goya",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Picasso painted Guernica in 1937 in response to the bombing of the Basque town during the Spanish Civil War.",
         level: 2,
@@ -226,12 +226,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist created the famous ceiling frescoes in the Vatican's Raphael Rooms?",
         options: [
-            "Raphael",
             "Michelangelo",
             "Leonardo da Vinci",
+            "Raphael",
             "Titian",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Raphael and his workshop decorated the rooms now known as the Raphael Rooms in the Vatican Palace.",
         level: 3,
@@ -239,12 +239,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist is associated with the technique known as sfumato?",
         options: [
-            "Leonardo da Vinci",
             "Caravaggio",
+            "Leonardo da Vinci",
             "Raphael",
             "Botticelli",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Leonardo da Vinci famously used sfumato, a technique that creates subtle transitions between colours and tones without sharp outlines.",
         level: 3,
@@ -252,12 +252,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist painted The Arnolfini Portrait?",
         options: [
-            "Jan van Eyck",
             "Hieronymus Bosch",
+            "Jan van Eyck",
             "Pieter Bruegel",
             "Albrecht Dürer",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "The Arnolfini Portrait was painted by Jan van Eyck in 1434 and is famous for its detailed symbolism and use of oil paint.",
         level: 3,
@@ -265,12 +265,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which art movement was strongly influenced by Sigmund Freud's theories of the unconscious?",
         options: [
-            "Surrealism",
             "Impressionism",
             "Neoclassicism",
             "Realism",
+            "Surrealism",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Surrealist artists were strongly influenced by ideas about dreams, the unconscious and psychoanalysis.",
         level: 3,
@@ -304,12 +304,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "What is the main difference between Impressionism and Expressionism?",
         options: [
-            "Impressionism focused on visual impressions, while Expressionism emphasized emotional experience",
             "Impressionism used sculptures while Expressionism used paintings",
             "Expressionism existed before the Renaissance",
+            "Impressionism focused on visual impressions, while Expressionism emphasized emotional experience",
             "There is no significant difference",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Impressionism focused on capturing visual impressions and effects of light, while Expressionism emphasized subjective emotion and distortion.",
         level: 3,
@@ -317,12 +317,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which artist created the series of paintings known as Les Demoiselles d'Avignon?",
         options: [
-            "Pablo Picasso",
             "Georges Braque",
             "Henri Matisse",
             "Paul Cézanne",
+            "Pablo Picasso",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Picasso painted Les Demoiselles d'Avignon in 1907, a work that played an important role in the development of Cubism.",
         level: 3,

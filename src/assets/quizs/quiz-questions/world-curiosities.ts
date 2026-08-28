@@ -6,8 +6,8 @@ export const questions: QuizModel.Question[] = [
     // ============================================================
     {
         question: "Which is the smallest country in the world?",
-        options: ["Vatican City", "Monaco", "Nauru", "Tuvalu"],
-        answer: 0,
+        options: ["Monaco", "Vatican City", "Nauru", "Tuvalu"],
+        answer: 1,
         explanation:
             "Vatican City covers only about 0.49 km², making it the world's smallest independent country.",
         level: 1,
@@ -71,8 +71,8 @@ export const questions: QuizModel.Question[] = [
     },
     {
         question: "Which country is famous for the ancient city of Machu Picchu?",
-        options: ["Peru", "Chile", "Bolivia", "Ecuador"],
-        answer: 0,
+        options: ["Chile", "Bolivia", "Ecuador", "Peru"],
+        answer: 3,
         explanation:
             "Machu Picchu is an ancient Inca site located high in the Andes of Peru.",
         level: 1,
@@ -99,13 +99,8 @@ export const questions: QuizModel.Question[] = [
     },
     {
         question: "Which country is home to the ancient city of Petra?",
-        options: [
-            "Jordan",
-            "Egypt",
-            "Turkey",
-            "Lebanon",
-        ],
-        answer: 0,
+        options: ["Egypt", "Jordan", "Turkey", "Lebanon"],
+        answer: 1,
         explanation:
             "Petra is an ancient city in Jordan, famous for its buildings carved directly into rock.",
         level: 1,
@@ -113,12 +108,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is famous for the Northern Lights?",
         options: [
-            "Norway",
+
             "Portugal",
             "Greece",
             "Morocco",
+            "Norway",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Norway is one of the most popular places to see the Northern Lights because of its location close to the Arctic.",
         level: 1,
@@ -126,12 +122,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is home to the Taj Mahal?",
         options: [
-            "India",
+
             "Pakistan",
+            "India",
             "Nepal",
             "Bangladesh",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "The Taj Mahal is a famous monument in Agra, India.",
         level: 1,
@@ -139,12 +136,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is famous for the tradition of the sauna?",
         options: [
-            "Finland",
+
             "Sweden",
             "Denmark",
+            "Finland",
             "Estonia",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Saunas are deeply rooted in Finnish culture and are an important part of everyday life in Finland.",
         level: 1,
@@ -152,12 +150,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is famous for the city of Venice and its canals?",
         options: [
-            "Italy",
+
             "France",
             "Croatia",
+            "Italy",
             "Spain",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Venice is an Italian city famous for its canals, bridges, and gondolas.",
         level: 1,
@@ -168,12 +167,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "In Bulgaria, how do people traditionally say 'yes' and 'no' with their heads?",
         options: [
-            "Move the head horizontally for 'yes' and vertically for 'no'",
+
             "Move the head vertically for 'yes' and horizontally for 'no'",
             "Shake the head only for 'yes' and use the hands for 'no'",
             "There is no traditional difference",
+            "Move the head horizontally for 'yes' and vertically for 'no'",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Bulgaria is famous for traditional head gestures that can be opposite to those commonly used in many Western countries.",
         level: 2,
@@ -246,8 +246,8 @@ export const questions: QuizModel.Question[] = [
     {
         question:
             "Which country is famous for the traditional practice of eating with the hands as part of its food culture?",
-        options: ["India", "Germany", "Canada", "Sweden"],
-        answer: 0,
+        options: ["Germany", "India", "Canada", "Sweden"],
+        answer: 1,
         explanation:
             "Eating with the hands is an established tradition in many parts of Indian culture and cuisine.",
         level: 2,
@@ -263,12 +263,13 @@ export const questions: QuizModel.Question[] = [
     }, {
         question: "Which country has a village called Giethoorn that is famous for having very few roads and many canals?",
         options: [
-            "Netherlands",
+
             "Belgium",
             "Denmark",
+            "Netherlands",
             "Germany",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Giethoorn in the Netherlands is famous for its canals and traditional houses, with boats historically playing an important role in transportation.",
         level: 2,
@@ -276,12 +277,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country has a traditional festival called Holi, known for people throwing coloured powders?",
         options: [
-            "India",
+
             "Nepal",
             "Thailand",
+            "India",
             "Sri Lanka",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Holi is a Hindu festival strongly associated with India and is famous for its colourful celebrations.",
         level: 2,
@@ -289,12 +291,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is home to the ancient underground city of Derinkuyu?",
         options: [
-            "Turkey",
+
             "Greece",
             "Iran",
             "Armenia",
+            "Turkey",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Derinkuyu is a large underground city in Cappadocia, Turkey, extending several levels beneath the ground.",
         level: 2,
@@ -315,12 +318,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is home to the ancient city of Angkor, famous for Angkor Wat?",
         options: [
-            "Cambodia",
+
             "Thailand",
+            "Cambodia",
             "Vietnam",
             "Laos",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Angkor Wat is located in Cambodia and is part of the enormous Angkor archaeological complex.",
         level: 2,
@@ -328,12 +332,12 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is known for the traditional floating markets around Bangkok?",
         options: [
-            "Thailand",
             "Vietnam",
             "Indonesia",
+            "Thailand",
             "Malaysia",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Floating markets are a distinctive part of Thai culture, particularly around Bangkok and central Thailand.",
         level: 2,
@@ -345,12 +349,13 @@ export const questions: QuizModel.Question[] = [
         question:
             "The Kindlifresserbrunnen fountain in Switzerland depicts what?",
         options: [
-            "A mythical creature that eats children",
+
             "A memorial for children who died in a plague",
             "A symbol of education",
             "A traditional Swiss guardian",
+            "A mythical creature that eats children",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "The Kindlifresserbrunnen in Bern depicts a frightening figure eating children, although its exact historical meaning remains uncertain.",
         level: 3,
@@ -411,8 +416,8 @@ export const questions: QuizModel.Question[] = [
     {
         question:
             "Which country has a traditional festival where people throw tomatoes at each other?",
-        options: ["Spain", "Italy", "Greece", "Croatia"],
-        answer: 0,
+        options: ["Italy", "Spain", "Greece", "Croatia"],
+        answer: 1,
         explanation:
             "La Tomatina is a famous Spanish festival held in Buñol, where participants throw tomatoes at one another.",
         level: 3,
@@ -420,8 +425,8 @@ export const questions: QuizModel.Question[] = [
     {
         question:
             "Which country has a traditional festival in which people build and race giant wooden boats known as dragon boats?",
-        options: ["China", "Japan", "Vietnam", "Thailand"],
-        answer: 0,
+        options: ["Japan", "China", "Vietnam", "Thailand"],
+        answer: 1,
         explanation:
             "Dragon boat racing has ancient roots in China and is particularly associated with the Dragon Boat Festival.",
         level: 3,
@@ -429,8 +434,8 @@ export const questions: QuizModel.Question[] = [
     {
         question:
             "Which country is famous for the annual Running of the Bulls in Pamplona?",
-        options: ["Spain", "Portugal", "Mexico", "Argentina"],
-        answer: 0,
+        options: ["Portugal", "Mexico", "Spain", "Argentina"],
+        answer: 2,
         explanation:
             "The Running of the Bulls takes place in Pamplona, Spain, during the San Fermín festival.",
         level: 3,
@@ -438,20 +443,21 @@ export const questions: QuizModel.Question[] = [
     {
         question:
             "Which country has a traditional celebration called Up Helly Aa, featuring a Viking-style torch procession?",
-        options: ["Scotland", "Iceland", "Norway", "Ireland"],
-        answer: 0,
+        options: ["Iceland", "Norway", "Ireland", "Scotland"],
+        answer: 3,
         explanation:
             "Up Helly Aa is a famous fire festival held in Shetland, Scotland, featuring a Viking-themed torch procession.",
         level: 3,
     }, {
         question: "Which country has a traditional fire festival called Up Helly Aa?",
         options: [
-            "Scotland",
+
             "Iceland",
             "Norway",
             "Ireland",
+            "Scotland",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Up Helly Aa is a famous fire festival held in Shetland, Scotland, featuring a Viking-themed torch procession.",
         level: 3,
@@ -459,12 +465,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is traditionally associated with the festival of La Tomatina?",
         options: [
-            "Spain",
+
             "Italy",
+            "Spain",
             "Portugal",
             "Mexico",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "La Tomatina is held in Buñol, Spain, and is famous for its large tomato-throwing celebration.",
         level: 3,
@@ -498,12 +505,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is associated with the ancient practice of sky burial in Tibetan Buddhist traditions?",
         options: [
-            "Tibet",
+
             "Japan",
             "India",
+            "Tibet",
             "Mongolia",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Sky burial is a traditional Tibetan Buddhist funerary practice in which the body is offered to vultures.",
         level: 3,
@@ -511,12 +519,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country has the ancient city of Lalibela, famous for churches carved directly into rock?",
         options: [
-            "Ethiopia",
+
             "Egypt",
             "Sudan",
             "Kenya",
+            "Ethiopia",
         ],
-        answer: 0,
+        answer: 3,
         explanation:
             "Lalibela in Ethiopia is famous for its medieval churches carved directly into volcanic rock.",
         level: 3,
@@ -524,12 +533,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is associated with the traditional festival of Naadam, featuring wrestling, horse racing and archery?",
         options: [
-            "Mongolia",
+
             "Kazakhstan",
+            "Mongolia",
             "Kyrgyzstan",
             "Uzbekistan",
         ],
-        answer: 0,
+        answer: 1,
         explanation:
             "Naadam is Mongolia's most famous traditional festival and features the country's three major sports: wrestling, horse racing and archery.",
         level: 3,
@@ -550,12 +560,13 @@ export const questions: QuizModel.Question[] = [
     {
         question: "Which country is home to the Salar de Uyuni, the world's largest salt flat?",
         options: [
-            "Bolivia",
+
             "Chile",
             "Peru",
+            "Bolivia",
             "Argentina",
         ],
-        answer: 0,
+        answer: 2,
         explanation:
             "Salar de Uyuni is located in Bolivia and is the world's largest salt flat.",
         level: 3,

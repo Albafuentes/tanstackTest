@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button/Button";
 
-import type { ButtonProps } from "@/components/Button/Button";
+import type { ButtonProps } from "@/components";
 
 export interface TriggerProps extends ButtonProps {
     children: React.ReactNode;

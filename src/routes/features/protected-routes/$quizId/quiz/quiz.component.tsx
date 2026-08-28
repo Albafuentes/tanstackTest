@@ -4,12 +4,10 @@ import { useQuiz } from './hook';
 import type { QuizModel } from '@/types/quiz.types';
 import { formatSentenceString } from '@/utils/formats';
 import styles from './quiz.module.css';
-import { Progress } from '@/components/index';
+import { Progress, Button, buttonStyles  } from '@/components';
 import TimerCountdown from './components/TimerCountdown/TimerCountdown';
 import useSession from '@/zunstand/session';
 import { TagAnswer } from './components/TagAnswer/TagAnswer';
-import { Button } from '@/components';
-import buttonStyles from '@/components/Button/Button.module.css';
 import { Route } from './quiz.route';
 
 function Quiz() {

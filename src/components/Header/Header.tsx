@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { totalScore } from "@/utils/score.utils";
-import { Button } from "@/components/Button/Button";
+import { Button } from "@/components";
 import { IconSettings } from "@tabler/icons-react";
 import { Sidebar } from "../Sidebar";
 import useSession from "../../zunstand/session";

@@ -1,5 +1,5 @@
 
-import { Badge } from '@/components/Badge/Badge';
+import { Badge } from '@/components';
 import useSession from '@/zunstand/session';
 import type { QuizModel } from '@/types/quiz.types';
 import { QuizCard } from './QuizCard/QuizCard';

@@ -1,12 +1,11 @@
 
 import { Link, } from '@tanstack/react-router'
 import { maxScore } from '@/utils/score.utils';
-import { Badge, Progress } from '@/components';
+import { Badge, Progress, buttonStyles } from '@/components';
 import { isGoodScore } from '@/utils/score.utils';
 import useSession from '../../../../../zunstand/session';
 import { Score } from '@/assets/svg/score';
 import { ABBREVIATION_PT } from '@/config/constants';
-import buttonStyles from '@/components/Button/Button.module.css';
 import styles from './results.module.css';
 import { Route } from './results.route';
 

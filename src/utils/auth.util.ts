@@ -11,6 +11,19 @@ const SECRET_KEY = crypto.getRandomValues(
     new Uint8Array(32),
 );
 
+/**
+ * NOTE: This token simulates part of the communication that would normally
+ * take place with a backend authentication service.
+ *
+ * In a real-world application, token creation and verification would be
+ * handled by the backend, while user data would be retrieved through
+ * authenticated API requests.
+ *
+ * For this project, some user data is required by the client application.
+ * Keeping it in the token allows the authentication/session flow to remain
+ * self-contained and compact in this frontend-only implementation.
+ */
+
 export function getToken(): string | null {
     return sessionStorage.getItem("token");
 }
@@ -21,6 +34,8 @@ export async function generateToken(
     const SignPayload: JWTPayload = {
         ...payload,
     };
+
+
     return new SignJWT(SignPayload)
         .setProtectedHeader({
             alg: "HS256",

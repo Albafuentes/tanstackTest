@@ -24,7 +24,6 @@ export const Header = () => {
 
   const user = decodeToken();
 
-
   const history = useSession((state) => state.history);
 
   return (
@@ -37,7 +36,7 @@ export const Header = () => {
           <Sidebar.Item readonly>
             <div className={styles["sidebar-item__header"]}>
               <Logo avatarUrl={user?.avatarURL || chGreen} />
-              <span>{user?.email}</span>
+              <span>{user?.id}</span>
               <small>session: {formatDate(user?.createdAt)}</small>
 
             </div>

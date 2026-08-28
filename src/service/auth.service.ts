@@ -10,8 +10,6 @@ export const authService = {
             if (email && password) {
                 const user: AuthModel.User = {
                     id: crypto.randomUUID(),
-                    name: (email as string).split("@")[0],
-                    email: email as string,
                     createdAt: new Date().toISOString(),
                     avatarURL: Math.random() < 0.5 ? chGreen : chRed
                 };

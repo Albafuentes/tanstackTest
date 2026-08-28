@@ -6,6 +6,7 @@ import useSession from "../../../zunstand/session";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
 import { isAuthenticated } from "../../../utils/auth.util";
+import { Suspense } from "react";
 
 export const Route = createRoute({
   getParentRoute: () => RootRoute,
@@ -27,9 +28,11 @@ function ProtectedRoutesLayout() {
   return (
     <SidebarProvider>
       <Header />
-      <AnimatedRoute variant="fade">
-        <Outlet />
-      </AnimatedRoute>
+      <Suspense>
+        <AnimatedRoute variant="fade">
+          <Outlet />
+        </AnimatedRoute>
+      </Suspense>
     </SidebarProvider>
   );
 }

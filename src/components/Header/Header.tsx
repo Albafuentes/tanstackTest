@@ -14,7 +14,7 @@ import { decodeToken } from "@/utils/auth.util";
 const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 
 
-  return <img src={avatarUrl} alt="User" width={48} height={48} />;
+  return <img src={avatarUrl} loading="lazy" alt="User" width={48} height={48} />;
 };
 
 export const Header = () => {

@@ -68,7 +68,7 @@ function Login() {
 
     return (
         <main id={style.login}>
-            <img src={hero} alt="Hero" />
+            <img src={hero} loading="lazy" alt="Hero" width={370} height={275}/>
             <form action={formAction}>
                 <Field
                     type="text"

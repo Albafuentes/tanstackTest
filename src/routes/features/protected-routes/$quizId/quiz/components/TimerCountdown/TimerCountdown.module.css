@@ -1,5 +1,5 @@
 .timer-countdown {
-    padding: 0.25rem 0.625rem !important;
-    line-height: 1.25rem;
+    padding: var(--size-8) var(--size-12) !important;
+    line-height: var(--line-height-short);
     font-size: initial !important;
 }

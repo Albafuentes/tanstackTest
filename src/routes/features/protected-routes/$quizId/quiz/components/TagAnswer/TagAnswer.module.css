@@ -3,12 +3,12 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
     align-items: center;
-    gap: 2rem;
+    gap: var(--size-32);
 
     background-color: var(--black-5);
 
-    padding: 0.875rem 1.5rem;
-    border-radius: 0.875rem;
+    padding: var(--size-14) var(--size-24);
+    border-radius: var(--radius-md);
 
     cursor: pointer;
 
@@ -19,17 +19,17 @@
     }
 
     &:has(input[aria-checked="true"]) {
-        outline: 2px solid var(--black-80);
+        outline: var(--border-default) solid var(--black-80);
         background-color: var(--black-20);
 
         &.tag-answer--green {
-            outline: 2px solid var(--green-60);
+            outline: var(--border-default) solid var(--green-60);
             background-color: var(--green-50);
             color: var(--white);
         }
 
         &.tag-answer--red {
-            outline: 2px solid var(--red-60);
+            outline: var(--border-default) solid var(--red-60);
             background-color: var(--red-50);
             color: var(--white);
         }
@@ -40,8 +40,8 @@
 
             &>.tag-answer__badge {
                 justify-self: flex-end;
-                padding: 0.375rem 1.25rem;
-                line-height: 1.25rem;
+                padding: var(--size-8) var(--size-24);
+                line-height: var(--line-height-shorter);
             }
         }
     }

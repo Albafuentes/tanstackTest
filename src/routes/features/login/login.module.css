@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2.625rem;
+    gap: var(--size-42);
 
     form {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2.625rem 1rem;
+        gap: var(--size-42) var(--size-16);
         align-items: stretch;
         justify-content: stretch;
 

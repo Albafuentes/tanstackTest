@@ -5,9 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 1rem;
+    gap: var(--size-16);
 
-    width:100%;
+    width: 100%;
 
     color: var(--red-50);
 
@@ -23,7 +23,7 @@
   .sidebar-item__header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--size-8);
 
     color: var(--black-90);
   }

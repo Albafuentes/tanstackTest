@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.625rem;
+    gap: var(--size-12);
 
     border: none;
 
@@ -18,15 +18,15 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.625rem;
+        gap: var(--size-12);
 
         label {
-            font-weight: 500;
+            font-weight: var(---font-weight-medium);
         }
 
         small {
             color: var(--red-50);
-            padding: 0rem 0.15rem;
+            padding: 0 var(--size-8);
         }
 
         .field__input-text,
@@ -34,9 +34,9 @@
 
             width: stretch;
             min-width: 22rem;
-            padding: 0.875rem 1.5rem;
+            padding: var(--size-14) var(--size-24);
 
-            border-radius: 0.875rem;
+            border-radius: var(--radius-md);
             border-color: transparent;
             background-color: var(--black-5);
 
@@ -51,7 +51,7 @@
 
             &[aria-invalid="true"],
             &:invalid {
-                border: 2px solid var(--red-50);
+                border: var(--border-default) solid var(--red-50);
             }
 
         }
@@ -59,7 +59,7 @@
         .field__custom-number {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--size-8);
 
             input {
                 width: fit-content;
@@ -90,18 +90,17 @@
 
             button {
                 padding: 0;
-                width: 1.625rem;
-                height: 1.625rem;
+                width: var(--size-24);
+                height: var(--size-24);
 
             }
         }
 
 
         .field__custom-bar {
-
             display: flex;
             align-items: flex-end;
-            gap: 0.5rem;
+            gap: var(--size-8);
 
             input {
                 display: none;
@@ -110,8 +109,8 @@
             .field__custom-bar__1,
             .field__custom-bar__2,
             .field__custom-bar__3 {
-                width: 2.625rem;
-                border-radius: 0.5rem;
+                width: var(--size-42);
+                border-radius: var(--radius-sm);
                 border-color: transparent;
 
                 background-color: var(--black-5);
@@ -129,15 +128,15 @@
             }
 
             .field__custom-bar__1 {
-                height: 2.625rem;
+                height: var(--size-42);
             }
 
             .field__custom-bar__2 {
-                height: 4rem;
+                height: calc(var(--size-42) * (var(--size-42) / 2));
             }
 
             .field__custom-bar__3 {
-                height: 5.25rem;
+                height: calc(var(--size-42) * var(--size-42));
             }
         }
     }

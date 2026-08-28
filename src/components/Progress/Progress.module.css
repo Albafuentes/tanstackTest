@@ -4,7 +4,7 @@
 
         .progress__help-text {
             text-align: right;
-            margin-bottom: 1rem !important;
+            margin-bottom: var(--size-16) !important;
         }
 
         .progress__thumb {
@@ -13,8 +13,8 @@
 
             .progress__thumb__value,
             progress {
-                height: 0.563rem;
-                border-radius: 0.25rem;
+                height: var(--size-8);
+                border-radius: var(--radius-full);
             }
 
             .progress__thumb__value {
@@ -38,7 +38,7 @@
 
                 &::-webkit-progress-bar {
                     background-color: var(--black-5);
-                    border-radius: 0.25rem;
+                    border-radius: var(--radius-full);
                 }
 
                 &::-webkit-progress-value {

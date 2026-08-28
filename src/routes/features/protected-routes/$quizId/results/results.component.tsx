@@ -43,10 +43,10 @@ function Results() {
                                 <span>{results?.skippedAnswers}</span>
                             </Badge>
                         </div>
-                        <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
-                            Go to Dashboard
-                        </Link>
                     </div>
+                    <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
+                        Go to Dashboard
+                    </Link>
                 </>
             ) : (
                 <div className={styles["results__empty"]}>

@@ -1,12 +1,12 @@
 .settings {
     display: flex;
     flex-direction: column;
-    gap: 2.625rem;
+    gap: var(--size-42);
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 1.375rem;
+        gap: var(--size-32);
 
 
         fieldset {
@@ -21,9 +21,9 @@
         .settings__button-group {
             display: flex;
             justify-content: flex-end;
-            gap: 0.5rem;
+            gap: var(--size-8);
 
-            padding-top: 2.625rem;
+            padding-top: var(--size-42);
         }
     }
 

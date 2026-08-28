@@ -44,6 +44,48 @@
     --heading: "Rubik", sans-serif;
     --mono: ui-monospace, Consolas, monospace;
 
+    /* Font-size */
+    ---font-size-sm: 0.75em;
+    ---font-size-md: 1em;
+    ---font-size-lg: 1.333em;
+    ---font-size-xl: 1.777em;
+    ---font-size-2xl: 2.369em;
+    ---font-size-3xl: 3.158em;
+    ---font-size-4xl: 4.209em;
+    ---font-size-5xl: 5.61em;
+
+    /* Font-weight */
+    ---font-weight-regular: 400;
+    ---font-weight-medium: 500;
+    ---font-weight-semibold: 600;
+    ---font-weight-bold: 700;
+
+    /* Line-height */
+    --line-height-shorter: 1;
+    --line-height-short: 1.25;
+    --line-height-moderate: 1.5;
+
+    /* sizes */
+    --size-80: 5rem;
+    --size-48: 3rem;
+    --size-42: 2.625rem;
+    --size-40: 2.5rem;
+    --size-32: 2rem;
+    --size-24: 1.5rem;
+    --size-16: 1rem;
+    --size-14: 0.875rem;
+    --size-12: 0.75rem;
+    --size-8: 0.5rem;
+    --size-4: 0.25rem;
+
+    /* Border */
+    --border-thin: 1px;
+    --border-default: 2px;
+
+    /* Radii */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-full: 9999px;
 }
 
 /* @media (prefers-color-scheme: dark) {

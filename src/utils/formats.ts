@@ -1,8 +1,7 @@
-// String formats
-export const isValidString = (value: unknown): boolean => {
-    return typeof value === "string" && value.trim().length > 0;
-};
+import { getLocale, getTimeZone } from "./locales.utils";
+import { isValidString, isAValidDate } from "./validators.utils";
 
+// String formats
 export const formatSentenceString = (str: unknown | null): string => {
     if (!str || !isValidString(str)) return "-";
 
@@ -26,31 +25,6 @@ export const formatSentenceString = (str: unknown | null): string => {
 };
 
 // Dates formats
-
-const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/;
-const isoDateTime =
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?(Z|[+-]\d{2}:\d{2})$/;
-
-export const isAValidDate = (date: string): boolean => {
-    const trimmed = date.trim();
-    if (!trimmed) return false;
-
-    if (!isoDateTime.test(trimmed) && !isoDateOnly.test(trimmed)) {
-        return false;
-    }
-
-    const parsed = new Date(trimmed);
-    return !Number.isNaN(parsed.getTime());
-};
-
-export const getTimeZone = (): string => {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone;
-};
-
-export const getLocale = (): string => {
-    return navigator.language;
-};
-
 export const formatDate = (
     date: unknown | null,
     locale?: string,
@@ -77,6 +51,7 @@ export const formatDate = (
     }
 };
 
+// Time formats
 export const secondsToTime = (seconds: number) => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);

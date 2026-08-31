@@ -1,6 +1,6 @@
 
 import { Badge } from '@/components';
-import useSession from '@/zunstand/session';
+import useSession from '@/zunstand/store/session.store';
 import type { QuizModel } from '@/types/quiz.types';
 import { QuizCard } from './components/QuizCard/QuizCard';
 import styles from './dashboard.module.css';

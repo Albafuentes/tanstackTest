@@ -4,7 +4,7 @@ import { es } from './locales/es';
 import { maxScore } from '@/utils/score.utils';
 import { Badge, Progress, buttonStyles } from '@/components';
 import { isGoodScore } from '@/utils/score.utils';
-import useSession from '../../../../../zunstand/session';
+import useSession from '../../../../../zunstand/store/session.store';
 import { Score } from '@/assets/svg/score';
 import { ABBREVIATION_PT } from '@/config/constants';
 import styles from './results.module.css';

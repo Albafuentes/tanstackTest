@@ -1,6 +1,6 @@
 import { createRoute, Link, useNavigate } from '@tanstack/react-router';
 import { Route as ProtectedRoutesLayoutRoute } from '../layout';
-import useSession from '@/zunstand/session';
+import useSession from '@/zunstand/store/session.store';
 import styles from './settings.module.css';
 import { Button, Field, buttonStyles } from '@/components';
 import { useActionState } from 'react';

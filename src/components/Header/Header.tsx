@@ -3,7 +3,7 @@ import { totalScore } from "@/utils/score.utils";
 import { Button } from "@/components";
 import { IconSettings } from "@tabler/icons-react";
 import { Sidebar } from "../Sidebar";
-import useSession from "../../zunstand/session";
+import useSession from "../../zunstand/store/session.store";
 import { ABBREVIATION_PT } from "../../config/constants";
 import { es } from "./locales/es";
 import chGreen from "../../assets/svg/ch-green.svg";

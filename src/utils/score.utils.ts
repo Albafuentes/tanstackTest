@@ -1,4 +1,4 @@
-import type { HistoryState } from "@/zunstand/session";
+import type { HistoryState } from "@/zunstand/store/session.store";
 
 export const SCORE_QUESTION_INCREMENT = 10;
 export const DEFAULT_SCORE = 0;

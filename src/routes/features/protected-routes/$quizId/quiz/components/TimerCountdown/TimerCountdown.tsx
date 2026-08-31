@@ -1,5 +1,5 @@
 import { Badge } from "@/components";
-import { TIMER_INCREMENT } from "@/zunstand/session";
+import { TIMER_INCREMENT } from "@/zunstand/store/session.store";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 import { useEffect, useState } from "react";
 import styles from "./TimerCountdown.module.css";

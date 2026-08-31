@@ -6,7 +6,7 @@ import { formatSentenceString } from '@/utils/formats';
 import styles from './quiz.module.css';
 import { Progress, Button, buttonStyles } from '@/components';
 import TimerCountdown from './components/TimerCountdown/TimerCountdown';
-import useSession from '@/zunstand/session';
+import useSession from '@/zunstand/store/session.store';
 import { TagAnswer } from './components/TagAnswer/TagAnswer';
 import { Route } from './quiz.route';
 import { translate } from '@/utils/locales.utils';

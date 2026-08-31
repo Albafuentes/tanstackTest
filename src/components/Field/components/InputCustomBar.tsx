@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../Field.module.css';
-import { MAX_LEVEL, MIN_LEVEL } from '@/zunstand/session';
+import { MAX_LEVEL, MIN_LEVEL } from '@/zunstand/store/session.store';
 
 export const InputCustomBar = (
     props: React.InputHTMLAttributes<HTMLInputElement>,
@@ -20,7 +20,7 @@ export const InputCustomBar = (
             const siblings = button.parentElement?.querySelectorAll("button");
 
             siblings?.forEach((button) => {
-                if(button.value <= level.toString()) {
+                if (button.value <= level.toString()) {
                     button.dataset.active = "true";
                 } else {
                     button.dataset.active = "false";

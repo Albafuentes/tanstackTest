@@ -2,7 +2,7 @@ import { createRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AnimatedRoute } from "../../../components";
 import { SidebarProvider } from "../../../components/Sidebar/SidebarProvider";
 import { UnauthorizedError } from "../../../utils/errors.utils";
-import useSession from "../../../zunstand/session";
+import useSession from "../../../zunstand/store/session.store";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
 import { isAuthenticated } from "../../../utils/auth.util";

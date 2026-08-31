@@ -1,4 +1,4 @@
-import { MAX_TIMER, MIN_TIMER, TIMER_INCREMENT } from "@/zunstand/session";
+import { MAX_TIMER, MIN_TIMER, TIMER_INCREMENT } from "@/zunstand/store/session.store";
 import React from "react";
 import style from '../Field.module.css';
 import { Button } from "@/components";

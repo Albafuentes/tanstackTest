@@ -1,14 +1,16 @@
 
 import { Link } from '@tanstack/react-router';
-import { useQuiz } from './hook';
+import { useQuiz } from './hooks/useQuiz.hook';
 import type { QuizModel } from '@/types/quiz.types';
 import { formatSentenceString } from '@/utils/formats';
 import styles from './quiz.module.css';
-import { Progress, Button, buttonStyles  } from '@/components';
+import { Progress, Button, buttonStyles } from '@/components';
 import TimerCountdown from './components/TimerCountdown/TimerCountdown';
 import useSession from '@/zunstand/session';
 import { TagAnswer } from './components/TagAnswer/TagAnswer';
 import { Route } from './quiz.route';
+import { translate } from '@/utils/locales.utils';
+import { es } from './locales/es';
 
 function Quiz() {
 
@@ -53,12 +55,12 @@ function Quiz() {
                         className={`${buttonStyles['button']} ${buttonStyles['button--red']}`}
                         onClick={handleFinishQuiz}
                     >
-                        Finish Quiz
+                        {translate(es.linkText)}
                     </Link>
                 );
             }
 
-            return <Button onClick={handleNextQuestion}>Next Question</Button>;
+            return <Button onClick={handleNextQuestion}>{translate(es.nextButton)}</Button>;
         } else {
             return (
                 <Button
@@ -66,7 +68,7 @@ function Quiz() {
                     onClick={resolveAnswer}
                     disabled={!selectedOption}
                 >
-                    Resolve
+                    {translate(es.resolveButton)}
                 </Button>
             );
         }
@@ -78,7 +80,10 @@ function Quiz() {
                 <h4>{formatSentenceString(data.name)}</h4>
                 <div className={styles['quiz__header-timer']}>
                     <Progress
-                        helpText={`${questionCount?.questionsAnswered ?? '-'} of ${questionCount?.totalQuestions ?? '-'}`}
+                        helpText={translate(es.progressHelpText, {
+                            currentQuestion: String(questionCount?.questionsAnswered) ?? '-',
+                            questionCount: String(questionCount?.totalQuestions) ?? '-',
+                        })}
                         widthValue={
                             questionCount?.questionsAnswered ?? 0
                         }
@@ -114,7 +119,7 @@ function Quiz() {
             </div>
             <div className={styles['quiz__footer']}>
                 <Button variant="outline-black" onClick={skipAnswer}>
-                    Skip
+                    {translate(es.skipButton)}
                 </Button>
                 {buttonSwitch()}
             </div>

@@ -1,5 +1,6 @@
 
 import { Link, } from '@tanstack/react-router'
+import { es } from './locales/es';
 import { maxScore } from '@/utils/score.utils';
 import { Badge, Progress, buttonStyles } from '@/components';
 import { isGoodScore } from '@/utils/score.utils';
@@ -8,6 +9,7 @@ import { Score } from '@/assets/svg/score';
 import { ABBREVIATION_PT } from '@/config/constants';
 import styles from './results.module.css';
 import { Route } from './results.route';
+import { translate } from '@/utils/locales.utils';
 
 function Results() {
     const history = useSession((state) => state.history);
@@ -19,7 +21,7 @@ function Results() {
             {results ? (
                 <>
                     <div className={styles["results__score"]}>
-                        <h4>New score</h4>
+                        <h4>{translate(es.title)}</h4>
                         <Score score={`${results.points}`} isGoodScore={isGoodScore(results.points ?? 0, results.totalQuestions ?? 0)} />
                         <Progress
                             helpText={`${results.points} ${ABBREVIATION_PT}`}
@@ -28,31 +30,31 @@ function Results() {
                         />
                     </div>
                     <div className={styles["results__summary"]}>
-                        <strong>Summary</strong>
+                        <strong>{translate(es.summarySubTitle)}</strong>
                         <div className={styles["results__summary__group-badges"]}>
                             <Badge variant="tag" color="outline-green">
-                                <span>Correct </span>
+                                <span>{translate(es.correctBadge)}</span>
                                 <span>{results?.correctQuestions}</span>
                             </Badge>
                             <Badge variant="tag" color="outline-red">
-                                <span>Wrong</span>
+                                <span>{translate(es.wrongBadge)}</span>
                                 <span>{results?.wrongQuestions}</span>
                             </Badge>
                             <Badge variant="tag" color="outline-black">
-                                <span>Skips </span>
+                                <span>{translate(es.skipsBadge)}</span>
                                 <span>{results?.skippedAnswers}</span>
                             </Badge>
                         </div>
                     </div>
                     <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
-                        Go to Dashboard
+                        {translate(es.linkText)}
                     </Link>
                 </>
             ) : (
                 <div className={styles["results__empty"]}>
-                    <strong>Ups! We have an error, and we can't recover the results. </strong>
+                    <strong>{translate(es.errorMessage)}</strong>
                     <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
-                        Go to Dashboard
+                        {translate(es.linkText)}
                     </Link>
                 </div>
             )}

@@ -1,3 +1,5 @@
+import { isValidString } from "./validators.utils";
+
 export const getTimeZone = (): string => {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
 };
@@ -8,9 +10,9 @@ export const getLocale = (): string => {
 
 
 export const translate = (translation: string, interpolation?: { [key: string]: string }) => {
-    if (!translation || translation.length === 0) return "";
+    if (!translation || translation.length === 0 || !isValidString(translation)) return "";
 
-    const parts = String(translation).split(/({{.*?}})/g);
+    const parts = translation.split(/({{.*?}})/g);
 
     const text = parts.map((part) => {
         const interpolationPart = part.match(/{{(.*?)}}/);

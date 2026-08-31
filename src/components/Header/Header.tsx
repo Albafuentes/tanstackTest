@@ -5,11 +5,13 @@ import { IconSettings } from "@tabler/icons-react";
 import { Sidebar } from "../Sidebar";
 import useSession from "../../zunstand/session";
 import { ABBREVIATION_PT } from "../../config/constants";
+import { es } from "./locales/es";
 import chGreen from "../../assets/svg/ch-green.svg";
 import { IconStar } from "@tabler/icons-react";
 import styles from "./Header.module.css";
 import { formatDate } from "@/utils/formats";
 import { clearToken, decodeToken } from "@/utils/auth.util";
+import { translate } from "@/utils/locales.utils";
 
 const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
 
@@ -42,17 +44,17 @@ export const Header = () => {
           <Sidebar.Item readonly>
             <div className={styles["sidebar-item__header"]}>
               <Logo avatarUrl={user?.avatarURL || chGreen} />
-              <span>Invited</span>
-              <small>session: {formatDate(user?.createdAt)}</small>
+              <span>{translate(es.userNameItemSidebar)}</span>
+              <small>{translate(es.sessionItemSidebar, { date: formatDate(user?.createdAt) })}</small>
 
             </div>
           </Sidebar.Item>
           <Sidebar.Item withSeparator>
-            <Link to="/dashboard/settings"><IconSettings size={20} />Settings</Link>
+            <Link to="/dashboard/settings"><IconSettings size={20} />{translate(es.linkText)}</Link>
           </Sidebar.Item>
 
           <Sidebar.Footer>
-            <Button onClick={handleLogout} variant="link">Log out</Button>
+            <Button onClick={handleLogout} variant="link">{translate(es.logoutButton)}</Button>
           </Sidebar.Footer>
         </Sidebar>
       )}

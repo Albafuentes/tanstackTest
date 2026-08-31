@@ -7,6 +7,8 @@ import { useActionState } from 'react';
 import type { SettingsState } from './types/state.types';
 import { useFormStatus } from 'react-dom';
 import { useShallow } from 'zustand/shallow';
+import { translate } from '@/utils/locales.utils';
+import { es } from './locales/es';
 
 export const Route = createRoute({
     getParentRoute: () => ProtectedRoutesLayoutRoute,
@@ -35,7 +37,7 @@ const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
         <Button type="submit" disabled={pending}>
-            Save
+            {translate(es.submitButton)}
         </Button>
     );
 };
@@ -70,22 +72,22 @@ function Settings() {
 
     return (
         <section className={styles['settings']}>
-            <h4>Settings</h4>
+            <h4>{translate(es.title)}</h4>
             <form action={formAction} >
                 <Field
                     type="custom-number"
-                    label="Timer"
+                    label={translate(es.timerLabel)}
                     name="timer"
-                    description="Select the timer that will be used for every question."
+                    description={translate(es.timerDescription)}
                     errors={state.errors?.timer}
                     defaultValue={settings?.timer || ''}
                     orientation="horizontal"
                 />
                 <Field
                     type="custom-bar"
-                    label="Level"
+                    label={translate(es.levelLabel)}
                     name="level"
-                    description="Select the level questions. A higher level indicates that the questions are more difficult."
+                    description={translate(es.levelDescription)}
                     errors={state.errors?.level}
                     defaultValue={settings.level.toString() || ''}
                     orientation="horizontal"
@@ -94,7 +96,7 @@ function Settings() {
 
                 <div className={styles['settings__button-group']}>
                     <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--outline-black"]}`}>
-                        Cancel
+                        {translate(es.cancelButton)}
                     </Link>
                     <SubmitButton />
                 </div>

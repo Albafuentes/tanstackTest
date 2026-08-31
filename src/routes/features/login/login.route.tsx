@@ -8,6 +8,8 @@ import { mailVerification, stringVerification } from "./utils/validators";
 import { useFormStatus } from "react-dom";
 import type { LoginState } from "./types/state.types";
 import { api } from "@/service/api.service";
+import { translate } from "@/utils/locales.utils";
+import { es } from "./locales/es";
 
 export const Route = createRoute({
     getParentRoute: () => RootRoute,
@@ -21,7 +23,7 @@ const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
         <Button type="submit" disabled={pending}>
-            Login
+            {translate(es.submitButton)}
         </Button>
     );
 };
@@ -47,8 +49,8 @@ function Login() {
         if (!response || !response.token) {
             return {
                 errors: {
-                    email: ["Invalid username or password"],
-                    password: ["Invalid username or password"],
+                    email: [translate(es.loginActionError)],
+                    password: [translate(es.loginActionError)],
                 },
             };
         }
@@ -72,16 +74,16 @@ function Login() {
             <form action={formAction}>
                 <Field
                     type="text"
-                    label="Email"
+                    label={translate(es.emailLabel)}
                     name={"email"}
-                    placeholder="email..."
+                    placeholder={translate(es.emailPlaceholder)}
                     errors={state.errors?.email}
                 />
                 <Field
                     type="password"
-                    label="Password"
+                    label={translate(es.passwordLabel)}
                     name={"password"}
-                    placeholder="password..."
+                    placeholder={translate(es.passwordPlaceholder)}
                     errors={state.errors?.password}
                 />
                 <SubmitButton />

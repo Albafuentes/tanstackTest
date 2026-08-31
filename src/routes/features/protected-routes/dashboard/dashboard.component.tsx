@@ -2,11 +2,13 @@
 import { Badge } from '@/components';
 import useSession from '@/zunstand/session';
 import type { QuizModel } from '@/types/quiz.types';
-import { QuizCard } from './QuizCard/QuizCard';
+import { QuizCard } from './components/QuizCard/QuizCard';
 import styles from './dashboard.module.css';
 import { ABBREVIATION_PT } from '@/config/constants';
 import { formatSentenceString } from '@/utils/formats';
 import { Route } from './dashboard.route';
+import { translate } from '@/utils/locales.utils';
+import { es } from './locales/es';
 
 function Dashboard() {
     const history = useSession((state) => state.history);
@@ -16,7 +18,7 @@ function Dashboard() {
 
     return (
         <section className={styles['dashboard']}>
-            <h3>Let's play a quiz!</h3>
+            <h3>{translate(es.title)}</h3>
 
             <article className={styles['dashboard-quizs']}>
                 {quizsData.map((quiz) => (
@@ -24,7 +26,7 @@ function Dashboard() {
                 ))}
             </article>
             <article className={styles['dashboard-scores']}>
-                <strong>All Scores</strong>
+                <strong>{translate(es.scoresSubTitle)}</strong>
                 <ul>
                     {history.length ? (
                         history.map((historyItem, index) => (
@@ -39,7 +41,7 @@ function Dashboard() {
                         ))
                     ) : (
                         <li className={styles['dashboard-scores__item-empty']}>
-                            No scores yet...
+                            {translate(es.scoresEmptyList)}
                         </li>
                     )}
                 </ul>

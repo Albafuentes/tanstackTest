@@ -3,7 +3,7 @@ import { TIMER_INCREMENT } from "@/zunstand/store/session.store";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 import { useEffect, useState } from "react";
 import styles from "./TimerCountdown.module.css";
-import { secondsToTime, timeToSeconds } from "@/utils/formats";
+import { secondsToTime, timeToSeconds } from "@/utils/formats.utils";
 
 interface TimerCountdownProps {
     time?: string;

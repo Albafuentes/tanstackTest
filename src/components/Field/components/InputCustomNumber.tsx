@@ -3,7 +3,7 @@ import React from "react";
 import style from '../Field.module.css';
 import { Button } from "@/components";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-import { secondsToTime } from "@/utils/formats";
+import { secondsToTime } from "@/utils/formats.utils";
 
 export const InputCustomNumber = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
 

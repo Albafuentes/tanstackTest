@@ -9,8 +9,8 @@ import { es } from "./locales/es";
 import chGreen from "../../assets/svg/ch-green.svg";
 import { IconStar } from "@tabler/icons-react";
 import styles from "./Header.module.css";
-import { formatDate } from "@/utils/formats";
-import { clearToken, decodeToken } from "@/utils/auth.util";
+import { formatDate } from "@/utils/formats.utils";
+import { clearToken, decodeToken } from "@/utils/auth.utils";
 import { translate } from "@/utils/locales.utils";
 
 const Logo = ({ avatarUrl }: { avatarUrl: string }) => {

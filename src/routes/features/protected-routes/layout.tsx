@@ -5,7 +5,7 @@ import { UnauthorizedError } from "../../../utils/errors.utils";
 import useSession from "../../../zunstand/store/session.store";
 import { Header } from "../../../components/Header/Header";
 import { Route as RootRoute } from "../../__root";
-import { isAuthenticated } from "../../../utils/auth.util";
+import { isAuthenticated } from "../../../utils/auth.utils";
 import { Suspense } from "react";
 
 export const Route = createRoute({

@@ -1,5 +1,5 @@
 import type { AuthModel } from "@/types/auth.types";
-import { generateToken } from "@/utils/auth.util";
+import { generateToken } from "@/utils/auth.utils";
 import chGreen from "@/assets/svg/ch-green.svg";
 import chRed from "@/assets/svg/ch-red.svg";
 

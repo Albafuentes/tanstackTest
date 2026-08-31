@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import styles from "./QuizCard.module.css";
 import { Badge, buttonStyles } from "@/components";
 import { IconStar } from "@tabler/icons-react";
-import { formatSentenceString } from "@/utils/formats";
+import { formatSentenceString } from "@/utils/formats.utils";
 import { translate } from "@/utils/locales.utils";
 import { es } from "../../locales/es";
 

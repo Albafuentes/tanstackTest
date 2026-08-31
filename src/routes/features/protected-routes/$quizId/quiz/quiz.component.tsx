@@ -2,7 +2,7 @@
 import { Link } from '@tanstack/react-router';
 import { useQuiz } from './hooks/useQuiz.hook';
 import type { QuizModel } from '@/types/quiz.types';
-import { formatSentenceString } from '@/utils/formats';
+import { formatSentenceString } from '@/utils/formats.utils';
 import styles from './quiz.module.css';
 import { Progress, Button, buttonStyles } from '@/components';
 import TimerCountdown from './components/TimerCountdown/TimerCountdown';

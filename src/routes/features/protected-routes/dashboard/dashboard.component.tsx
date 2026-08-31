@@ -5,7 +5,7 @@ import type { QuizModel } from '@/types/quiz.types';
 import { QuizCard } from './components/QuizCard/QuizCard';
 import styles from './dashboard.module.css';
 import { ABBREVIATION_PT } from '@/config/constants';
-import { formatSentenceString } from '@/utils/formats';
+import { formatSentenceString } from '@/utils/formats.utils';
 import { Route } from './dashboard.route';
 import { translate } from '@/utils/locales.utils';
 import { es } from './locales/es';

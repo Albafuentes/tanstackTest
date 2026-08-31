@@ -1,5 +1,5 @@
 import { Badge } from "@/components";
-import type { SelectedOption } from "../../hook";
+import type { SelectedOption } from "../../hooks/useQuiz.hook";
 import styles from "./TagAnswer.module.css";
 
 interface TagAnswerProps {
@@ -14,6 +14,8 @@ interface TagAnswerProps {
 }
 
 import type { ReactElement } from "react";
+import { translate } from "@/utils/locales.utils";
+import { es } from "../../locales/es";
 const getStatus = (
     selectedOption: SelectedOption | null,
     isTagSelected: boolean,
@@ -27,7 +29,7 @@ const getStatus = (
         if (isTagSelected && isCorrectAnswer) {
             return {
                 style: styles["tag-answer--green"],
-                component: <Badge color="outline-green" className={styles["tag-answer__badge"]}>Good!</Badge>,
+                component: <Badge color="outline-green" className={styles["tag-answer__badge"]}>{translate(es.TagAnswer.goodBadge)}</Badge>,
             };
         }
 
@@ -36,7 +38,7 @@ const getStatus = (
                 style: styles["tag-answer--red"],
                 component: (
                     <>
-                        <Badge color="outline-red" className={styles["tag-answer__badge"]}>Oops!</Badge>
+                        <Badge color="outline-red" className={styles["tag-answer__badge"]}>{translate(es.TagAnswer.failBadge)}</Badge>
                         <p>{explanation}</p>
                     </>
                 ),

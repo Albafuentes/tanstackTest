@@ -4,6 +4,8 @@ import styles from "./QuizCard.module.css";
 import { Badge, buttonStyles } from "@/components";
 import { IconStar } from "@tabler/icons-react";
 import { formatSentenceString } from "@/utils/formats";
+import { translate } from "@/utils/locales.utils";
+import { es } from "../../locales/es";
 
 
 export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: boolean }) => {
@@ -13,7 +15,7 @@ export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: 
 
             <div className={styles["quiz-card__text"]}>
                 <h6>{formatSentenceString(quiz.name)}</h6>
-                <p>Questions: {quiz.questions}</p>
+                <p>{translate(es.quizCard.totalQuestions, { totalQuestions: String(quiz.questions) })}</p>
             </div>
 
             <Link
@@ -23,7 +25,7 @@ export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: 
                 className={`${buttonStyles["button"]} ${buttonStyles["button--red"]}`}
                 disabled={disabled}
             >
-                Let's go!
+                {translate(es.quizCard.linkText)}
             </Link>
         </div>
     );

@@ -1,3 +1,5 @@
+import { ABBREVIATION_PT } from "@/config/constants";
+
 interface ScoreProps {
     score: string;
     isGoodScore: boolean;
@@ -54,7 +56,7 @@ export const Score = ({ score, isGoodScore }: ScoreProps) => {
                 x="17.87"
                 y="160"
             >
-                + {score} XP
+                + {score} {ABBREVIATION_PT}
             </text>
         </svg>
     );

@@ -1,15 +1,15 @@
-import { Children, cloneElement, isValidElement, useContext} from "react";
-import type { FooterProps } from "./components/Footer";
-import { Footer } from "./components/Footer";
+import { Children, cloneElement, isValidElement, useContext } from "react";
+import type { FooterProps } from "./components/Footer/Footer";
+import { Footer } from "./components/Footer/Footer";
 import { SidebarContext } from "./SidebarProvider";
 
 import styles from "./Sidebar.module.css";
-import { Trigger, type TriggerProps } from "./components/Trigger";
+import { Trigger, type TriggerProps } from "./components/Trigger/Trigger";
 
 import {
     Item,
     type ItemProps,
-} from "./components/Item";
+} from "./components/Item/Item";
 import { AnimatePresence, motion } from "motion/react";
 
 export interface SidebarProps {
@@ -67,11 +67,11 @@ export const Sidebar = ({
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0, transition: { delay: 0.2 } }}
                             transition={{ duration: 0.3 }}
+                            data-testid="sidebar-overlay"
                         />
                         <motion.div
                             aria-label="Sidebar"
                             className={styles["sidebar-content"]}
-                            onClick={(event) => event.stopPropagation()}
                             initial={{ x: "-100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "-100%" }}

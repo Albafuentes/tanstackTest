@@ -1,6 +1,6 @@
 
 import { type ReactElement, type LiHTMLAttributes } from "react";
-import styles from "../Sidebar.module.css";
+import styles from "../../Sidebar.module.css";
 
 export interface ItemProps extends LiHTMLAttributes<HTMLLIElement> {
     children: ReactElement;
@@ -8,11 +8,11 @@ export interface ItemProps extends LiHTMLAttributes<HTMLLIElement> {
     readonly?: boolean;
 }
 
-export const Item = ({ children, ...props }: ItemProps) => {
+export const Item = ({ children, withSeparator, readonly, ...props }: ItemProps) => {
     return (
         <li
             {...props}
-            className={`${props.className ?? ""} ${styles["sidebar-item"]} ${props.withSeparator ? styles["item--separator"] : ""} ${props.readonly ? styles["item--readonly"] : ""}`}
+            className={`${props.className ?? ""} ${styles["sidebar-item"]} ${withSeparator ? styles["item--separator"] : ""} ${readonly ? styles["item--readonly"] : ""}`}
         >
             {children}
         </li>

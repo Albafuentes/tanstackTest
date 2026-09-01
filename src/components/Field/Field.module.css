@@ -29,6 +29,7 @@
             padding: 0 var(--size-8);
         }
 
+        /* This styles are for the component but is include in the general because it has a direct dependency on the field__label-container and sharing styles */
         .field__input-text,
         .field__input-password {
 

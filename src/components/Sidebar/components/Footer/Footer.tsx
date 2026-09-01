@@ -1,7 +1,7 @@
 
-import { type ReactElement, type LiHTMLAttributes } from "react";
+import { type ReactElement, type HTMLAttributes } from "react";
 
-export interface FooterProps extends LiHTMLAttributes<HTMLDivElement> {
+export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
     children: ReactElement;
 }
 

@@ -1,8 +1,8 @@
 
 import { Sidebar, type SidebarProps } from "./Sidebar";
-import { Trigger } from "./components/Trigger";
-import { Item } from "./components/Item";
-import { Footer } from "./components/Footer";
+import { Trigger } from "./components/Trigger/Trigger";
+import { Item } from "./components/Item/Item";
+import { Footer } from "./components/Footer/Footer";
 
 
 type SidebarComponent = typeof Sidebar & {

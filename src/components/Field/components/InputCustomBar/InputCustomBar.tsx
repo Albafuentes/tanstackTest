@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../Field.module.css';
+import style from '../../Field.module.css';
 import { MAX_LEVEL, MIN_LEVEL } from '@/zunstand/store/session.store';
 
 export const InputCustomBar = (
@@ -7,11 +7,27 @@ export const InputCustomBar = (
 ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
 
+    const setNativeInputValue = (input: HTMLInputElement, value: string) => {
+        const ownDescriptor = Object.getOwnPropertyDescriptor(input, 'value')
+        const prototypeDescriptor = Object.getOwnPropertyDescriptor(
+            Object.getPrototypeOf(input),
+            'value',
+        )
+
+        const setter =
+            prototypeDescriptor?.set && ownDescriptor?.set !== prototypeDescriptor.set
+                ? prototypeDescriptor.set
+                : ownDescriptor?.set
+
+        setter?.call(input, value)
+    }
+
 
     const handleButtonClick = (level: number, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         if (inputRef.current) {
-            inputRef.current.value = level.toString();
+            setNativeInputValue(inputRef.current, level.toString());
+
             const event = new Event('input', { bubbles: true });
             inputRef.current.dispatchEvent(event);
 
@@ -20,7 +36,7 @@ export const InputCustomBar = (
             const siblings = button.parentElement?.querySelectorAll("button");
 
             siblings?.forEach((button) => {
-                if (button.value <= level.toString()) {
+                if (Number(button.value) <= level) {
                     button.dataset.active = "true";
                 } else {
                     button.dataset.active = "false";

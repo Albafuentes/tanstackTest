@@ -22,7 +22,7 @@ export type HistoryState = {
   wrongQuestions: number;
 }
 
-type SessionState = {
+export type SessionState = {
   settings: {
     timer: string;
     level: number;

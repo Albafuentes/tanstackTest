@@ -6,10 +6,10 @@ export * from './Progress/Progress';
 export * from './Sidebar/Sidebar';
 export * from './Sidebar/SidebarProvider';
 export * from './Button/Button';
-export * from './Sidebar/components/Footer';
-export * from './Sidebar/components/Item';
-export * from './Sidebar/components/Trigger';
-export * from './Field/components/InputCustomNumber';
-export * from './Field/components/InputCustomBar';
+export * from './Sidebar/components/Footer/Footer';
+export * from './Sidebar/components/Item/Item';
+export * from './Sidebar/components/Trigger/Trigger';
+export * from './Field/components/InputCustomNumber/InputCustomNumber';
+export * from './Field/components/InputCustomBar/InputCustomBar';
 
 export { default as buttonStyles } from './Button/Button.module.css';

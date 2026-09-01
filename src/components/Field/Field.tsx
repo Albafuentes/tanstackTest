@@ -1,7 +1,7 @@
 import style from './Field.module.css';
 import React from 'react';
-import { InputCustomBar } from './components/InputCustomBar';
-import { InputCustomNumber } from './components/InputCustomNumber';
+import { InputCustomBar } from './components/InputCustomBar/InputCustomBar';
+import { InputCustomNumber } from './components/InputCustomNumber/InputCustomNumber';
 
 interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
     type: 'text' | 'password' | 'custom-number' | 'custom-bar';

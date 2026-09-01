@@ -43,6 +43,7 @@ export function AnimatedRoute({
     variant = 'fade',
     ...motionProps
 }: AnimatedRouteProps) {
+
     const pathname = useRouterState({
         select: (state) => state.location.pathname,
     });
@@ -64,6 +65,7 @@ export function AnimatedRoute({
                     exit="out"
                     variants={routeVariants[variant]}
                     transition={pageTransition}
+                    data-testid="animated-main"
                     {...motionProps}
                 >
                     {children}

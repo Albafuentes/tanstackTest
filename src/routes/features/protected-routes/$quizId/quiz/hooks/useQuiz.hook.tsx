@@ -127,6 +127,7 @@ export const useQuiz = (
         } else {
             setQuizStatus((prev) => ({
                 ...prev,
+                timerStatus: TIMER_STATUS.PAUSED,
                 wrongQuestions: prev.wrongQuestions + 1,
             }));
         }

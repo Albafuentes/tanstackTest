@@ -43,7 +43,7 @@ vi.mock('motion/react', () => ({
         event: string,
         callback: (latest: any) => void,
     ) => {
-        // Se suscribe de verdad, como el hook real
+        // The subscription is real like a hook
         value.on(event, callback);
     },
     animate: vi.fn((target: any, targetValue: any, options: any = {}) => {

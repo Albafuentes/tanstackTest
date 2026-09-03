@@ -1,5 +1,5 @@
 export const es = {
-    linkText: " Finish Quiz",
+    linkText: "Finish Quiz",
     resolveButton: "Resolve",
     nextButton: "Next Question",
     skipButton: "Skip",

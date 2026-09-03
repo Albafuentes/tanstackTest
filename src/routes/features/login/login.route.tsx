@@ -28,7 +28,7 @@ const SubmitButton = () => {
     );
 };
 
-function Login() {
+export function Login() {
     const navigate = useNavigate();
 
     const loginAction = async (_previousState: LoginState, formData: FormData): Promise<LoginState> => {

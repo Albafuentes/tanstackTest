@@ -10,7 +10,7 @@ import { es } from "../../locales/es";
 
 export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: boolean }) => {
     return (
-        <div className={styles["quiz-card"]}>
+        <div className={styles["quiz-card"]} data-testid={`quiz-card-${quiz.id}`}>
             <Badge color="green" className={styles["quiz-card__badge"]}><IconStar size={14} />{quiz.extraPoints}</Badge>
 
             <div className={styles["quiz-card__text"]}>
@@ -23,7 +23,7 @@ export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: 
                 params={{ quizId: quiz.id }}
                 activeOptions={{ exact: true }}
                 className={`${buttonStyles["button"]} ${buttonStyles["button--red"]}`}
-                disabled={disabled}
+                aria-disabled={disabled}
             >
                 {translate(es.quizCard.linkText)}
             </Link>

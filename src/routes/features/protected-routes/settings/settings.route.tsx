@@ -42,7 +42,7 @@ const SubmitButton = () => {
     );
 };
 
-function Settings() {
+export function Settings() {
 
     const { updateSettings, settings } = useSession(
         useShallow((state) => ({
@@ -80,8 +80,8 @@ function Settings() {
                     name="timer"
                     description={translate(es.timerDescription)}
                     errors={state.errors?.timer}
-                    defaultValue={settings?.timer || ''}
                     orientation="horizontal"
+                    {...(settings && { defaultValue: settings.timer})}
                 />
                 <Field
                     type="custom-bar"
@@ -89,9 +89,8 @@ function Settings() {
                     name="level"
                     description={translate(es.levelDescription)}
                     errors={state.errors?.level}
-                    defaultValue={settings.level.toString() || ''}
                     orientation="horizontal"
-
+                    {...(settings && { defaultValue: settings.level })}
                 />
 
                 <div className={styles['settings__button-group']}>

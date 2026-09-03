@@ -5,16 +5,20 @@ import { render, screen } from '@testing-library/react'
 import { expect, describe, it, vi } from 'vitest'
 import { mockNavigate, mockUseRouterState } from '@/test/mocks/router.mocks'
 
-vi.mock('@tanstack/react-router', () => ({
-    useNavigate: () => mockNavigate,
-    useRouterState: (opts?: { select?: (state: unknown) => unknown },
-    ) => mockUseRouterState(opts),
-    Link: ({ to, children, ...props }: { to: string, children: React.ReactNode }) => (
-        <a href={to} {...props}>
-            {children}
-        </a>
-    ),
-}))
+vi.mock("@tanstack/react-router", async (importOriginal) => {
+    const actual = await importOriginal<typeof import("@tanstack/react-router")>();
+    return {
+        ...actual,
+        useNavigate: () => mockNavigate,
+        useRouterState: (opts?: { select?: (state: unknown) => unknown },
+        ) => mockUseRouterState(opts),
+        Link: ({ to, children, ...props }: { to: string, children: React.ReactNode }) => (
+            <a href={to} {...props}>
+                {children}
+            </a>
+        ),
+    };
+});
 
 
 describe('AnimatedRoute component', () => {

@@ -67,6 +67,7 @@ function Quiz() {
                     variant="red"
                     onClick={resolveAnswer}
                     disabled={!selectedOption}
+                    aria-disabled={!selectedOption}
                 >
                     {translate(es.resolveButton)}
                 </Button>
@@ -81,8 +82,8 @@ function Quiz() {
                 <div className={styles['quiz__header-timer']}>
                     <Progress
                         helpText={translate(es.progressHelpText, {
-                            currentQuestion: String(questionCount?.questionsAnswered) ?? '-',
-                            questionCount: String(questionCount?.totalQuestions) ?? '-',
+                            currentQuestion: String(questionCount?.questionsAnswered ?? '-'),
+                            questionCount: String(questionCount?.totalQuestions ?? '-'),
                         })}
                         widthValue={
                             questionCount?.questionsAnswered ?? 0

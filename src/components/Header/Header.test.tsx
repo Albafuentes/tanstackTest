@@ -9,20 +9,28 @@ import { totalScore } from '@/utils/score.utils';
 import { ABBREVIATION_PT } from '@/config/constants';
 import { mockUseSession } from '@/test/mocks/session.mocks';
 
-vi.mock('@tanstack/react-router', () => ({
-    useNavigate: () => mockNavigate,
-    useRouterState: (opts?: { select?: (state: unknown) => unknown },
-    ) => mockUseRouterState(opts),
-    Link: ({ to, children, ...props }: { to: string, children: React.ReactNode }) => (
-        <a href={to} {...props}>
-            {children}
-        </a>
-    ),
-}))
+vi.mock("@tanstack/react-router", async (importOriginal) => {
+    const actual = await importOriginal<typeof import("@tanstack/react-router")>();
+    return {
+        ...actual,
+        useNavigate: () => mockNavigate,
+        useRouterState: (opts?: { select?: (state: unknown) => unknown },
+        ) => mockUseRouterState(opts),
+        Link: ({ to, children, ...props }: { to: string, children: React.ReactNode }) => (
+            <a href={to} {...props}>
+                {children}
+            </a>
+        ),
+    };
+});
 
-vi.mock('@/zunstand/store/session.store', () => ({
-    default: (selector: (state: any) => unknown) => mockUseSession(selector),
-}))
+vi.mock('@/zunstand/store/session.store', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('@/zunstand/store/session.store')>();
+    return {
+        ...actual,
+        default: (selector: (state: any) => unknown) => mockUseSession(selector),
+    };
+});
 
 vi.mock('@/utils/formats.utils', () => ({
     formatDate: vi.fn(),

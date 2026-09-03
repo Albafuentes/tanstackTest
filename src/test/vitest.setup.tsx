@@ -20,4 +20,56 @@ vi.mock('motion/react', () => ({
             },
         },
     ),
+    useMotionValue: (initial: any) => {
+        let current = initial;
+        const listeners = new Set<(latest: any) => void>();
+
+        return {
+            get: () => current,
+            set: (next: any) => {
+                current = next;
+                listeners.forEach((listener) => listener(current));
+            },
+            on: (event: string, callback: (latest: any) => void) => {
+                if (event === "change") {
+                    listeners.add(callback);
+                }
+                return () => listeners.delete(callback);
+            },
+        };
+    },
+    useMotionValueEvent: (
+        value: { on: (event: string, cb: (latest: any) => void) => () => void },
+        event: string,
+        callback: (latest: any) => void,
+    ) => {
+        // Se suscribe de verdad, como el hook real
+        value.on(event, callback);
+    },
+    animate: vi.fn((target: any, targetValue: any, options: any = {}) => {
+        let stopped = false;
+        const durationMs = (options.duration ?? 0) * 1000;
+
+        const timeoutId = setTimeout(() => {
+            if (stopped) return;
+            if (target && typeof target.set === "function") {
+                target.set(targetValue);
+            }
+            options.onComplete?.();
+        }, durationMs);
+
+        return {
+            stop: vi.fn(() => {
+                stopped = true;
+                clearTimeout(timeoutId);
+            }),
+            pause: vi.fn(),
+            play: vi.fn(),
+            complete: vi.fn(),
+            cancel: vi.fn(() => {
+                stopped = true;
+                clearTimeout(timeoutId);
+            }),
+        };
+    }),
 }))

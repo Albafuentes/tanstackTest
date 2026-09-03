@@ -59,7 +59,7 @@ export const TagAnswer = ({
     const status = getStatus(selectedOption, isTagSelected, data.explanation || "");
 
     return (
-        <label className={`${styles["tag-answer"]} ${status.style}`}>
+        <label className={`${styles["tag-answer"]} ${status.style}`} data-testid={`tag-answer-${data.index}`}>
             <input
                 type="radio"
                 onChange={() => handleSelectOption?.(data.index)}

@@ -22,6 +22,10 @@ export function setSessionState(state: Partial<SessionState>) {
 }
 
 // Copy and paste this code into your test file to use the session mock:
-// vi.mock('@/zunstand/store/session.store', () => ({
-//     default: (selector: (state: any) => unknown) => mockUseSession(selector),
-// }))
+// vi.mock('@/zunstand/store/session.store', async (importOriginal) => {
+//     const actual = await importOriginal<typeof import('@/zunstand/store/session.store')>();
+//     return {
+//         ...actual,
+//         default: (selector: (state: any) => unknown) => mockUseSession(selector),
+//     };
+// });

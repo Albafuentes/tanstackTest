@@ -2,6 +2,18 @@
 import '@testing-library/jest-dom/vitest';
 import type { JSX } from 'react/jsx-runtime';
 import { vi } from 'vitest'
+import { webcrypto } from 'node:crypto';
+
+Object.defineProperty(globalThis, 'crypto', {
+    value: webcrypto,
+    configurable: true,
+});
+
+const NativeUint8Array = Object.getPrototypeOf(Buffer.prototype).constructor;
+Object.defineProperty(globalThis, 'Uint8Array', {
+    value: NativeUint8Array,
+    configurable: true,
+});
 
 vi.mock('motion/react', () => ({
     AnimatePresence: ({ children }: { children: React.ReactNode }) => children,

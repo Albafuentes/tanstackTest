@@ -1,5 +1,5 @@
 import { getLocale, getTimeZone } from "./locales.utils";
-import { isValidString, isAValidDate } from "./validators.utils";
+import { isValidString, isAValidISODate } from "./validators.utils";
 
 // String formats
 export const formatSentenceString = (str: unknown | null): string => {
@@ -31,7 +31,7 @@ export const formatDate = (
     timeZone?: string,
     withTime: boolean = false,
 ): string => {
-    if (!date || !isAValidDate(String(date))) return "-";
+    if (!date || !isAValidISODate(String(date))) return "-";
 
     try {
         return new Date(String(date)).toLocaleDateString(locale ?? getLocale(), {
@@ -53,15 +53,15 @@ export const formatDate = (
 
 // Time formats
 export const secondsToTime = (seconds: number) => {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds = seconds % 60;
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
 
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 };
 
 export const timeToSeconds = (time: string) => {
-  const [hours, minutes, seconds = 0] = time.split(":").map(Number);
+    const [hours, minutes, seconds = 0] = time.split(":").map(Number);
 
-  return hours * 3600 + minutes * 60 + seconds;
+    return hours * 3600 + minutes * 60 + seconds;
 };

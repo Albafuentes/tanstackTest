@@ -14,7 +14,7 @@ export const maxScore = (totalQuestions: number): number => {
 
 export const isGoodScore = (points: number, totalQuestions: number): boolean => {
     if (totalQuestions === 0) return false;
-    return points >= (totalQuestions / 2);
+    return points >= maxScore(totalQuestions) / 2;
 }
 
 export const totalScore = (history: HistoryState[]): number => {

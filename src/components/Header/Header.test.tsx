@@ -1,6 +1,6 @@
 // Header.test.tsx
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { Header } from './Header';
 import { mockNavigate, mockUseRouterState, setRouterState } from '@/test/mocks/router.mocks';
 import { createAuthMock } from '@/test/mocks/auth.mocks';

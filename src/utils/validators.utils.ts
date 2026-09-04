@@ -10,9 +10,9 @@ export const isValidNumber = (value: unknown): boolean => {
 // date validators
 const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/;
 const isoDateTime =
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?(Z|[+-]\d{2}:\d{2})$/;
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?(Z|[+-]\d{2}:\d{2})?$/;
 
-export const isAValidDate = (date: string): boolean => {
+export const isAValidISODate = (date: string): boolean => {
     const trimmed = date.trim();
     if (!trimmed) return false;
 

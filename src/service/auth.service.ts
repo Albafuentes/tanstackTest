@@ -5,21 +5,21 @@ import chRed from "@/assets/svg/ch-red.svg";
 
 export const authService = {
     async login(email: string, password: string): Promise<{ token: string }> {
-        // Simulate an API call with a delay
-        return new Promise((resolve, reject) => {
-            if (email && password) {
-                const user: AuthModel.User = {
-                    id: crypto.randomUUID(),
-                    createdAt: new Date().toISOString(),
-                    avatarURL: Math.random() < 0.5 ? chGreen : chRed
-                };
+        
+        if (!email || !password) {
+            throw new Error("Invalid username or password");
+        }
 
-                generateToken(user).then((token) => {
-                    setTimeout(() => { resolve({ token }); return; }, 1000);
-                }).catch(reject);
-            } else {
-                reject(new Error("Invalid username or password"));
-            }
-        });
+        const user: AuthModel.User = {
+            id: crypto.randomUUID(),
+            createdAt: new Date().toISOString(),
+            avatarURL: Math.random() < 0.5 ? chGreen : chRed
+        };
+
+        const token = await generateToken(user);
+        // Simulate an API call with a delay
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        return { token };
     },
 };

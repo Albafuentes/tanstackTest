@@ -4,25 +4,20 @@ import { quizs } from "../assets/quizs/quiz";
 
 export const quizService = {
   async getQuizs(): Promise<QuizModel.Quiz[]> {
-    return new Promise((resolve) => {
-      // Simulate an API call with a delay
-      setTimeout(() => resolve(quizs), 1000);
-    });
+    // Simulate an API call with a delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return quizs;
   },
 
   async getQuizById(id: string): Promise<QuizModel.Quiz> {
-    return new Promise((resolve, reject) => {
-      // Simulate an API call with a delay
-      setTimeout(() => {
-        const quiz = quizs.find((quiz) => quiz.id === id);
+    // Simulate an API call with a delay
+    const quiz = quizs.find((quiz) => quiz.id === id);
+    if (!quiz) {
+      throw new NotFoundError(`Quiz with id ${id} not found`);
+    }
 
-        if (!quiz) {
-          reject(new NotFoundError(`Quiz with id ${id} not found`));
-          return;
-        }
+    return quiz;
 
-        resolve(quiz);
-      }, 1000);
-    });
   },
 };

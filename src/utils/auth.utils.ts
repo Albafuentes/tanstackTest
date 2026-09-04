@@ -57,19 +57,13 @@ export async function verifyToken(token: string): Promise<boolean> {
 
 export async function isAuthenticated(): Promise<boolean> {
     const token = getToken();
+    if (!token) return false;
 
-    if (!token) {
-        return false;
-    }
-
-    try {
-        await verifyToken(token);
-        return true;
-    } catch {
+    const isValid = await verifyToken(token);
+    if (!isValid) {
         sessionStorage.removeItem("token");
-
-        return false;
     }
+    return isValid;
 }
 
 export function decodeToken(): AuthModel.User | null {

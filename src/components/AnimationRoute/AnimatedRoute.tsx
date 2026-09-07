@@ -66,6 +66,7 @@ export function AnimatedRoute({
                     variants={routeVariants[variant]}
                     transition={pageTransition}
                     data-testid="animated-main"
+                    id='protected-routes-main'
                     {...motionProps}
                 >
                     {children}

@@ -11,11 +11,14 @@ function TestConsumer() {
     if (!context) return <p>No context</p>
 
     return (
-        <div>
-            <p data-testid="status">{context.isOpen ? 'open' : 'closed'}</p>
-            <button onClick={context.openSidebar}>Open</button>
-            <button onClick={context.closeSidebar}>Close</button>
-        </div>
+        <>
+            <div>
+                <p data-testid="status">{context.isOpen ? 'open' : 'closed'}</p>
+                <button onClick={context.openSidebar}>Open</button>
+                <button onClick={context.closeSidebar}>Close</button>
+            </div>
+            <main data-testid="main" id="protected-routes-main">Test</main>
+        </>
     )
 }
 
@@ -101,4 +104,59 @@ describe('SidebarProvider', () => {
 
         expect(screen.getByText('No context')).toBeInTheDocument()
     })
+
+    it("enables scroll and enables inert on main when opening", async () => {
+        render(
+            <SidebarProvider>
+                <TestConsumer />
+            </SidebarProvider>,
+        )
+        const main = screen.getByTestId("main");
+
+
+        await act(async () => {
+            await fireEvent.click(screen.getByText('Open'))
+
+        })
+
+        expect(document.body.style.overflow).toBe("hidden");
+        expect(main.hasAttribute("inert")).toBe(true);
+        expect(main.getAttribute("aria-hidden")).toBe("true");
+    });
+
+    it("blocks scroll and inerts the main when opening, and reverts when closing", async () => {
+        render(
+            <SidebarProvider>
+                <TestConsumer />
+            </SidebarProvider>,
+        )
+        const main = screen.getByTestId("main");
+
+
+        await act(async () => {
+            await fireEvent.click(screen.getByText('Open'))
+            await fireEvent.click(screen.getByText('Close'))
+        })
+
+        expect(document.body.style.overflow).toBe("");
+        expect(main.hasAttribute("inert")).toBe(false);
+        expect(main.hasAttribute("aria-hidden")).toBe(false);
+    });
+
+    it("cleans up overflow and inert if unmounted with the sidebar open when the component is removed from the DOM", async () => {
+        render(
+            <SidebarProvider>
+                <TestConsumer />
+            </SidebarProvider>,
+        )
+        const main = screen.getByTestId("main");
+
+        await act(async () => {
+            await fireEvent.click(screen.getByText('Open'))
+            await fireEvent.click(screen.getByText('Close'))
+        })
+
+        expect(document.body.style.overflow).toBe("");
+        expect(main.hasAttribute("inert")).toBe(false);
+    });
 })

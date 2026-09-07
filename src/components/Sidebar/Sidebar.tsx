@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, useContext } from "react";
+import { Children, cloneElement, isValidElement, useContext, useEffect, useRef } from "react";
 import type { FooterProps } from "./components/Footer/Footer";
 import { Footer } from "./components/Footer/Footer";
 import { SidebarContext } from "./SidebarProvider";
@@ -20,6 +20,13 @@ export const Sidebar = ({
     children,
 }: SidebarProps) => {
     const activeSidebar = useContext(SidebarContext);
+    const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (activeSidebar?.isOpen) {
+            sidebarRef.current?.focus();
+        }
+    }, [activeSidebar?.isOpen]);
 
     const childrenArray = Children.toArray(children);
 
@@ -55,6 +62,7 @@ export const Sidebar = ({
                 cloneElement(TriggerComponent, {
                     ...TriggerComponent.props,
                     onClick: handleOnOpen,
+                    
                 })}
             <AnimatePresence mode="wait" initial={false}>
                 {activeSidebar?.isOpen && (
@@ -70,12 +78,21 @@ export const Sidebar = ({
                             data-testid="sidebar-overlay"
                         />
                         <motion.div
+                            role="dialog"
+                            aria-modal="true"
                             aria-label="Sidebar"
+                            ref={sidebarRef}
+                            tabIndex={-1}
                             className={styles["sidebar-content"]}
                             initial={{ x: "-100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "-100%" }}
                             transition={{ duration: 0.3 }}
+                            onKeyDown={(e) => {
+                                if (e.key === "Escape") {
+                                    handleOnClose();
+                                }
+                            }}
                         >
                             <ul>
                                 {ItemComponent && ItemComponent.map((item) =>

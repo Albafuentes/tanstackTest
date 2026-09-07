@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
 import { Badge } from './Badge'
 import styles from './Badge.module.css'
 
@@ -75,5 +75,25 @@ describe('Badge component', () => {
         expect(badge).toHaveClass(styles.badge)
         expect(badge).toHaveClass(styles['badge--solid'])
         expect(badge).toHaveClass(styles['badge--black'])
+    })
+
+    it('renders the Badge as a button when onClick is provided', () => {
+        const mockOnClick = vi.fn();
+        render(
+            <Badge onClick={mockOnClick} data-testid="clickable-badge">
+                Clickable
+            </Badge>
+        )
+
+        act(() => {
+            fireEvent.keyDown(screen.getByTestId('clickable-badge'), { key: 'Enter', code: 'Enter' });
+        });
+
+        const badge = screen.getByTestId('clickable-badge')
+        expect(badge).toHaveAttribute('role', 'button')
+        expect(badge).toHaveAttribute('tabIndex', '0')
+
+
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
     })
 })

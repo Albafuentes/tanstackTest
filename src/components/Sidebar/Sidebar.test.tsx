@@ -1,228 +1,274 @@
 // Sidebar.test.tsx
-import { act, fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
-import { Sidebar } from './Sidebar'
-import { SidebarContext } from './SidebarProvider'
-import { Trigger } from './components/Trigger/Trigger'
-import { Item } from './components/Item/Item'
-import { Footer } from './components/Footer/Footer'
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { Sidebar } from './Sidebar';
+import { SidebarContext } from './SidebarProvider';
+import { Trigger } from './components/Trigger/Trigger';
+import { Item } from './components/Item/Item';
+import { Footer } from './components/Footer/Footer';
 
 vi.mock('./components/Trigger/Trigger', () => ({
-    Trigger: ({ children, onClick, ...props }: any) => (
-        <button data-testid="trigger" onClick={onClick} {...props}>
-            {children}
-        </button>
-    ),
-}))
+  Trigger: ({ children, onClick, ...props }: any) => (
+    <button data-testid="trigger" onClick={onClick} {...props}>
+      {children}
+    </button>
+  ),
+}));
 
 vi.mock('./components/Item/Item', () => ({
-    Item: ({ children, onClick, ...props }: any) => (
-        <li data-testid="item" onClick={onClick} {...props}>
-            {children}
-        </li>
-    ),
-}))
+  Item: ({ children, onClick, ...props }: any) => (
+    <li data-testid="item" onClick={onClick} {...props}>
+      {children}
+    </li>
+  ),
+}));
 
 vi.mock('./components/Footer/Footer', () => ({
-    Footer: ({ children, ...props }: any) => (
-        <div data-testid="footer" {...props}>
-            {children}
-        </div>
-    ),
-}))
+  Footer: ({ children, ...props }: any) => (
+    <div data-testid="footer" {...props}>
+      {children}
+    </div>
+  ),
+}));
 
 function renderWithSidebarContext(
-    ui: React.ReactElement,
-    contextValue: {
-        isOpen: boolean
-        openSidebar: () => void
-        closeSidebar: () => void
-    },
+  ui: React.ReactElement,
+  contextValue: {
+    isOpen: boolean;
+    openSidebar: () => void;
+    closeSidebar: () => void;
+  },
 ) {
-    return render(
-        <SidebarContext.Provider value={contextValue}>{ui}</SidebarContext.Provider>,
-    )
+  return render(
+    <SidebarContext.Provider value={contextValue}>
+      {ui}
+    </SidebarContext.Provider>,
+  );
 }
 
-function createContextValue(overrides: Partial<{ isOpen: boolean }> = {}) {
-    return {
-        isOpen: overrides.isOpen ?? false,
-        openSidebar: vi.fn(),
-        closeSidebar: vi.fn(),
-    }
+function createContextValue(
+  overrides: Partial<{
+    isOpen: boolean;
+    closeSidebar: () => void;
+    openSidebar: () => void;
+  }> = {},
+) {
+  return {
+    isOpen: overrides.isOpen ?? false,
+    openSidebar: overrides.openSidebar ?? vi.fn(),
+    closeSidebar: overrides.closeSidebar ?? vi.fn(),
+  };
 }
 
 describe('Sidebar component', () => {
-    it('renders the Trigger when provided as a child', () => {
-        const context = createContextValue()
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger><>Abrir</></Trigger>
-            </Sidebar>,
-            context,
-        )
+  it('renders the Trigger when provided as a child', () => {
+    const context = createContextValue();
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>
+          <>Abrir</>
+        </Trigger>
+      </Sidebar>,
+      context,
+    );
 
-        expect(screen.getByTestId('trigger')).toBeInTheDocument()
-    })
+    expect(screen.getByTestId('trigger')).toBeInTheDocument();
+  });
 
-    it('does not render sidebar content when isOpen is false', () => {
-        const context = createContextValue({ isOpen: false })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-                <Item><>Item 1</></Item>
-            </Sidebar>,
-            context,
-        )
+  it('does not render sidebar content when isOpen is false', () => {
+    const context = createContextValue({ isOpen: false });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+        <Item>
+          <>Item 1</>
+        </Item>
+      </Sidebar>,
+      context,
+    );
 
-        expect(screen.queryByLabelText('Sidebar')).not.toBeInTheDocument()
-    })
+    expect(screen.queryByLabelText('Sidebar')).not.toBeInTheDocument();
+  });
 
-    it('renders the overlay and content when isOpen is true', () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-            </Sidebar>,
-            context,
-        )
+  it('renders the overlay and content when isOpen is true', () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
 
-        expect(screen.getByLabelText('Sidebar')).toBeInTheDocument()
-    })
+    expect(screen.getByLabelText('Sidebar')).toBeInTheDocument();
+  });
 
-    it('calls openSidebar when clicking the trigger while closed', async () => {
+  it('calls openSidebar when clicking the trigger while closed', async () => {
+    const context = createContextValue({ isOpen: false });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
+    await act(async () => {
+      await fireEvent.click(screen.getByTestId('trigger'));
+    });
 
-        const context = createContextValue({ isOpen: false })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-            </Sidebar>,
-            context,
-        )
-        await act(async () => {
-            await fireEvent.click(screen.getByTestId('trigger'))
-        })
+    expect(context.openSidebar).toHaveBeenCalledTimes(1);
+    expect(context.closeSidebar).not.toHaveBeenCalled();
+  });
 
-        expect(context.openSidebar).toHaveBeenCalledTimes(1)
-        expect(context.closeSidebar).not.toHaveBeenCalled()
-    })
+  it('calls closeSidebar when clicking the trigger while open', async () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
 
-    it('calls closeSidebar when clicking the trigger while open', async () => {
+    await act(async () => {
+      await fireEvent.click(screen.getByTestId('trigger'));
+    });
 
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-            </Sidebar>,
-            context,
-        )
+    expect(context.closeSidebar).toHaveBeenCalledTimes(1);
+    expect(context.openSidebar).not.toHaveBeenCalled();
+  });
 
-        await act(async () => {
-            await fireEvent.click(screen.getByTestId('trigger'))
-        })
+  it('calls closeSidebar when clicking the overlay', async () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
 
-        expect(context.closeSidebar).toHaveBeenCalledTimes(1)
-        expect(context.openSidebar).not.toHaveBeenCalled()
-    })
+    await act(async () => {
+      await fireEvent.click(screen.getByTestId('sidebar-overlay'));
+    });
 
-    it('calls closeSidebar when clicking the overlay', async () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-            </Sidebar>,
-            context,
-        )
+    expect(context.closeSidebar).toHaveBeenCalledTimes(1);
+  });
 
-        await act(async () => {
-            await fireEvent.click(screen.getByTestId('sidebar-overlay'))
-        })
+  it('does not close the sidebar when clicking inside the content area', async () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
 
-        expect(context.closeSidebar).toHaveBeenCalledTimes(1)
-    })
+    await act(async () => {
+      await fireEvent.click(screen.getByLabelText('Sidebar'));
+    });
 
-    it('does not close the sidebar when clicking inside the content area', async () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Trigger>Abrir</Trigger>
-            </Sidebar>,
-            context,
-        )
+    expect(context.closeSidebar).not.toHaveBeenCalled();
+  });
 
-        await act(async () => {
-            await fireEvent.click(screen.getByLabelText('Sidebar'))
-        })
+  it('renders every Item when it is passed as a child', () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Item>
+          <>Item 1</>
+        </Item>
+        <Item>
+          <>Item 2</>
+        </Item>
+      </Sidebar>,
+      context,
+    );
 
-        expect(context.closeSidebar).not.toHaveBeenCalled()
-    })
+    expect(screen.getAllByTestId('item')).toHaveLength(2);
+  });
 
-    it('renders every Item when it is passed as a child', () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Item><>Item 1</></Item>
-                <Item><>Item 2</></Item>
-            </Sidebar>,
-            context,
-        )
+  it("closes the sidebar when an item is clicked, in addition to the item's own onClick", async () => {
+    const context = createContextValue({ isOpen: true });
+    const itemOnClick = vi.fn();
 
-        expect(screen.getAllByTestId('item')).toHaveLength(2)
-    })
+    renderWithSidebarContext(
+      <Sidebar>
+        <Item onClick={itemOnClick}>
+          <>Item 1</>
+        </Item>
+      </Sidebar>,
+      context,
+    );
 
-    it('closes the sidebar when an item is clicked, in addition to the item\'s own onClick', async () => {
+    await act(async () => {
+      await fireEvent.click(screen.getByTestId('item'));
+    });
 
-        const context = createContextValue({ isOpen: true })
-        const itemOnClick = vi.fn()
+    expect(itemOnClick).toHaveBeenCalledTimes(1);
+    expect(context.closeSidebar).toHaveBeenCalledTimes(1);
+  });
 
-        renderWithSidebarContext(
-            <Sidebar>
-                <Item onClick={itemOnClick}><>Item 1</></Item>
-            </Sidebar>,
-            context,
-        )
+  it('renders the Footer when provided as a child', () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Footer>
+          <>Pie de página</>
+        </Footer>
+      </Sidebar>,
+      context,
+    );
 
-        await act(async () => {
-            await fireEvent.click(screen.getByTestId('item'))
-        })
+    expect(screen.getByTestId('footer')).toBeInTheDocument();
+  });
 
-        expect(itemOnClick).toHaveBeenCalledTimes(1)
-        expect(context.closeSidebar).toHaveBeenCalledTimes(1)
-    })
+  it('does not render Footer when it is not provided as a child', () => {
+    const context = createContextValue({ isOpen: true });
+    renderWithSidebarContext(
+      <Sidebar>
+        <Item>
+          <>Item 1</>
+        </Item>
+      </Sidebar>,
+      context,
+    );
 
-    it('renders the Footer when provided as a child', () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Footer><>Pie de página</></Footer>
-            </Sidebar>,
-            context,
-        )
+    expect(screen.queryByTestId('footer')).not.toBeInTheDocument();
+  });
 
-        expect(screen.getByTestId('footer')).toBeInTheDocument()
-    })
+  it('does not crash when used without a SidebarProvider (context is null)', () => {
+    expect(() =>
+      render(
+        <Sidebar>
+          <Trigger>Abrir</Trigger>
+        </Sidebar>,
+      ),
+    ).not.toThrow();
 
-    it('does not render Footer when it is not provided as a child', () => {
-        const context = createContextValue({ isOpen: true })
-        renderWithSidebarContext(
-            <Sidebar>
-                <Item><>Item 1</></Item>
-            </Sidebar>,
-            context,
-        )
+    expect(screen.queryByLabelText('Sidebar')).not.toBeInTheDocument();
+  });
 
-        expect(screen.queryByTestId('footer')).not.toBeInTheDocument()
-    })
+  it('Sidebar has an accessible dialog announcement and closes with Escape when open', async () => {
+    const handleOnClose = vi.fn();
+    const context = createContextValue({
+      isOpen: true,
+      closeSidebar: handleOnClose,
+    });
 
-    it('does not crash when used without a SidebarProvider (context is null)', () => {
-        expect(() =>
-            render(
-                <Sidebar>
-                    <Trigger>Abrir</Trigger>
-                </Sidebar>,
-            ),
-        ).not.toThrow()
+    renderWithSidebarContext(
+      <Sidebar>
+        <Trigger>Abrir</Trigger>
+      </Sidebar>,
+      context,
+    );
 
-        expect(screen.queryByLabelText('Sidebar')).not.toBeInTheDocument()
-    })
-})
+    const dialog = screen.getByRole('dialog', { name: /sidebar/i });
+    expect(dialog).toHaveFocus();
+
+    await act(async () => {
+      await fireEvent.keyDown(
+        screen.getByRole('dialog', { name: /sidebar/i }),
+        { key: 'Escape' },
+      );
+    });
+
+    expect(handleOnClose).toHaveBeenCalledTimes(1);
+  });
+});

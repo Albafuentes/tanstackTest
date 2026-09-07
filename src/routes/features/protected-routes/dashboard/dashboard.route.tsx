@@ -6,6 +6,11 @@ import { api } from '@/service/api.service';
 const DashboardComponent = lazy(() => import('./dashboard.component'));
 
 export const Route = createRoute({
+  head: () => ({
+    meta: [{
+      title: `Dashboard`,
+    }]
+  }),
   getParentRoute: () => ProtectedRoutesLayoutRoute,
   path: '/',
   component: DashboardComponent,

@@ -9,6 +9,11 @@ import { lazy } from 'react';
 const QuizComponent = lazy(() => import('./quiz.component'));
 
 export const Route = createRoute({
+    head: (ctx) => ({
+        meta: [{
+            title: `Quiz-${ctx.params.quizId}`,
+        }]
+    }),
     getParentRoute: () => QuizLayoutRoute,
     path: '/',
     component: QuizComponent,

@@ -11,6 +11,11 @@ import { translate } from '@/utils/locales.utils';
 import { es } from './locales/es';
 
 export const Route = createRoute({
+      head: () => ({
+    meta: [{
+      title: `Settings`,
+    }]
+  }),
     getParentRoute: () => ProtectedRoutesLayoutRoute,
     path: '/settings',
     component: Settings,

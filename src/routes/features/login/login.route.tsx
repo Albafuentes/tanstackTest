@@ -12,6 +12,11 @@ import { translate } from "@/utils/locales.utils";
 import { es } from "./locales/es";
 
 export const Route = createRoute({
+    head: () => ({
+        meta: [{
+            title: "Login",
+        }]
+    }),
     getParentRoute: () => RootRoute,
     path: "/",
     component: Login,

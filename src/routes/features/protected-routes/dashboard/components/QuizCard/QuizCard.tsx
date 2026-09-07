@@ -11,7 +11,7 @@ import { es } from "../../locales/es";
 export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: boolean }) => {
     return (
         <div className={styles["quiz-card"]} data-testid={`quiz-card-${quiz.id}`}>
-            <Badge color="green" className={styles["quiz-card__badge"]}><IconStar size={14} />{quiz.extraPoints}</Badge>
+            <Badge color="green" className={styles["quiz-card__badge"]} aria-label="extra points"><IconStar size={14} aria-hidden="true" />{quiz.extraPoints}</Badge>
 
             <div className={styles["quiz-card__text"]}>
                 <h6>{formatSentenceString(quiz.name)}</h6>

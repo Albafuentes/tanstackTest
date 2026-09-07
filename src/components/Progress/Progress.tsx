@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import styles from "./Progress.module.css";
 import { isValidNumber } from "@/utils/validators.utils";
+import { useId } from "react";
 
 interface ProgressProps {
     helpText: string;
@@ -16,10 +17,12 @@ export const Progress = ({
 }: ProgressProps) => {
     const percentage = (widthValue / maxValue) * 100;
     const value = isValidNumber(percentage)? percentage : 0;
+
+    const helpTextId = useId();
     
     return (
         <div className={styles["progress"]}>
-            <p className={styles["progress__help-text"]}>{helpText}</p>
+            <p id={helpTextId} className={styles["progress__help-text"]}>{helpText}</p>
             <div className={styles["progress__thumb"]}>
                 <motion.div
                     animate={{
@@ -38,6 +41,7 @@ export const Progress = ({
                 <progress
                     value={value ?? 0}
                     max={100}
+                    aria-labelledby={helpTextId}
                 />
             </div>
         </div >

@@ -50,7 +50,7 @@ export const Header = () => {
             </div>
           </Sidebar.Item>
           <Sidebar.Item withSeparator>
-            <Link to="/dashboard/settings"><IconSettings size={20} />{translate(es.linkText)}</Link>
+            <Link to="/dashboard/settings"><IconSettings size={20} aria-hidden="true" />{translate(es.linkText)}</Link>
           </Sidebar.Item>
 
           <Sidebar.Footer>
@@ -58,8 +58,8 @@ export const Header = () => {
           </Sidebar.Footer>
         </Sidebar>
       )}
-      <div className={styles["score-pill"]}>
-        <IconStar size={18} />
+      <div className={styles["score-pill"]} aria-label="total score">
+        <IconStar size={18}  aria-hidden="true" />
         {totalScore(history || [])} {ABBREVIATION_PT}
       </div>
     </header>

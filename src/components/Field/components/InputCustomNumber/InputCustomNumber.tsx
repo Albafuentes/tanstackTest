@@ -25,7 +25,7 @@ export const InputCustomNumber = (props: React.InputHTMLAttributes<HTMLInputElem
             aria-label="Decrease value"
             variant="green"
         >
-            <IconMinus size={22} />
+            <IconMinus size={22} aria-hidden="true" />
         </Button>
         <input
             type="time"
@@ -43,7 +43,7 @@ export const InputCustomNumber = (props: React.InputHTMLAttributes<HTMLInputElem
             aria-label="Increase value"
             variant="green"
         >
-            <IconPlus size={26} />
+            <IconPlus size={26} aria-hidden="true" />
         </Button>
     </div>)
 }

@@ -65,13 +65,16 @@ export const Field = (props: FieldProps) => {
                     id={name}
                     name={name}
                     aria-invalid={hasErrors ? 'true' : undefined}
-                    aria-describedby={description ? `${name}-description` : undefined}
+                    aria-describedby={[
+                        description ? `${name}-description` : null,
+                        hasErrors ? `${name}-error` : null,
+                    ].filter(Boolean).join(' ') || undefined}
                     {...inputProps}
                 />
 
                 {hasErrors &&
                     errors.map((error, index) => (
-                        <small key={`input-error-${name}-${index}`} id={`${name}-error`}>
+                        <small key={`input-error-${name}-${index}`} id={`${name}-error-${index}`}>
                             {error}
                         </small>
                     ))}

@@ -11,6 +11,7 @@ import {
     type ItemProps,
 } from "./components/Item/Item";
 import { AnimatePresence, motion } from "motion/react";
+import { isPrefersReducedMotion } from "@/utils/validators.utils";
 
 export interface SidebarProps {
     children: React.ReactNode;
@@ -62,7 +63,6 @@ export const Sidebar = ({
                 cloneElement(TriggerComponent, {
                     ...TriggerComponent.props,
                     onClick: handleOnOpen,
-                    
                 })}
             <AnimatePresence mode="wait" initial={false}>
                 {activeSidebar?.isOpen && (
@@ -74,7 +74,7 @@ export const Sidebar = ({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0, transition: { delay: 0.2 } }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: isPrefersReducedMotion() ? 0 : 0.3 }}
                             data-testid="sidebar-overlay"
                         />
                         <motion.div
@@ -87,7 +87,7 @@ export const Sidebar = ({
                             initial={{ x: "-100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "-100%" }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: isPrefersReducedMotion() ? 0 : 0.3 }}
                             onKeyDown={(e) => {
                                 if (e.key === "Escape") {
                                     handleOnClose();

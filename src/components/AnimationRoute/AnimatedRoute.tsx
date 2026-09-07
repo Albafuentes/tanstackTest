@@ -1,5 +1,6 @@
 
 import { AnimatePresence, motion, type MotionProps, type Variants } from 'motion/react'
+import { isPrefersReducedMotion } from '@/utils/validators.utils'
 import { useRouterState } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 
@@ -35,7 +36,7 @@ const routeVariants: Record<RouteVariant, Variants> = {
 const pageTransition: MotionProps['transition'] = {
     type: 'tween',
     ease: 'anticipate',
-    duration: 0.3,
+    duration: isPrefersReducedMotion() ? 0 : 0.3,
 }
 
 export function AnimatedRoute({

@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import styles from "./Progress.module.css";
-import { isValidNumber } from "@/utils/validators.utils";
+import { isValidNumber, isPrefersReducedMotion } from "@/utils/validators.utils";
 import { useId } from "react";
 
 interface ProgressProps {
@@ -29,7 +29,7 @@ export const Progress = ({
                         width: `${value}%`,
                     }}
                     transition={{
-                        duration: 0.6,
+                        duration: isPrefersReducedMotion() ? 0 : 0.6,
                         ease: "easeOut",
                     }}
                     style={{

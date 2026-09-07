@@ -24,6 +24,7 @@ export const QuizCard = ({ quiz, disabled }: { quiz: QuizModel.Quiz, disabled?: 
                 activeOptions={{ exact: true }}
                 className={`${buttonStyles["button"]} ${buttonStyles["button--red"]}`}
                 aria-disabled={disabled}
+                disabled={disabled}
             >
                 {translate(es.quizCard.linkText)}
             </Link>

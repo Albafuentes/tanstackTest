@@ -58,6 +58,8 @@ export const TagAnswer = ({
     const isTagSelected = selectedOption?.answer === data.index;
     const status = getStatus(selectedOption, isTagSelected, data.explanation || "");
 
+    const listStyleType = String.fromCharCode(65 + data.index); 
+
     return (
         <label className={`${styles["tag-answer"]} ${status.style}`} data-testid={`tag-answer-${data.index}`}>
             <input
@@ -65,9 +67,10 @@ export const TagAnswer = ({
                 onChange={() => handleSelectOption?.(data.index)}
                 checked={isTagSelected}
                 aria-checked={isTagSelected}
+                name={`${listStyleType}.${data.answer}`}
             />
             <p>
-                <strong>{String.fromCharCode(65 + data.index)}.</strong>
+                <strong>{listStyleType}.</strong>
                 &nbsp;{data.answer}
             </p>
             {status.component}

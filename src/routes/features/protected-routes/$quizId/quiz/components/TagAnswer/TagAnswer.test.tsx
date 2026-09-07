@@ -90,4 +90,16 @@ describe('TagAnswer component', () => {
         expect(screen.queryByText('Good!')).not.toBeInTheDocument()
         expect(screen.queryByText('Oops!')).not.toBeInTheDocument()
     })
+
+    it("The input is focusabled when it is hidden visually", async () => {
+        const selectedOption: SelectedOption = { answer: 0, resolved: true, correct: true }
+        render(<TagAnswer selectedOption={selectedOption} data={baseData} />)
+
+        const radio = screen.getByRole("radio");
+
+        radio.focus();
+
+        expect(document.activeElement).toBe(radio);
+        expect(radio).toHaveFocus();
+    });
 })

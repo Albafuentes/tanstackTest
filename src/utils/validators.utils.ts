@@ -23,3 +23,7 @@ export const isAValidISODate = (date: string): boolean => {
     const parsed = new Date(trimmed);
     return !Number.isNaN(parsed.getTime());
 };
+
+export const isPrefersReducedMotion = (): boolean => {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+};

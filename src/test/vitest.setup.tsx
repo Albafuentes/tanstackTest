@@ -15,6 +15,20 @@ Object.defineProperty(globalThis, 'Uint8Array', {
     configurable: true,
 });
 
+Object.defineProperty(window, "matchMedia", {
+    writable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+        matches: false, // valor por defecto: sin preferencia de reduced-motion
+        media: query,
+        onchange: null,
+        addListener: vi.fn(), // deprecated, pero algunas libs aún lo usan
+        removeListener: vi.fn(), // deprecated
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+    })),
+});
+
 vi.mock('motion/react', () => ({
     AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
     motion: new Proxy(

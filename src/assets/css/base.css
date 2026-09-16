@@ -105,6 +105,54 @@
             list-style: none;
         }
     }
+
+    .anchor-tooltip {
+        anchor-name: --info;
+        padding: 0;
+         color: var(--black-50);
+    }
+
+    .tooltip {
+        position-anchor: --info;
+        position: fixed;
+        position-area: top;
+
+        max-width: 22rem;
+        padding: var(--size-8);
+        margin-bottom: var(--size-12);
+
+        border: 2px solid var(--black-10);
+        background-color: var(--black-5);
+        border-radius: var(--radius-sm);
+
+        font-size: var(---font-size-sm);
+        font-weight: 400;
+        color: var(--black-50);
+
+        overflow: visible;
+
+
+        &::after {
+            content: "";
+            position: absolute;
+
+            bottom: -8px;
+            left: 50%;
+
+            background: red;
+            color: white;
+            padding: 5px;
+
+            width: 2px;
+            height: 2px;
+            transform: translateX(-50%) rotate(45deg);
+
+            background-color: var(--black-5);
+            border-bottom: 2px solid var(--black-10);
+            border-right: 2px solid var(--black-10);
+            border-radius: 2px;
+        }
+    }
 }
 
 @media (min-width: 1024px) {

@@ -145,10 +145,10 @@ describe('Header component', () => {
 
         it('renders the user name and formatted session date when it is rendered', () => {
             setRouterState({ pathname: '/dashboard', status: 'idle' })
-            setDecodedUser({ createdAt: '2026-01-01T00:00:00.000Z' })
+            setDecodedUser({ createdAt: '2026-01-01T00:00:00.000Z', sessionName: 'Test Session' })
             render(<Header />)
 
-            expect(screen.getByText(es.userNameItemSidebar)).toBeInTheDocument()
+            expect(screen.getByText('Test Session')).toBeInTheDocument()
             expect(screen.getByText(es.sessionItemSidebar)).toBeInTheDocument()
         })
     })

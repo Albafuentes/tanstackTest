@@ -47,24 +47,11 @@ describe("Login page", () => {
         expect(api.auth.login).not.toHaveBeenCalled();
     });
 
-    it("should show an error if the email is not in a valid format", async () => {
-        render(<Login />);
-        await act(async () => {
-            fireEvent.change(screen.getByLabelText(es.emailLabel), { target: { value: "no-es-un-email" } });
-            fireEvent.change(screen.getByLabelText(es.passwordLabel), { target: { value: "password123" } });
-            fireEvent.click(screen.getByRole("button", { name: es.submitButton }));
-        });
-
-        expect(await screen.findByText(es.mailVerificationNotValidEmailError)).toBeInTheDocument();
-        expect(api.auth.login).not.toHaveBeenCalled();
-    });
-
     it("should save the token and navigate to the dashboard if the login is successful", async () => {
         vi.mocked(api.auth.login).mockResolvedValue({ token: "fake-token" });
         render(<Login />);
         await act(async () => {
-            fireEvent.change(screen.getByLabelText(es.emailLabel), { target: { value: "user@test.com" } });
-            fireEvent.change(screen.getByLabelText(es.passwordLabel), { target: { value: "password123" } });
+            fireEvent.change(screen.getByLabelText(es.sessionNameLabel), { target: { value: "Test Session" } });
             fireEvent.click(screen.getByRole("button", { name: es.submitButton }));
         });
 
@@ -78,8 +65,7 @@ describe("Login page", () => {
         vi.mocked(api.auth.login).mockResolvedValue("" as any);
         render(<Login />);
         await act(async () => {
-            fireEvent.change(screen.getByLabelText(es.emailLabel), { target: { value: "user@test.com" } });
-            fireEvent.change(screen.getByLabelText(es.passwordLabel), { target: { value: "password123" } });
+            fireEvent.change(screen.getByLabelText(es.sessionNameLabel), { target: { value: "Test Session" } });
             fireEvent.click(screen.getByRole("button", { name: es.submitButton }));
         });
 

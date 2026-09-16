@@ -4,14 +4,15 @@ import chGreen from "@/assets/svg/ch-green.svg";
 import chRed from "@/assets/svg/ch-red.svg";
 
 export const authService = {
-    async login(email: string, password: string): Promise<{ token: string }> {
+    async login(sessionName: string): Promise<{ token: string }> {
         
-        if (!email || !password) {
-            throw new Error("Invalid username or password");
+        if (!sessionName) {
+            throw new Error("Invalid session name");
         }
 
         const user: AuthModel.User = {
             id: crypto.randomUUID(),
+            sessionName: sessionName,
             createdAt: new Date().toISOString(),
             avatarURL: Math.random() < 0.5 ? chGreen : chRed
         };

@@ -7,14 +7,18 @@
 
     form {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(calc(22rem * 2), 1fr);
+        grid-template-rows: 1fr min-content;
         gap: var(--size-42) var(--size-16);
         align-items: stretch;
         justify-content: stretch;
 
+        fieldset > * {
+            width: 100%;
+        }
 
         button {
-            grid-column: 2 / -1;
+            grid-row: 2 / -1;
             justify-self: end;
         }
     }

@@ -12,10 +12,3 @@ export function stringVerification(value: unknown): string[] {
 
   return errors;
 }
-
-export function mailVerification(value: unknown): string[] {
-  if (typeof value === "string" && !value.includes("@")) {
-    return [es.mailVerificationNotValidEmailError];
-  }
-  return [];
-}

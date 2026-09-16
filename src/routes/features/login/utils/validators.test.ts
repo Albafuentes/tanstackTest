@@ -1,6 +1,6 @@
 // validators.test.ts
 import { describe, it, expect } from "vitest";
-import { stringVerification, mailVerification } from "./validators";
+import { stringVerification } from "./validators";
 import { es } from "../locales/es";
 
 describe("stringVerification", () => {
@@ -17,20 +17,5 @@ describe("stringVerification", () => {
 
     it("no devuelve errores si recibe un string válido", () => {
         expect(stringVerification("hola")).toEqual([]);
-    });
-});
-
-describe("mailVerification", () => {
-    it("return error when the string does not contain @", () => {
-        expect(mailVerification("email-invalido")).toContain(es.mailVerificationNotValidEmailError);
-    });
-
-    it.each([
-        ["user@test.com"],
-        [undefined], //delegates that validation to stringVerification
-        [123], // delegates that validation to stringVerification
-    ])("return the correct error for the email %p", (input) => {
-        const result = mailVerification(input);
-        expect(result).toEqual([]);
     });
 });

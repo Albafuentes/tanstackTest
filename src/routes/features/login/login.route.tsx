@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { Button, Field } from "@/components";
 import { Route as RootRoute } from "../../__root";
 import hero from "@/assets/svg/hero.svg";
-import { mailVerification, stringVerification } from "./utils/validators";
+import { stringVerification } from "./utils/validators";
 import { useFormStatus } from "react-dom";
 import type { LoginState } from "./types/state.types";
 import { api } from "@/service/api.service";
@@ -37,25 +37,23 @@ export function Login() {
     const navigate = useNavigate();
 
     const loginAction = async (_previousState: LoginState, formData: FormData): Promise<LoginState> => {
-        const email = formData.get("email");
-        const password = formData.get("password");
+        const sessionName = formData.get("sessionName");
+
 
         const errors = {
-            email: [...stringVerification(email), ...mailVerification(email)],
-            password: stringVerification(password),
+            sessionName: [...stringVerification(sessionName)],
         };
 
-        if (errors.email.length > 0 || errors.password.length > 0) {
+        if (errors.sessionName.length > 0) {
             return { errors };
         }
 
-        const response = await api.auth.login(email as string, password as string);
+        const response = await api.auth.login(sessionName as string);
 
         if (!response || !response.token) {
             return {
                 errors: {
-                    email: [translate(es.loginActionError)],
-                    password: [translate(es.loginActionError)],
+                    sessionName: [translate(es.loginActionError)],
                 },
             };
         }
@@ -79,17 +77,11 @@ export function Login() {
             <form action={formAction}>
                 <Field
                     type="text"
-                    label={translate(es.emailLabel)}
-                    name={"email"}
-                    placeholder={translate(es.emailPlaceholder)}
-                    errors={state.errors?.email}
-                />
-                <Field
-                    type="password"
-                    label={translate(es.passwordLabel)}
-                    name={"password"}
-                    placeholder={translate(es.passwordPlaceholder)}
-                    errors={state.errors?.password}
+                    label={translate(es.sessionNameLabel)}
+                    name={"sessionName"}
+                    placeholder={translate(es.sessionNamePlaceholder)}
+                    errors={state.errors?.sessionName}
+                    tooltip={translate(es.explanation)}
                 />
                 <SubmitButton />
             </form>

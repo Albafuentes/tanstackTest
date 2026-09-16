@@ -44,9 +44,8 @@ export const Header = () => {
           <Sidebar.Item readonly>
             <div className={styles["sidebar-item__header"]}>
               <Logo avatarUrl={user?.avatarURL || chGreen} />
-              <span>{translate(es.userNameItemSidebar)}</span>
+              <span>{user?.sessionName}</span>
               <small>{translate(es.sessionItemSidebar, { date: formatDate(user?.createdAt) })}</small>
-
             </div>
           </Sidebar.Item>
           <Sidebar.Item withSeparator>

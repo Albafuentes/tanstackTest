@@ -22,6 +22,9 @@
 
         label {
             font-weight: var(---font-weight-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--size-8);
         }
 
         small {

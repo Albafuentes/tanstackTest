@@ -51,7 +51,7 @@ describe("Login page", () => {
         vi.mocked(api.auth.login).mockResolvedValue({ token: "fake-token" });
         render(<Login />);
         await act(async () => {
-            fireEvent.change(screen.getByLabelText(es.sessionNameLabel), { target: { value: "Test Session" } });
+            fireEvent.change(screen.getByRole('textbox', { name: es.sessionNameLabel }), { target: { value: "Test Session" } });
             fireEvent.click(screen.getByRole("button", { name: es.submitButton }));
         });
 
@@ -65,7 +65,7 @@ describe("Login page", () => {
         vi.mocked(api.auth.login).mockResolvedValue("" as any);
         render(<Login />);
         await act(async () => {
-            fireEvent.change(screen.getByLabelText(es.sessionNameLabel), { target: { value: "Test Session" } });
+            fireEvent.change(screen.getByRole('textbox', { name: es.sessionNameLabel }), { target: { value: "Test Session" } });
             fireEvent.click(screen.getByRole("button", { name: es.submitButton }));
         });
 

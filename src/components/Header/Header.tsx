@@ -14,8 +14,6 @@ import { clearToken, decodeToken } from "@/utils/auth.utils";
 import { translate } from "@/utils/locales.utils";
 
 const Logo = ({ avatarUrl }: { avatarUrl: string }) => {
-
-
   return <img src={avatarUrl} loading="lazy" alt="User" width={48} height={48} />;
 };
 

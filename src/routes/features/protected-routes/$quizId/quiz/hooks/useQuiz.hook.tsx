@@ -55,6 +55,7 @@ export const useQuiz = (
     nextQuestion: () => void;
     finishedQuiz: () => void;
     timerStatus: TIMER_STATUS;
+    isPending: boolean;
     currentQuestion: QuizModel.Question | null;
     questionCount: QuestionCount;
     selectedOption: SelectedOption | null;
@@ -68,6 +69,8 @@ export const useQuiz = (
     const [selectedOption, setSelectedOption] = useState<SelectedOption | null>(
         null,
     );
+
+    const [isPending, setIsPending] = useState(false);
 
     const [quizStatus, setQuizStatus] = useState<QuizStatus>({
         timerStatus: TIMER_STATUS.STARTED,
@@ -109,6 +112,7 @@ export const useQuiz = (
 
     const resolveAnswer = (): void => {
         if (!currentQuestion) return;
+        setIsPending(true);
 
         const isCorrect = currentQuestion.answer === selectedOption?.answer;
         setSelectedOption({
@@ -131,6 +135,7 @@ export const useQuiz = (
                 wrongQuestions: prev.wrongQuestions + 1,
             }));
         }
+        setIsPending(false);
 
     };
 
@@ -147,9 +152,11 @@ export const useQuiz = (
             skippedAnswers: prev.skippedAnswers + 1,
         }));
         nextQuestion();
+
     };
 
     const nextQuestion = () => {
+        setIsPending(true);
         const nextQuestions = pendingQuestions.filter(
             (question) => question !== currentQuestion,
         );
@@ -158,9 +165,11 @@ export const useQuiz = (
         generateCurrentQuestion(nextQuestions);
         setSelectedOption(null);
         setQuizStatus((prev) => ({ ...prev, timerStatus: TIMER_STATUS.STARTED }));
+        setIsPending(false);
     };
 
     const finishedQuiz = () => {
+        setIsPending(true);
         updateHistory(
             quizInfo.id,
             quizInfo.name,
@@ -178,6 +187,7 @@ export const useQuiz = (
         setPendingQuestions([]);
         setSelectedOption(null);
         setCurrentQuestion(null);
+        setIsPending(false);
     };
 
     const questionCount: QuestionCount = {
@@ -193,6 +203,7 @@ export const useQuiz = (
         nextQuestion,
         finishedQuiz,
         timerStatus: quizStatus.timerStatus,
+        isPending,
         currentQuestion,
         questionCount,
         selectedOption,

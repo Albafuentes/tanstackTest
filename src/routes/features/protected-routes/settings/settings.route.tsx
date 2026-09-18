@@ -41,7 +41,7 @@ export const Route = createRoute({
 const SubmitButton = () => {
     const { pending } = useFormStatus();
     return (
-        <Button type="submit" disabled={pending}>
+        <Button type="submit" isLoading={pending} disabled={pending}>
             {translate(es.submitButton)}
         </Button>
     );

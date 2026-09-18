@@ -27,6 +27,7 @@ function Quiz() {
         nextQuestion,
         finishedQuiz,
         timerStatus,
+        isPending,
         currentQuestion,
         questionCount,
         selectedOption,
@@ -54,18 +55,20 @@ function Quiz() {
                         activeOptions={{ exact: true }}
                         className={`${buttonStyles['button']} ${buttonStyles['button--red']}`}
                         onClick={handleFinishQuiz}
+                        aria-disabled={isPending}
                     >
                         {translate(es.linkText)}
                     </Link>
                 );
             }
 
-            return <Button onClick={handleNextQuestion}>{translate(es.nextButton)}</Button>;
+            return <Button onClick={handleNextQuestion} isLoading={isPending}>{translate(es.nextButton)}</Button>;
         } else {
             return (
                 <Button
                     variant="red"
                     onClick={resolveAnswer}
+                    isLoading={isPending}
                     disabled={!selectedOption}
                     aria-disabled={!selectedOption}
                 >

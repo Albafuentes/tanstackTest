@@ -1,0 +1,56 @@
+.skeleton {
+
+    width: 100%;
+    background: linear-gradient(90deg,
+            rgb(from var(--black-70) r g b / 6%) 25%,
+            rgb(from var(--black-40) r g b / 6%) 50%,
+            rgb(from var(--black-70) r g b / 6%) 75%);
+    background-size: 200% 100%;
+
+    &:not(&.skeleton--button, &.skeleton--badge) {
+        border-radius: var(--radius-sm);
+    }
+
+    &.skeleton--h1 {
+        height: 89px;
+    }
+
+    &.skeleton--h2 {
+        height: 67px;
+    }
+
+    &.skeleton--h3 {
+        height: 50px;
+    }
+
+    &.skeleton--h4 {
+        height: 37px;
+    }
+
+    &.skeleton--h5 {
+        height: 28px;
+    }
+
+    &.skeleton--h6 {
+        height: 21px;
+    }
+
+    &.skeleton--p {
+        height: var(--font-size-md);
+    }
+
+    &.skeleton--badge {
+        height: 21px;
+        border-radius: var(--radius-full);
+    }
+
+    &.skeleton--button {
+        border-radius: var(--radius-full);
+        height: 50px;
+    }
+
+    &.skeleton--tag {
+        height: 50px;
+    }
+
+}

@@ -1,5 +1,4 @@
 .skeleton {
-
     width: 100%;
     background: linear-gradient(90deg,
             rgb(from var(--black-70) r g b / 6%) 25%,
@@ -12,45 +11,45 @@
     }
 
     &.skeleton--h1 {
-        height: 89px;
+        height: 5.563rem;
     }
 
     &.skeleton--h2 {
-        height: 67px;
+        height: 4.188rem;
     }
 
     &.skeleton--h3 {
-        height: 50px;
+        height: 3.125rem;
     }
 
     &.skeleton--h4 {
-        height: 37px;
+        height: 2.313rem;
     }
 
     &.skeleton--h5 {
-        height: 28px;
+        height: 1.75rem;
     }
 
     &.skeleton--h6 {
-        height: 21px;
+        height: 1.313rem;
     }
 
     &.skeleton--p {
-        height: 16px;
+        height: 1rem;
     }
 
     &.skeleton--badge {
-        height: 21px;
+        height: 1.313rem;
         border-radius: var(--radius-full);
     }
 
     &.skeleton--button {
         border-radius: var(--radius-full);
-        height: 50px;
+        height: 3.125rem;
     }
 
     &.skeleton--tag {
-        height: 50px;
+        height: 3.125rem;
     }
 
 }

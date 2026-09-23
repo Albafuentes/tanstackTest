@@ -14,7 +14,7 @@ export const Route = createRoute({
   }),
   getParentRoute: () => ProtectedRoutesLayoutRoute,
   path: '/',
-  component:() => <PendingComponent />,
+  component: DashboardComponent,
   loader: async () => {
     try {
       const quizsData = await api.quiz.getQuizs();

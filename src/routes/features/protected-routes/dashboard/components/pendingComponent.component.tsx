@@ -8,8 +8,6 @@ function PendingComponent() {
     return (
         <section className={styles['dashboard']}>
             <Skeleton tag={'h3'} />
-
-
             <article className={styles['dashboard-quizs']}>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <div className={quizCardStyles["quiz-card"]} key={`quiz-card-skeleton-${index}`}>

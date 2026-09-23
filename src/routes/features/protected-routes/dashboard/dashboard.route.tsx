@@ -1,9 +1,10 @@
 import { createRoute } from '@tanstack/react-router';
 import { lazy } from 'react';
+import PendingComponent from './components/pendingComponent.component';
 import { Route as ProtectedRoutesLayoutRoute } from '../layout';
 import { api } from '@/service/api.service';
 
-const DashboardComponent = lazy(() => import('./dashboard.component'));
+const DashboardComponent = lazy(() => import('./components/dashboard.component'));
 
 export const Route = createRoute({
   head: () => ({
@@ -13,7 +14,7 @@ export const Route = createRoute({
   }),
   getParentRoute: () => ProtectedRoutesLayoutRoute,
   path: '/',
-  component: DashboardComponent,
+  component:() => <PendingComponent />,
   loader: async () => {
     try {
       const quizsData = await api.quiz.getQuizs();
@@ -35,7 +36,7 @@ export const Route = createRoute({
   notFoundComponent: () => <>not found...</>,
 
   // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-  pendingComponent: () => <>Loading...</>,
+  pendingComponent: () => <PendingComponent />,
   // pendingMs: 1000, // 1 second
 });
 

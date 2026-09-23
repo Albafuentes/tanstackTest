@@ -36,7 +36,7 @@
     }
 
     &.skeleton--p {
-        height: var(--font-size-md);
+        height: 16px;
     }
 
     &.skeleton--badge {

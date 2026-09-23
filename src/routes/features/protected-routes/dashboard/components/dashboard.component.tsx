@@ -2,13 +2,13 @@
 import { Badge } from '@/components';
 import useSession from '@/zunstand/store/session.store';
 import type { QuizModel } from '@/types/quiz.types';
-import { QuizCard } from './components/QuizCard/QuizCard';
-import styles from './dashboard.module.css';
+import { QuizCard } from './QuizCard/QuizCard';
+import styles from '../dashboard.module.css';
 import { ABBREVIATION_PT } from '@/config/constants';
 import { formatSentenceString } from '@/utils/formats.utils';
-import { Route } from './dashboard.route';
+import { Route } from '../dashboard.route';
 import { translate } from '@/utils/locales.utils';
-import { es } from './locales/es';
+import { es } from '../locales/es';
 
 function Dashboard() {
     const history = useSession((state) => state.history);

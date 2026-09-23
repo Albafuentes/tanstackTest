@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import Dashboard from "./dashboard.component";
 import { mockUseSession, setSessionState } from "@/test/mocks/session.mocks";
-import { Route } from "./dashboard.route";
+import { Route } from "../dashboard.route";
 import { mockNavigate, mockUseRouterState } from "@/test/mocks/router.mocks";
-import {es} from "./locales/es";
+import { es } from "../locales/es";
 
 vi.mock("./dashboard.route", () => ({
     Route: {
@@ -60,7 +60,7 @@ describe("Dashboard page", () => {
         render(<Dashboard />);
 
         expect(screen.getAllByTestId(/quiz-card-1/i)).toHaveLength(1);
-        expect(screen.getAllByTestId(/quiz-card-2/i)).toHaveLength(1); 
+        expect(screen.getAllByTestId(/quiz-card-2/i)).toHaveLength(1);
     });
 
     it("shows the empty list message when there is no history", () => {

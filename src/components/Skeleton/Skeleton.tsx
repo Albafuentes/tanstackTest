@@ -18,7 +18,7 @@ interface SkeletonProps extends HTMLMotionProps<'div'> {
     maxWidth?: string;
 }
 
-export const Skeleton = ({ tag, width, height, maxWidth, ...props }: SkeletonProps) => {
+export const Skeleton = ({ tag, width, height, maxWidth, style, className, ...props }: SkeletonProps) => {
     return (
         <motion.div
             animate={{
@@ -29,8 +29,8 @@ export const Skeleton = ({ tag, width, height, maxWidth, ...props }: SkeletonPro
                 repeat: Infinity,
                 ease: "linear",
             }}
-            className={`${styles['skeleton']} ${styles[`skeleton--${tag}`]}`}
-            style={{ width, height, maxWidth }}
+            className={`${styles['skeleton']} ${styles[`skeleton--${tag}`]} ${className ?? ''}`}
+            style={{ width, height, maxWidth, ...style }}
             {...props}
         />
     );

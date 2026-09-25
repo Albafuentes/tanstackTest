@@ -7,8 +7,9 @@ import type { AuthModel } from "../types/auth.types";
  * This key intentionally lives in the client because authentication
  * is simulated and the token is not used for server authorization.
  */
-const SECRET_KEY = crypto.getRandomValues(
-    new Uint8Array(32),
+const SECRET_KEY = Uint8Array.from(
+    "dev-only-secret-key-for-local-dev-32".slice(0, 32),
+    (char) => char.charCodeAt(0),
 );
 
 /**

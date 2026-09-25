@@ -4,7 +4,7 @@ export const es = {
     nextButton: "Next Question",
     skipButton: "Skip",
 
-    progressHelpText: "{currentQuestion} of {questionCount}",
+    progressHelpText: "{{currentQuestion}} of {{questionCount}}",
 
     TagAnswer: {
         goodBadge: "Good!",

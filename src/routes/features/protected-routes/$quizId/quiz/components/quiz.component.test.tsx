@@ -2,9 +2,9 @@
 import { render, screen, act, fireEvent, cleanup } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import Quiz from "./quiz.component";
-import { Route } from "./quiz.route";
+import { Route } from "../quiz.route";
 import { mockUseSession, setSessionState } from "@/test/mocks/session.mocks";
-import { es } from "./locales/es";
+import { es } from "../locales/es";
 import { mockNavigate, mockUseRouterState } from "@/test/mocks/router.mocks";
 
 

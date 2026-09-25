@@ -1,16 +1,16 @@
 
 import { Link } from '@tanstack/react-router';
-import { useQuiz } from './hooks/useQuiz.hook';
+import { useQuiz } from '../hooks/useQuiz.hook';
 import type { QuizModel } from '@/types/quiz.types';
 import { formatSentenceString } from '@/utils/formats.utils';
-import styles from './quiz.module.css';
+import styles from '../quiz.module.css';
 import { Progress, Button, buttonStyles } from '@/components';
-import TimerCountdown from './components/TimerCountdown/TimerCountdown';
+import TimerCountdown from '../components/TimerCountdown/TimerCountdown';
 import useSession from '@/zunstand/store/session.store';
-import { TagAnswer } from './components/TagAnswer/TagAnswer';
-import { Route } from './quiz.route';
+import { TagAnswer } from '../components/TagAnswer/TagAnswer';
+import { Route } from '../quiz.route';
 import { translate } from '@/utils/locales.utils';
-import { es } from './locales/es';
+import { es } from '../locales/es';
 
 function Quiz() {
 

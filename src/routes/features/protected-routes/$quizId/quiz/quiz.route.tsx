@@ -5,8 +5,9 @@ import { Route as QuizLayoutRoute } from '../layout';
 import type { QuizModel } from '@/types/quiz.types';
 
 import { lazy } from 'react';
+import PendingComponent from './components/pendingComponent.component';
 
-const QuizComponent = lazy(() => import('./quiz.component'));
+const QuizComponent = lazy(() => import('./components/quiz.component'));
 
 export const Route = createRoute({
     head: (ctx) => ({
@@ -48,7 +49,7 @@ export const Route = createRoute({
     notFoundComponent: () => <>not found...</>,
 
     // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-    pendingComponent: () => <>Loading...</>,
+    pendingComponent: () => <PendingComponent />,
     //pendingMs: 1000, // 1 second
 
     // the component is rendered while the route is loading, and the user can see a loading state.

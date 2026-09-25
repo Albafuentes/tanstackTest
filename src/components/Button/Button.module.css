@@ -1,0 +1,111 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-8);
+
+    padding: var(--size-12) var(--size-24);
+    width: fit-content;
+
+    border-radius: var(--radius-full);
+
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+    &:disabled, &[aria-disabled="true"] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &.button--black {
+        background-color: var(--black-90);
+        border: var(--border-default) solid var(--black-90);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--black-80);
+        }
+
+        &:focus {
+            background-color: var(--black-70);
+        }
+
+        &:disabled {
+            color: var(--black-5);
+        }
+    }
+
+    &.button--red {
+        background-color: var(--red-50);
+        border: var(--border-default) solid var(--red-50);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--red-45);
+        }
+
+        &:focus {
+            background-color: var(--red-40);
+        }
+
+        &:disabled {
+            color: var(--black-5);
+        }
+    }
+
+    &.button--green {
+        background-color: var(--green-50);
+        border: var(--border-default) solid var(--green-50);
+        color: var(--white);
+
+        &:hover {
+            background-color: var(--green-45);
+        }
+
+        &:focus {
+            background-color: var(--green-40);
+        }
+
+        &:disabled {
+            color: var(--black-5);
+        }
+    }
+
+    &.button--outline-black {
+        background-color: var(--white);
+        color: var(--black-90);
+        border: var(--border-default) solid var(--black-90);
+
+        &:hover {
+            background-color: var(--black-5);
+        }
+
+        &:focus {
+            background-color: var(--black-10);
+        }
+
+        &:disabled {
+            color: var(--black-80);
+        }
+    }
+
+    &.button--link {
+        background-color: transparent;
+        color: var(--black-90);
+        border: none;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &:disabled {
+            color: var(--black-80);
+        }
+    }
+}

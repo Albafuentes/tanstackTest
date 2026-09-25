@@ -1,0 +1,103 @@
+:root {
+    --white: #fff;
+    --bg: var(--white);
+
+    --purple-50: #ece4ff;
+    --purple-500: #2200a6;
+
+    --pink-50: #fde2ff;
+    --pink-100: #fed6ff;
+    --pink-200: #f0a2ef;
+
+    /* New Colors */
+    --black: #1a1a19;
+    --black-90: #18181b;
+    /* text */
+    --black-80: #2f2f37;
+    --black-70: #474752;
+    --black-60: #5e5e6e;
+    --black-50: #767689;
+    --black-40: #9191a1;
+    --black-30: #adadb8;
+    --black-20: #c8c8d0;
+    --black-10: #e4e4e7;
+    --black-5: #f1f1f3;
+    /* background */
+
+    --red-60: #e11e35;
+    --red-55: #e43549;
+    /* aux */
+    --red-50: #e74b5d;
+    --red-45: #ea6271;
+    /* aux */
+    --red-40: #ed7886;
+
+    --green-60: #39604a;
+    --green-55: #437056;
+    /* aux */
+    --green-50: #4c8062;
+    --green-45: #56906e;
+    /* aux */
+    --green-40: #5fa07b;
+
+    --sans: "Rubik", sans-serif;
+    --heading: "Rubik", sans-serif;
+    --mono: ui-monospace, Consolas, monospace;
+
+    /* Font-size */
+    ---font-size-sm: 0.75em;
+    ---font-size-md: 1em;
+    ---font-size-lg: 1.333em;
+    ---font-size-xl: 1.777em;
+    ---font-size-2xl: 2.369em;
+    ---font-size-3xl: 3.158em;
+    ---font-size-4xl: 4.209em;
+    ---font-size-5xl: 5.61em;
+
+    /* Font-weight */
+    ---font-weight-regular: 400;
+    ---font-weight-medium: 500;
+    ---font-weight-semibold: 600;
+    ---font-weight-bold: 700;
+
+    /* Line-height */
+    --line-height-shorter: 1;
+    --line-height-short: 1.25;
+    --line-height-moderate: 1.5;
+
+    /* sizes */
+    --size-80: 5rem;
+    --size-48: 3rem;
+    --size-42: 2.625rem;
+    --size-40: 2.5rem;
+    --size-32: 2rem;
+    --size-24: 1.5rem;
+    --size-16: 1rem;
+    --size-14: 0.875rem;
+    --size-12: 0.75rem;
+    --size-8: 0.5rem;
+    --size-4: 0.25rem;
+
+    /* Border */
+    --border-thin: 1px;
+    --border-default: 2px;
+
+    /* Radii */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-full: 9999px;
+}
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --white: #fff;
+        --bg: #16171d;
+
+        --purple-50: #201b2b;
+        --purple-500: #637af6;
+
+        --pink-50: #fbe4fc;
+        --pink-100: #fad8fb;
+        --pink-200: #eaa7e8;
+    }
+} */

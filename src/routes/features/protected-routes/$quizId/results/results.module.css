@@ -1,0 +1,53 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-42);
+
+    .results__summary,
+    .results__score,
+    .results__empty {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-32);
+    }
+
+    .results__score {
+        align-items: center;
+
+        &>h4 {
+            align-self: flex-start;
+        }
+    }
+
+    .results__summary {
+        .results__summary__group-badges {
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            gap: var(--size-8);
+
+            &>div {
+                width: stretch;
+                flex-direction: column;
+
+                &>span:first-child {
+                    font-size: var(---font-size-sm);
+                }
+            }
+
+        }
+    }
+
+    .results__empty {
+        align-items: center;
+    }
+
+
+    a:not(.results__empty > a) {
+        align-self: flex-end;
+    }
+
+
+
+
+}

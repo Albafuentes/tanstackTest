@@ -1,0 +1,47 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: var(--size-42) var(--size-32);
+
+    width: inherit;
+    height: inherit;
+
+    h3 {
+        grid-column: 1 / -1;
+    }
+
+    &>.dashboard-quizs {
+        grid-column: 1 / -2;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: var(--size-16);
+
+        height: fit-content;
+    }
+
+    &>.dashboard-scores {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-32);
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: var(--size-16);
+
+            li>* {
+                width: stretch;
+            }
+
+            li.dashboard-scores__item-empty {
+                color: var(--black-50);
+            }
+        }
+    }
+}

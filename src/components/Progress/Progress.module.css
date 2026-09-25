@@ -1,0 +1,51 @@
+    .progress {
+        width: 100%;
+
+
+        .progress__help-text {
+            text-align: right;
+            margin-bottom: var(--size-16) !important;
+        }
+
+        .progress__thumb {
+            position: relative;
+            line-height: 0;
+
+            .progress__thumb__value,
+            progress {
+                height: var(--size-8);
+                border-radius: var(--radius-full);
+            }
+
+            .progress__thumb__value {
+                position: absolute;
+                bottom: 0;
+                top: auto;
+
+                background: var(--red-50);
+
+                &.progress__thumb__value--red {
+                    background: var(--red-50);
+                }
+
+                &.progress__thumb__value--black {
+                    background: var(--black-90);
+                }
+            }
+
+            progress {
+                width: 100%;
+
+                &::-webkit-progress-bar {
+                    background-color: var(--black-5);
+                    border-radius: var(--radius-full);
+                }
+
+                &::-webkit-progress-value {
+                    background-color: transparent;
+                }
+            }
+        }
+
+
+    }

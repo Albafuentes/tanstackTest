@@ -1,0 +1,79 @@
+import { Badge } from "@/components";
+import type { SelectedOption } from "../../hooks/useQuiz.hook";
+import styles from "./TagAnswer.module.css";
+
+interface TagAnswerProps {
+    selectedOption: SelectedOption | null;
+
+    data: {
+        index: number;
+        answer: string;
+        explanation?: string;
+    };
+    handleSelectOption?: (optionIndex: number) => void;
+}
+
+import type { ReactElement } from "react";
+import { translate } from "@/utils/locales.utils";
+import { es } from "../../locales/es";
+const getStatus = (
+    selectedOption: SelectedOption | null,
+    isTagSelected: boolean,
+    explanation: string,
+): { style: string; component: ReactElement | null } => {
+    const isResolvedState = selectedOption !== null && selectedOption?.resolved;
+    const isCorrectAnswer =
+        isResolvedState === true && selectedOption?.correct === true;
+
+    if (isResolvedState) {
+        if (isTagSelected && isCorrectAnswer) {
+            return {
+                style: styles["tag-answer--green"],
+                component: <Badge color="outline-green" className={styles["tag-answer__badge"]}>{translate(es.TagAnswer.goodBadge)}</Badge>,
+            };
+        }
+
+        if (isTagSelected && !isCorrectAnswer) {
+            return {
+                style: styles["tag-answer--red"],
+                component: (
+                    <>
+                        <Badge color="outline-red" className={styles["tag-answer__badge"]}>{translate(es.TagAnswer.failBadge)}</Badge>
+                        <p>{explanation}</p>
+                    </>
+                ),
+            };
+        }
+        return { style: styles["tag-answer--disabled"], component: null };
+    }
+
+    return { style: "", component: null };
+};
+
+export const TagAnswer = ({
+    selectedOption,
+    data,
+    handleSelectOption,
+}: TagAnswerProps) => {
+    const isTagSelected = selectedOption?.answer === data.index;
+    const status = getStatus(selectedOption, isTagSelected, data.explanation || "");
+
+    const listStyleType = String.fromCharCode(65 + data.index); 
+
+    return (
+        <label className={`${styles["tag-answer"]} ${status.style}`} data-testid={`tag-answer-${data.index}`}>
+            <input
+                type="radio"
+                onChange={() => handleSelectOption?.(data.index)}
+                checked={isTagSelected}
+                aria-checked={isTagSelected}
+                name={`${listStyleType}.${data.answer}`}
+            />
+            <p>
+                <strong>{listStyleType}.</strong>
+                &nbsp;{data.answer}
+            </p>
+            {status.component}
+        </label>
+    );
+};

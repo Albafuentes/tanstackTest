@@ -2,7 +2,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import Results from './results.component'
-import { es } from './locales/es'
+import { es } from '../locales/es'
 import { mockUseSession, setSessionState } from '@/test/mocks/session.mocks'
 import { ABBREVIATION_PT } from '@/config/constants'
 import type { HistoryState } from '@/zunstand/store/session.store'

@@ -2,8 +2,10 @@
 import { createRoute, } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
 import { lazy } from 'react';
+import useSession from '@/zunstand/store/session.store';
+import PendingComponent from './components/pendingComponent.component';
 
-const ResultsComponent = lazy(() => import('./results.component'));
+const ResultsComponent = lazy(() => import('./components/results.component'));
 
 export const Route = createRoute({
     head: (ctx) => ({
@@ -14,6 +16,17 @@ export const Route = createRoute({
     getParentRoute: () => QuizRoute,
     path: "/results",
     component: ResultsComponent,
+    loader: ({ params }) => {
+        const history = useSession.getState().history;
+
+        const result = history.find((item) => item.quizId === params.quizId);
+
+        if (!result) {
+            throw <>not found...</>
+        }
+
+        return result;
+    },
 
     // staleTime fixed the revalidation of the data. The loader function is not executed again on the client, and the data is not fetched again if it does not become stale.
     // staleTime: 1000 * 60 * 5, // 5 minutes
@@ -27,8 +40,13 @@ export const Route = createRoute({
     notFoundComponent: () => <>not found...</>,
 
     // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-    pendingComponent: () => <>Loading...</>,
+    pendingComponent: () => <PendingComponent/>
     // pendingMs: 1000, // 1 second
 });
 
-
+            {/* // <div className={styles["results__empty"]}>
+                //     <strong>{translate(es.errorMessage)}</strong>
+                //     <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
+                //         {translate(es.linkText)}
+                //     </Link>
+                // </div> */}

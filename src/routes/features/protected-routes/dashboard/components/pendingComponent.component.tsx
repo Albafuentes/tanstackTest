@@ -2,19 +2,21 @@
 import styles from '../dashboard.module.css';
 import quizCardStyles from "../components/QuizCard/QuizCard.module.css";
 import { Skeleton } from '@/components/Skeleton/Skeleton';
+import { translate } from '@/utils/locales.utils';
+import { es } from '../locales/es';
 
 function PendingComponent() {
 
     return (
         <section className={styles['dashboard']}>
-            <Skeleton tag={'h3'} />
+            <h3>{translate(es.title)}</h3>
             <article className={styles['dashboard-quizs']}>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <div className={quizCardStyles["quiz-card"]} key={`quiz-card-skeleton-${index}`}>
                         <Skeleton tag={"badge"} />
                         <div className={quizCardStyles["quiz-card__text"]}>
                             <Skeleton tag={"h6"} width={"8rem"} />
-                            <Skeleton tag={"p"}width={"6rem"}/>
+                            <Skeleton tag={"p"} width={"6rem"} />
                         </div>
                         <Skeleton tag={"button"} />
                     </div>
@@ -22,7 +24,7 @@ function PendingComponent() {
                 ))}
             </article>
             <article className={styles['dashboard-scores']}>
-                <Skeleton tag={'p'} />
+                <strong>{translate(es.scoresSubTitle)}</strong>
                 <ul>
                     {Array.from({ length: 3 }).map((_, index) => (
                         <li key={`history-item-skeleton-${index}`}>

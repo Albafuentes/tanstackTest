@@ -1,0 +1,67 @@
+import { getLocale, getTimeZone } from "./locales.utils";
+import { isValidString, isAValidISODate } from "./validators.utils";
+
+// String formats
+export const formatSentenceString = (str: unknown | null): string => {
+    if (!str || !isValidString(str)) return "-";
+
+    const words = String(str)
+        .replace(/([a-z0-9])([A-Z])/g, "$1 $2") //camelCase/PascalCase
+        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2") // consecutive acronyms
+
+        .replace(/[_\-.]+/g, " ") // replace _, -, ., espaces - snake_case, kebab-case, dot.case, etc.
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((w) => w.toLowerCase());
+
+    if (words.length === 0) return "";
+
+    return (
+        words[0][0].toUpperCase() +
+        words[0].slice(1) +
+        (words.length > 1 ? ` ${words.slice(1).join(" ")}` : "")
+    );
+};
+
+// Dates formats
+export const formatDate = (
+    date: unknown | null,
+    locale?: string,
+    timeZone?: string,
+    withTime: boolean = false,
+): string => {
+    if (!date || !isAValidISODate(String(date))) return "-";
+
+    try {
+        return new Date(String(date)).toLocaleDateString(locale ?? getLocale(), {
+            timeZone: timeZone ?? getTimeZone(),
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            ...(withTime
+                ? {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }
+                : {}),
+        });
+    } catch {
+        return "-";
+    }
+};
+
+// Time formats
+export const secondsToTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+};
+
+export const timeToSeconds = (time: string) => {
+    const [hours, minutes, seconds = 0] = time.split(":").map(Number);
+
+    return hours * 3600 + minutes * 60 + seconds;
+};

@@ -1,0 +1,55 @@
+.skeleton {
+    width: 100%;
+    background: linear-gradient(90deg,
+            rgb(from var(--black-70) r g b / 6%) 25%,
+            rgb(from var(--black-40) r g b / 6%) 50%,
+            rgb(from var(--black-70) r g b / 6%) 75%);
+    background-size: 200% 100%;
+
+    &:not(&.skeleton--button, &.skeleton--badge) {
+        border-radius: var(--radius-sm);
+    }
+
+    &.skeleton--h1 {
+        height: 5.563rem;
+    }
+
+    &.skeleton--h2 {
+        height: 4.188rem;
+    }
+
+    &.skeleton--h3 {
+        height: 3.125rem;
+    }
+
+    &.skeleton--h4 {
+        height: 2.313rem;
+    }
+
+    &.skeleton--h5 {
+        height: 1.75rem;
+    }
+
+    &.skeleton--h6 {
+        height: 1.313rem;
+    }
+
+    &.skeleton--p {
+        height: 1rem;
+    }
+
+    &.skeleton--badge {
+        height: 1.313rem;
+        border-radius: var(--radius-full);
+    }
+
+    &.skeleton--button {
+        border-radius: var(--radius-full);
+        height: 3.125rem;
+    }
+
+    &.skeleton--tag {
+        height: 3.125rem;
+    }
+
+}

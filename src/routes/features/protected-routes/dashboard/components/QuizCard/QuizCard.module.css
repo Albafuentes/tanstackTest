@@ -1,0 +1,38 @@
+.quiz-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--size-32);
+
+    padding: var(--size-14) var(--size-24);
+
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    border: var(--border-default) solid var(--black-30);
+
+    height: stretch;
+    max-width: 20rem;
+
+    .quiz-card__badge {
+        align-self: flex-end;
+
+        svg {
+            fill: var(--white);
+        }
+    }
+
+    .quiz-card__text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-8);
+
+        h6 {
+            font-weight: var(---font-weight-regular);
+        }
+    }
+
+    a {
+        width: stretch;
+    }
+}

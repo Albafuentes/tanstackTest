@@ -1,0 +1,13 @@
+#Error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 80px;
+    gap: 42px;
+
+    h5 {
+        margin-bottom: 12px;
+    }
+}

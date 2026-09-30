@@ -9,6 +9,7 @@ import { useFormStatus } from 'react-dom';
 import { useShallow } from 'zustand/shallow';
 import { translate } from '@/utils/locales.utils';
 import { es } from './locales/es';
+import { Error } from '@/components/Error/Error';
 
 export const Route = createRoute({
       head: () => ({
@@ -29,7 +30,7 @@ export const Route = createRoute({
     gcTime: 0,
 
     // page error 404, the page is not found, the component is rendered, and the user can navigate to another page.
-    notFoundComponent: () => <>not found...</>,
+    notFoundComponent: () => <Error status={404} />,
 
     // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
     pendingComponent: () => <>Loading...</>,

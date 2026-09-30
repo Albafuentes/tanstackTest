@@ -1,8 +1,10 @@
-import { createRoute } from '@tanstack/react-router';
+import { createRoute, notFound, type NotFoundRouteProps } from '@tanstack/react-router';
+import type { NotFoundRouterData } from '@/types/error.types';
 import { lazy } from 'react';
 import PendingComponent from './components/pendingComponent.component';
 import { Route as ProtectedRoutesLayoutRoute } from '../layout';
 import { api } from '@/service/api.service';
+import { Error } from '@/components/Error/Error';
 
 const DashboardComponent = lazy(() => import('./components/dashboard.component'));
 
@@ -14,6 +16,7 @@ export const Route = createRoute({
   }),
   getParentRoute: () => ProtectedRoutesLayoutRoute,
   path: '/',
+  //component: DashboardComponent,
   component: DashboardComponent,
   loader: async () => {
     try {
@@ -21,7 +24,8 @@ export const Route = createRoute({
       return { quizsData };
     } catch (error) {
       console.error('Error fetching quiz data:', error);
-      return { quizsData: [] };
+      const data: NotFoundRouterData = { status: 404, resource: 'quizs' }
+      throw notFound({ data })
     }
   },
   // staleTime fixed the revalidation of the data. The loader function is not executed again on the client, and the data is not fetched again if it does not become stale.
@@ -33,7 +37,7 @@ export const Route = createRoute({
   gcTime: 0,
 
   // page error 404, the page is not found, the component is rendered, and the user can navigate to another page.
-  notFoundComponent: () => <>not found...</>,
+  notFoundComponent: (props: NotFoundRouteProps) => <Error status={(props.data as NotFoundRouterData)?.status ?? 404} />,
 
   // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
   pendingComponent: () => <PendingComponent />,

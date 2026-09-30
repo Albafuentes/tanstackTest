@@ -1,0 +1,1 @@
+export type NotFoundRouterData = { status: number; resource: string }

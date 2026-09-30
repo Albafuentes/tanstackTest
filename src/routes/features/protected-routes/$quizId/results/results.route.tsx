@@ -1,8 +1,10 @@
 
-import { createRoute, } from '@tanstack/react-router'
+import { createRoute, notFound, type NotFoundRouteProps } from '@tanstack/react-router'
 import { Route as QuizRoute } from "../layout";
 import { lazy } from 'react';
 import useSession from '@/zunstand/store/session.store';
+import type { NotFoundRouterData } from '@/types/error.types';
+import { Error } from '@/components/Error/Error';
 import PendingComponent from './components/pendingComponent.component';
 
 const ResultsComponent = lazy(() => import('./components/results.component'));
@@ -22,7 +24,9 @@ export const Route = createRoute({
         const result = history.find((item) => item.quizId === params.quizId);
 
         if (!result) {
-            throw <>not found...</>
+            console.error(`Error fetching history by quizId: ${params.quizId}`);
+            const data: NotFoundRouterData = { status: 404, resource: 'history.params.quizId' }
+            throw notFound({ data })
         }
 
         return result;
@@ -37,16 +41,9 @@ export const Route = createRoute({
     gcTime: 0,
 
     // page error 404, the page is not found, the component is rendered, and the user can navigate to another page.
-    notFoundComponent: () => <>not found...</>,
+    notFoundComponent: (props: NotFoundRouteProps) => <Error status={(props.data as NotFoundRouterData)?.status ?? 404} />,
 
     // the component is rendered while the navigator is pending a few minutes. It works with pendingMs and only appears to after the time specified in pendingMs. It is useful for long loading times, and the user can see a loading state.
-    pendingComponent: () => <PendingComponent/>
+    pendingComponent: () => <PendingComponent />
     // pendingMs: 1000, // 1 second
 });
-
-            {/* // <div className={styles["results__empty"]}>
-                //     <strong>{translate(es.errorMessage)}</strong>
-                //     <Link to="/dashboard" className={`${buttonStyles["button"]} ${buttonStyles["button--black"]}`}>
-                //         {translate(es.linkText)}
-                //     </Link>
-                // </div> */}

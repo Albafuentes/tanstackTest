@@ -1,10 +1,20 @@
 import { Route as RootRoute } from "./__root";
-import { Route as InitRoute } from "./features/init";
-import { Route as QuizRoute } from "./features/quiz";
-import { Route as QuizLayoutRoute } from "./features/quiz/layout";
-import { Route as ResultsRoute } from "./features/quiz/results";
+import { Route as DashboardRoute } from "./features/protected-routes/dashboard/dashboard.route";
+import { Route as QuizRoute } from "./features/protected-routes/$quizId/quiz/quiz.route";
+import { Route as QuizLayoutRoute } from "./features/protected-routes/$quizId/layout";
+import { Route as ResultsRoute } from "./features/protected-routes/$quizId/results/results.route";
+import { Route as LoginRoute } from "./features/login/login.route";
+import { Route as ProtectedRoutesLayoutRoute } from "./features/protected-routes/layout";
+import { Route as SettingsRoute } from "./features/protected-routes/settings/settings.route";
 
 export const routeTree = RootRoute.addChildren([
-    InitRoute,
-    QuizLayoutRoute.addChildren([QuizRoute, ResultsRoute]),
+    LoginRoute,
+    ProtectedRoutesLayoutRoute.addChildren([
+        DashboardRoute,
+        SettingsRoute,
+        QuizLayoutRoute.addChildren([
+            QuizRoute,
+            ResultsRoute,
+        ]),
+    ]),
 ]);

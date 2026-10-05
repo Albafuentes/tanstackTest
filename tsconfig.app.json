@@ -8,7 +8,10 @@
     ],
     "module": "esnext",
     "types": [
-      "vite/client"
+      "vite/client",
+      "vitest",
+      "@testing-library/jest-dom/vitest",
+       "node"
     ],
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
@@ -23,7 +26,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "src",
